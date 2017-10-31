@@ -53,6 +53,25 @@ class Refactor(object):
   def InsertRightAfterToken(self, token):
     pass
 
+  def ActionOnX(self, tb, ctx_class, condition_fn=None, action_fn=None,
+                optional=False):
+    if not condition_fn:
+      condition_fn = lambda _ : True
+    x_list = tb.get(ctx_class)
+    if x_list:
+      limited_list = [i for i in x_list if condition_fn(i)]
+      if action_fn:
+        for i in limited_list:
+          action_fn(i)
+      return limited_list
+    else:
+      if optional:
+        return []
+      else:
+        raise Exception('Did not find any of this type of element in code: %s'
+                        % str(ctx_class))
+
+
   def Save(self):
     filename = self._filename
     if self._save_as_new:

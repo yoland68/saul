@@ -32,6 +32,15 @@ class JavaAgentBase(JavaParserListener):
   def filepath(self):
     return self._filepath
 
+  def skip(self, filename):
+    if not filename.endswith('.java'):
+      logging.info('This is not a java file')
+      return True
+    return False
+
+  def set_file(self, filepath):
+    self._filepath = filepath
+
   def __init__(self, args):
     self._args =  args
 
@@ -62,6 +71,7 @@ class JavaRefactorAgent(JavaAgentBase):
     self._element_table = collections.defaultdict(list)
     super(JavaRefactorAgent, self).__init__()
 
+  #Override
   def set_file(self, filepath):
     self._filepath = filepath
     self._refactor = Refactor(filepath, self.args.save_as_new)
@@ -69,12 +79,6 @@ class JavaRefactorAgent(JavaAgentBase):
   def reset(self):
     self._element_list = []
     self._element_table = collections.defaultdict(list)
-
-  def skip(self, filename):
-    if not filename.endswith('.java'):
-      logging.info('This is not a java file')
-      return True
-    return False
 
   #Override
   def actions(self):
