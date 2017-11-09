@@ -28,7 +28,7 @@ def _AddDefaultArguments(parser, keyword):
   return parser
 
 
-class JavaLogAgent(JavaRefactorAgent):
+class AndroidJavaLogAgent(JavaRefactorAgent):
   """Add Logging to Java Method or Classes"""
   @staticmethod
   def addOptions(parser):
@@ -60,12 +60,12 @@ class JavaLogAgent(JavaRefactorAgent):
         '--call', default='d', choices=['d', 'i', 'w', 'e'],
         help='Specify which log method to use [d, i, w, e]. `d` is default')
     parser.add_argument(
-        '--package', default='org.chromium.base.Log',
+        '--package', default='android.util.Log',
         help='Specify which logging package to use')
     return parser
 
   def __init__(self, args):
-    super(JavaLogAgent, self).__init__(args)
+    super(AndroidJavaLogAgent, self).__init__(args)
     self.log_content = None
     self.log_formatter = None
     self.counter = 0
@@ -84,9 +84,14 @@ class JavaLogAgent(JavaRefactorAgent):
   def actions(self):
     if self.args.clean:
       return
-    log_template = self.getLogStatement()
+    log_template = self.getLogTemplate()
     self.addImport(self.args.package)
     if self.args.method_declaration:
+      self.refactor.actionOnX(
+          self.tb, JavaParser.ConstructorDeclarationContext,
+          condition_fn = (
+            lambda x: x.IDENTIFIER().getText() == self.args.method_declaration),
+          action_fn = self._getLogEveryStatementFn(log_template))
       self.refactor.actionOnX(
           self.tb, JavaParser.MethodDeclarationContext,
           condition_fn = (
@@ -102,6 +107,10 @@ class JavaLogAgent(JavaRefactorAgent):
       self.refactor.actionOnX(
           self.tb, JavaParser.MethodDeclarationContext,
           action_fn = self._getLogEveryStatementFn(log_template))
+      self.refactor.actionOnX(
+          self.tb, JavaParser.ConstructorDeclarationContext,
+          action_fn = self._getLogEveryStatementFn(log_template))
+
     self.refactor.save()
 
   def _counterLogFormatter(self, template, _):
@@ -119,30 +128,30 @@ class JavaLogAgent(JavaRefactorAgent):
         str(token.start.line) if token.start.line == token.stop.line else
         '%d-%d' % (token.start.line, token.stop.line))
     code = (
-        ' ' * token.depth() + self.refactor.content[token.start.start:token.stop.stop+1])
+        ' ' * token.depth()
+        + self.refactor.content[token.start.start:token.stop.stop+1])
     code = code.split('\n')[0]
     code = code.replace('"', r'\"')
     return template.format(
       class_name=self.class_name, line_num=line_num, code=code)
 
-  def getLogStatement(self):
-    if self.log_content is None:
-      if self.args.bring_your_own_log:
-        self.log_content = self.args.bring_your_own_log
-        self.log_formatter = lambda tem, _: tem
-      if self.args.log_count:
-        self.log_content = "{class_name}:{counter:d}"
-        self.log_formatter = self._counterLogFormatter
-      elif self.args.log_line:
-        self.log_content = "{class_name}:{line_num}"
-        self.log_formatter = self._lineNumLogFormatter
-      elif self.args.log_source:
-        self.log_content = "{class_name}:\\t{code}"
-        self.log_formatter = self._sourceLogFormatter
-      # default choice
-      else:
-        self.log_content = "{class_name}"
-        self.log_formatter = self.
+  def getLogTemplate(self):
+    if self.args.bring_your_own_log:
+      self.log_content = self.args.bring_your_own_log
+      self.log_formatter = lambda tem, _: tem
+    if self.args.log_count:
+      self.log_content = "{class_name}:{counter:d}"
+      self.log_formatter = self._counterLogFormatter
+    elif self.args.log_line:
+      self.log_content = "{class_name}:{line_num}"
+      self.log_formatter = self._lineNumLogFormatter
+    elif self.args.log_source:
+      self.log_content = "{class_name}:\\t{code}"
+      self.log_formatter = self._sourceLogFormatter
+    # default choice
+    else:
+      self.log_content = "{class_name}:{line_num}"
+      self.log_formatter = self._lineNumLogFormatter
     return 'Log.%s("%s", "%s");' % (
         self.args.call, self.args.tag, self.log_content)
 
@@ -160,35 +169,63 @@ class JavaLogAgent(JavaRefactorAgent):
       self._logEveryStatement(token, log_template)
     return _inner_function
 
-class JavaTraceAgent(JavaRefactorAgent):
+class AndroidJavaTraceAgent(JavaRefactorAgent):
   """Add Tracing to Java Method or Classes"""
   @staticmethod
   def addOptions(parser):
     parser = _AddDefaultArguments(parser, 'trace')
+    parser.add_argument(
+        '--package', default='org.chromium.base.test.TestTraceEvent',
+        help='Specify which logging package to use')
     return parser
+
+  def __init__(self, args):
+    super(AndroidJavaTraceAgent, self).__init__(args)
+    self.trace_content = None
+    self.trace_formatter = None
 
   #Override
   def validate(self):
     pass
 
+  #Override
   def actions(self):
-    self.validate()
-    trace_insertion = self.getTraceStatement()
-    if self.args.method_declaration:
-      self.refactor.actionOnX(
-          self.tb, JavaParser.MethodDeclarationContext,
-          condition_fn = lambda x: x.IDENTIFIER == self.args.method_declaration,
-          action_fn = self.traceEveryLine)
-    elif self.args.method_invocation:
-      self.refactor.actionOnX(
-          self.tb, JavaParser.BlockStatementContext,
-          condition_fn = lambda x: self.args.method_invocation+'(' in x.getText(),
-          action_fn = self.traceInvocation)
-    else:
-      logging.error('Nothing happened')
+    if self.args.clean:
+      return
+    trace_template = self.getTraceTemplate()
+    self.addImport(self.args.package)
+    self.refactor.actionOnX(
+        self.tb, JavaParser.MethodDeclarationContext,
+        action_fn = self._getTraceEveryStatementFn(trace_template))
+    self.refactor.save()
 
-  def getTraceStatment(self):
-    pass
+  def _lineNumLogFormatter(self, template, token, call):
+    line_num = (
+        str(token.start.line) if token.start.line == token.stop.line else
+        '%d-%d' % (token.start.line, token.stop.line))
+    return template.format(
+        call=call, class_name=self.class_name, line_num=line_num)
+
+  def getTraceTemplate(self):
+    self.trace_content = '{class_name}:{line_num}'
+    self.trace_formatter = self._lineNumLogFormatter
+    return 'TestTraceEvent.{call}("%s");' % self.trace_content
+
+  def _traceEveryStatement(self, token, trace_template):
+    if type(token) == antlr4.tree.Tree.TerminalNodeImpl:
+      return
+    for c in token.getChildren():
+      if type(c) == JavaParser.BlockStatementContext:
+        begin_trace_insertion = self.trace_formatter(trace_template, c, 'begin')
+        end_trace_insertion = self.trace_formatter(trace_template, c, 'end')
+        self.refactor.insertBeforeToken(c, begin_trace_insertion, use_mask=True)
+        self.refactor.insertAfterToken(c, end_trace_insertion, use_mask=True)
+      self._traceEveryStatement(c, trace_template)
+
+  def _getTraceEveryStatementFn(self, trace_template):
+    def _inner(token):
+      self._traceEveryStatement(token, trace_template)
+    return _inner
 
 
 class JavaStats(JavaRefactorAgent):

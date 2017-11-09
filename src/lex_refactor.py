@@ -13,14 +13,14 @@ from antlr.JavaLexer import JavaLexer
 from antlr.JavaParser import JavaParser
 from antlr.JavaParserListener import JavaParserListener
 
-from agents.JavaAgents import JavaLogAgent, JavaTraceAgent, JavaStats
+from agents.JavaAgents import AndroidJavaLogAgent, AndroidJavaTraceAgent, JavaStats
 from agents.CppAgents import CppStats
 from agents.JavaScriptAgents import JavaScriptStats
 from agents.PythonAgents import PythonStats
 
 _AGENT_DICT = {
-    'java-add-log': JavaLogAgent,
-    'java-add-trace': JavaTraceAgent,
+    'android-add-log': AndroidJavaLogAgent,
+    'android-add-trace': AndroidJavaTraceAgent,
     'java-stats': JavaStats,
     'cpp-stats': CppStats,
     'python-stats': PythonStats
