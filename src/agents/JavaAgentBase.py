@@ -1,6 +1,8 @@
+import re
 import logging
 import collections
 import functools
+import subprocess
 
 from antlr.JavaParserListener import JavaParserListener
 from antlr.JavaLexer import JavaLexer
@@ -50,10 +52,6 @@ class JavaAgentBase(JavaParserListener):
   def filepath(self):
     return self._filepath
 
-  #Override
-  def preWalkActions(self):
-    pass
-
   def skip(self, filename):
     if not filename.endswith('.java'):
       logging.info('This is not a java file')
@@ -66,15 +64,35 @@ class JavaAgentBase(JavaParserListener):
   def __init__(self, args):
     self._args =  args
 
+  #Override
   def actions(self):
     """Implement this to define the actions needed for a Java refactoring"""
     raise NotImplementedError("actions not implemented")
 
+  #Override
+  def validate(self):
+    raise NotImplementedError("validate not implemented")
+
+  #Override
+  def clean(self):
+    raise NotImplementedError("clean not implemented")
+
+  #Override
+  def setup(self):
+    raise NotImplementedError("setup not implemented")
 
 class JavaRefactorAgent(JavaAgentBase):
   @staticmethod
   def addOptions(parser):
     return parser
+
+  def __init__(self, args):
+    self._element_list = []
+    super(JavaRefactorAgent, self).__init__(args)
+    self._element_table = collections.defaultdict(list)
+    self._imported_packages = []
+    self._class_name = None
+    self._refactor = None
 
   @property
   def ls(self):
@@ -88,56 +106,33 @@ class JavaRefactorAgent(JavaAgentBase):
   def refactor(self):
     return self._refactor
 
-  def __init__(self, args):
-    self._element_list = []
-    super(JavaRefactorAgent, self).__init__(args)
-    self._element_table = collections.defaultdict(list)
-    self._imported_packages = []
-    self._class_name = None
-
-  #Override
-  def set_file(self, filepath):
-    self._filepath = filepath
-    self._refactor = Refactor(filepath, self.args.save_as_new,
-        start_mask=self.start_mask, end_mask=self.end_mask)
-
   @property
   def start_mask(self):
     return '/*SAUL:*/ '
-
-  @property
-  def escaped_start_mask(self):
-    return '\/\*SAUL:\*\/ '
 
   @property
   def end_mask(self):
     return ' /*:SAUL*/'
 
   @property
-  def escaped_end_mask(self):
-    return ' \/\*:SAUL\*\/'
-
-  @property
   def class_name(self):
     return self._class_name
 
-  def addImport(self, package_name):
-    if package_name.endswith(';'):
-      package_name = package_name[:-1]
-    if package_name not in self._imported_packages:
-      insertion = 'import %s;' % package_name
-      imports = self.refactor.actionOnX(
-          self.tb, JavaParser.ImportDeclarationContext)
-      self.refactor.insertAfterToken(imports[-1], insertion, use_mask=True)
-      self._imported_packages.append(package_name)
-
-  def reset(self):
-    self._element_list = []
-    self._element_table = collections.defaultdict(list)
+  #Override
+  def clean(self):
+    sed_string = 's/%s.*%s//g' % (
+        re.escape(self.start_mask), re.escape(self.end_mask))
+    if self.args.file:
+      subprocess.call(['sed', '-i', sed_string, self.args.file])
+    else:
+      subprocess.call(['find', self.args.directory, '-type', 'f', '-exec',
+                       'sed', '-i', sed_string, '{}', ';'])
 
   #Override
-  def preWalkActions(self):
-    pass
+  def set_file(self, filepath):
+    self._filepath = filepath
+    self._refactor = Refactor(filepath, self.args.save_as_new,
+        start_mask=self.start_mask, end_mask=self.end_mask)
 
   #Override
   def setup(self):
@@ -153,6 +148,20 @@ class JavaRefactorAgent(JavaAgentBase):
   def actions(self):
     """Implement this to define the actions needed for a Java refactoring"""
     raise NotImplementedError("actions not implemented")
+
+  def addImport(self, package_name):
+    if package_name.endswith(';'):
+      package_name = package_name[:-1]
+    if package_name not in self._imported_packages:
+      insertion = 'import %s;' % package_name
+      imports = self.refactor.actionOnX(
+          self.tb, JavaParser.ImportDeclarationContext)
+      self.refactor.insertAfterToken(imports[-1], insertion, use_mask=True)
+      self._imported_packages.append(package_name)
+
+  def reset(self):
+    self._element_list = []
+    self._element_table = collections.defaultdict(list)
 
   ##### Overriding exit token methods for parser listener #####
   def exitCompilationUnit(self, ctx):

@@ -39,14 +39,14 @@ def ActionOnDirectory(agent, directory, pattern=None,
       else:
         ActionOnFile(agent, whole_path, logging_level)
 
+
 def ActionOnFile(agent, filename, logging_level=logging.WARNING):
-  """Use agent on all the files in a directory that matches pattern"""
+  """Use agent on one file"""
   logger = SetLogger(logging_level, filename)
   if agent.skip(filename):
     logger.warning('%s does not match %s requirement' % (filename, agent))
   inp = FileStream(filename)
   agent.set_file(filename)
-  agent.preWalkActions()
   lexer = agent.createLexer(inp)
   stream = CommonTokenStream(lexer)
   parser = agent.createParser(stream)
@@ -55,6 +55,7 @@ def ActionOnFile(agent, filename, logging_level=logging.WARNING):
   walker.walk(agent, tree)
   agent.setup()
   agent.actions()
+
 
 def SetLogger(logging_level, filepath):
   log = logging.getLogger()
@@ -90,8 +91,8 @@ def Main():
       '-a', '--agent', help='Specify the agent for the current file or '
       'directory. Use `-l` to list agents and `-a [agent-name] -h` to find'
       ' out agent specific arguments')
-  argument_parser.add_argument('--clean', action='store_true', default=False,
-      help='Clean all the previously inserted content')
+  argument_parser.add_argument('-c', '--clean', action='store_true',
+      default=False, help='Clean all the previously inserted content')
 
   arguments, unknown = argument_parser.parse_known_args()
 
@@ -115,6 +116,12 @@ def Main():
       add_help=True, parents=[argument_parser])
   agent_class = _AGENT_DICT[arguments.agent]
   argument_parser = agent_class.addOptions(argument_parser)
+  try:
+    import argcomplete
+    argcomplete.autocomplete(argument_parser)
+  except ImportError:
+    logging.error('Can not import argcomplete')
+
   arguments = argument_parser.parse_args()
 
   logging_level = logging.WARN
@@ -134,6 +141,7 @@ def Main():
   if arguments.clean:
     agent.clean()
     return
+  agent.validate()
   if arguments.file:
     ActionOnFile(agent, arguments.file, logging_level)
   else:
