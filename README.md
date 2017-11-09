@@ -20,7 +20,7 @@ You only need this if you want to generate new lex/parser file for a language
 
 1. **Install Antlr4 Python3 runtime**
 ```bash
-pip install antlr4-python3-runtime
+pip3 install antlr4-python3-runtime
 ```
 
 2. **Download this repo to your source code repository**
@@ -30,10 +30,30 @@ git clone https://github.com/yoland68/saul
 
 ## Usage
 
-Better call `python3 saul/src/saul.py -h` to learn how to use saul.py
-
-Check exiting agents, better call `python3 saul/src/saul.py -l`
-
+- Better call ⤵ to log every statement in a Javafile
+```
+python3 saul/src/saul.py -a android-add-log -f [path-to-file]
+```
+- Better call ⤵ to log every statement in a method
+```
+python3 saul/src/saul.py -a android-add-log -f [path-to-file] --method-declaration [method-name]
+```
+- Better call ⤵ to log method call with specific name
+```
+python3 saul/src/saul.py -a android-add-log -f [path-to-file] --method-invocation [method-name]
+```
+- Better call ⤵ to trace every statement in a Javafile
+```
+python3 saul/src/saul.py -a android-add-trace -f [path-to-file]
+```
+- Better call ⤵ to learn how to use saul.py
+```
+python3 saul/src/saul.py -h
+```
+- Better call ⤵ to find out all the available Saul agents
+```
+python3 saul/src/saul.py -l
+```
 
 ## Links
 
