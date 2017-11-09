@@ -6,7 +6,8 @@ Do you know you have rights as a software develper?
 
 Well, you **better call saul.py**
 
-This project aim to create scripts with Antlr4 and predefined Antlr4 grammars to tokenize source code and refactor them
+This project aim to create scripts with Antlr4 and predefined Antlr4 grammars
+to tokenize source code and refactor them
 
 ## Prerequisites
 
@@ -14,7 +15,8 @@ This project aim to create scripts with Antlr4 and predefined Antlr4 grammars to
 
 ## Installation
 
-0. (Optional) [Install Antlr4](https://github.com/antlr/antlr4/blob/master/doc/getting-started.md)
+0. (Optional) [Install Antlr4](https://github.com/antlr/antlr4/blob/master/doc/getting-started.md).
+You only need this if you want to generate new lex/parser file for a language
 
 1. **Install Antlr4 Python3 runtime**
 ```
@@ -24,17 +26,21 @@ pip install antlr4-python3-runtime
 
 2. **Download this repo to your source code repository**
 ```
-git clone https://github.com/yoland68/lex-refactor
+git clone https://github.com/yoland68/saul
 ```
 
 ## Usage
 
-Pleae check help page with `python lex-refactor/src/lex-refactor.py -h`
+Better call `python3 saul/src/saul.py -h` to learn how to use saul.py
+
+Check exiting agents, better call `python3 saul/src/saul.py -l`
 
 
 ## Links
 
 - [Install Antlr4](https://github.com/antlr/antlr4/blob/master/doc/getting-started.md)
-- [Antlr4 Mega tutorial]()
 
-please email +yolandyan about any of the bug you've encounted or create issue in this repo
+## Warning
+
+The usage of this tool is bound by developer-client privelidge
+
