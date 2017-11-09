@@ -15,6 +15,11 @@ def _AddDefaultArguments(parser, keyword):
            'func would %s inside the statments inside func declaration'
            % keyword)
   parser.add_argument(
+      '--method-invocation',
+      help='Specify the method invocation name, e.g. `--method-invocation'
+           ' func would %s before each call'
+           % keyword)
+  parser.add_argument(
       '--%s-each-line' % keyword, action='store_true', default=False,
       help='Add %s in between each statement' % keyword)
   parser.add_argument(
@@ -28,11 +33,12 @@ class JavaLogAgent(JavaRefactorAgent):
   @staticmethod
   def addOptions(parser):
     parser = _AddDefaultArguments(parser, 'log')
-    parser.add_argument('--log-method-local-variable', action='store_true',
-        default=False, help='Log all the local variable declared in a specified'
-                            ' method')
-    parser.add_argument('--log-class-variable', action='store_true',
-        default=False, help='Log all the class variables at each command line')
+    #TODO add support for the commented out arguments
+#     parser.add_argument('--log-method-local-variable', action='store_true',
+        # default=False, help='Log all the local variable declared in a specified'
+                            # ' method')
+    # parser.add_argument('--log-class-variable', action='store_true',
+        # default=False, help='Log all the class variables at each command line')
     parser.add_argument('--log-variable', help='Log the specified variable at '
                         'each line. e.g. `--log-variable=mFlag` would cause'
                         ' mFlag to be logged each time')
@@ -42,6 +48,9 @@ class JavaLogAgent(JavaRefactorAgent):
     parser.add_argument(
         '--log-line', action='store_true', default=False,
         help='Use file line number in log content')
+    parser.add_argument(
+        '--log-source', action='store_true', default=False,
+        help='Use source code itself as log content')
     parser.add_argument(
         '--bring-your-own-log', help='Specify your own log statement, e.g.'
         ' --bring-your-own-log=Log.d("#SAUL", Integer.toString(mInt))')
@@ -105,6 +114,17 @@ class JavaLogAgent(JavaRefactorAgent):
         '%d-%d' % (token.start.line, token.stop.line))
     return template.format(class_name=self.class_name, line_num=line_num)
 
+  def _sourceLogFormatter(self, template, token):
+    line_num = (
+        str(token.start.line) if token.start.line == token.stop.line else
+        '%d-%d' % (token.start.line, token.stop.line))
+    code = (
+        ' ' * token.depth() + self.refactor.content[token.start.start:token.stop.stop+1])
+    code = code.split('\n')[0]
+    code = code.replace('"', r'\"')
+    return template.format(
+      class_name=self.class_name, line_num=line_num, code=code)
+
   def getLogStatement(self):
     if self.log_content is None:
       if self.args.bring_your_own_log:
@@ -116,10 +136,13 @@ class JavaLogAgent(JavaRefactorAgent):
       elif self.args.log_line:
         self.log_content = "{class_name}:{line_num}"
         self.log_formatter = self._lineNumLogFormatter
+      elif self.args.log_source:
+        self.log_content = "{class_name}:\\t{code}"
+        self.log_formatter = self._sourceLogFormatter
       # default choice
       else:
-        self.log_content = "{class_name}:{line_num}"
-        self.log_formatter = self._lineNumLogFormatter
+        self.log_content = "{class_name}"
+        self.log_formatter = self.
     return 'Log.%s("%s", "%s");' % (
         self.args.call, self.args.tag, self.log_content)
 

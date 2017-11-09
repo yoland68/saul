@@ -18,7 +18,12 @@ class Refactor(object):
     self._end_mask = end_mask
     with open(filename, 'r') as f:
       self.content = f.read()
+    self._change_dict = {}
     self._save_as_new = save_as_new
+
+  @property
+  def change_dict(self):
+    return self._change_dict
 
   @property
   def offset_table(self):
@@ -64,12 +69,24 @@ class Refactor(object):
     #STUB: find an effective way to insert that handles new lines
     if use_mask:
       insertion = self.start_mask + insertion + self.end_mask
+    self.change_dict[token.start.start] = insertion
+
+  def deprInsertBeforeToken(self, token, insertion, use_mask=True):
+    #STUB: find an effective way to insert that handles new lines
+    if use_mask:
+      insertion = self.start_mask + insertion + self.end_mask
     original_start = token.start.start
     start = self.getStartLocation(token)
     self.content = self.content[:start] + insertion + self.content[start:]
     self.offset_table[original_start] = len(insertion)
 
   def insertAfterToken(self, token, insertion, use_mask=True):
+    #STUB: find an effective way to insert that handles new lines
+    if use_mask:
+      insertion = self.start_mask + insertion + self.end_mask
+    self.change_dict[token.stop.stop+1] = insertion
+
+  def deprInsertAfterToken(self, token, insertion, use_mask=True):
     #STUB: find an effective way to insert that handles new lines
     if use_mask:
       insertion = self.start_mask + insertion + self.end_mask
@@ -114,8 +131,9 @@ class Refactor(object):
         raise Exception('Did not find any of this type of element in code: %s'
                         % str(ctx_class))
 
-
   def save(self):
+    for i in sorted(self.change_dict.keys(), reverse=True):
+      self.content = self.content[:i] + self.change_dict[i] + self.content[i:]
     filename = self._filename
     if self._save_as_new:
       filename += '.new'
