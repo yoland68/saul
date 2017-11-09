@@ -104,7 +104,7 @@ class Refactor(object):
   #TODO refactor tb to be a inner object
   #TODO remove debugger
   def actionOnX(self, tb, ctx_class, condition_fn=None, action_fn=None,
-                optional=False, warn=True, debug=False):
+                optional=True, warn=True, debug=False):
     if debug == True:
       import ipdb
       ipdb.set_trace()
