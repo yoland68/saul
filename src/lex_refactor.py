@@ -90,6 +90,8 @@ def Main():
       '-a', '--agent', help='Specify the agent for the current file or '
       'directory. Use `-l` to list agents and `-a [agent-name] -h` to find'
       ' out agent specific arguments')
+  argument_parser.add_argument('--clean', action='store_true', default=False,
+      help='Clean all the previously inserted content')
 
   arguments, unknown = argument_parser.parse_known_args()
 
@@ -129,13 +131,14 @@ def Main():
 
   agent = agent_class(arguments)
 
+  if arguments.clean:
+    agent.clean()
+    return
   if arguments.file:
     ActionOnFile(agent, arguments.file, logging_level)
   else:
     ActionOnDirectory(agent, arguments.directory, pattern=arguments.pattern,
                       logging_level=logging_level)
-
-
 
 if __name__ == '__main__':
     Main()

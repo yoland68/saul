@@ -14,17 +14,12 @@ def _AddDefaultArguments(parser, keyword):
       help='Specify the method declarition name, e.g. `--method-declaration '
            'func would %s inside the statments inside func declaration'
            % keyword)
-  parser.add_argument('--method-invocation',
-      help='Specify the method invocation name, e.g. `--method-invocation func`'
-           ' would %s every func() call' % keyword)
   parser.add_argument(
       '--%s-each-line' % keyword, action='store_true', default=False,
       help='Add %s in between each statement' % keyword)
   parser.add_argument(
       '--%s-entry-exit' % keyword, action='store_true', default=False,
       help='Add %s only at block entry and exit')
-  parser.add_argument('--clean', action='store_true', default=False,
-      help='Clean all the inserted %s' % keyword)
   return parser
 
 
@@ -107,12 +102,7 @@ class JavaLogAgent(JavaRefactorAgent):
   def clean(self):
     sed_string = 's/%s.*%s//g' % (
         re.escape(self.start_mask), re.escape(self.end_mask))
-    if self.args.file:
-      subprocess.call(['sed', '-i', sed_string, self.args.file])
-    else:
-      subprocess.call(['find', self.args.directory, '-type', 'f', '-exec',
-          'sed', '-i', sed_string, '{}', '\+'])
-    sys.exit(0)
+    subprocess.call(['sed', '-i', sed_string, self.filepath])
 
   #Override
   def preWalkActions(self):
@@ -123,6 +113,8 @@ class JavaLogAgent(JavaRefactorAgent):
 
   #Override
   def actions(self):
+    if self.args.clean:
+      return
     log_template = self.getLogStatement()
     self.addImport(self.args.package)
     if self.args.method_declaration:
