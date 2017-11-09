@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# PYTHON_ARGCOMPLETE_OK
 
 import sys
 if sys.version_info[0] < 3:
@@ -14,13 +15,16 @@ from antlr.JavaParser import JavaParser
 from antlr.JavaParserListener import JavaParserListener
 
 from agents.JavaAgents import AndroidJavaLogAgent, AndroidJavaTraceAgent, JavaStats
-from agents.CppAgents import CppStats
-from agents.JavaScriptAgents import JavaScriptStats
-from agents.PythonAgents import PythonStats
+from agents.CppAgents import CppStats, CppLogAgent
+from agents.JavaScriptAgents import JavaScriptStats, JavaScriptLogAgent
+from agents.PythonAgents import PythonStats, PythonLogAgent
 
 _AGENT_DICT = {
     'android-add-log': AndroidJavaLogAgent,
     'android-add-trace': AndroidJavaTraceAgent,
+    'cpp-add-log': CppLogAgent,
+    'python-add-log': PythonLogAgent,
+    'javascript-add-log': JavaScriptLogAgent,
     'java-stats': JavaStats,
     'cpp-stats': CppStats,
     'python-stats': PythonStats
@@ -74,6 +78,12 @@ def SetLogger(logging_level, filepath):
 
 def Main():
   argument_parser = argparse.ArgumentParser(add_help=False)
+  list_agent_parser = argparse.ArgumentParser(add_help=False)
+  argument_parser.add_argument(
+      choices=list(_AGENT_DICT.keys()), dest='agent',
+      help='Specify the agent for the current file or directory. Use `-l` to '
+           'list agents and `[agent-name] -h` to find out agent specific '
+           'arguments')
   argument_parser.add_argument('-p', '--pattern', help='Pattern for matching '
       'files in directory, if not specified, it will match all the files'
       ' in the directory')
@@ -82,21 +92,17 @@ def Main():
                                help='Specify directory')
   argument_parser.add_argument('-v', '--verbose', help='Log info',
                                action='store_true')
+  list_agent_parser.add_argument('-l', '--list-agents', action='store_true')
   argument_parser.add_argument(
       '-l', '--list-agents', help='List all available agents',
       action='store_true', default=False)
   argument_parser.add_argument('-n', '--save-as-new', default=False,
                                action='store_true', help='Save as a new file')
-  argument_parser.add_argument(
-      '-a', '--agent', help='Specify the agent for the current file or '
-      'directory. Use `-l` to list agents and `-a [agent-name] -h` to find'
-      ' out agent specific arguments')
   argument_parser.add_argument('-c', '--clean', action='store_true',
       default=False, help='Clean all the previously inserted content')
 
-  arguments, unknown = argument_parser.parse_known_args()
-
-  if arguments.list_agents:
+  list_agent_args, _ = list_agent_parser.parse_known_args()
+  if list_agent_args.list_agents:
     print('Available agents and description:\n')
     for agent, agent_class in _AGENT_DICT.items():
       print("%25s:\t%s" % (
@@ -104,18 +110,13 @@ def Main():
         if agent_class.__doc__ is not None else 'N.A.'))
     return
 
-  if ('-h' in unknown or '--help' in unknown) and arguments.agent is None:
-    argument_parser.print_help()
-    return 0
-  if arguments.agent is None:
-    logging.error('One must provide an agent argument')
-    argument_parser.print_help()
-    return 1
+  arguments, _ = argument_parser.parse_known_args()
 
   argument_parser = argparse.ArgumentParser(
       add_help=True, parents=[argument_parser])
   agent_class = _AGENT_DICT[arguments.agent]
   argument_parser = agent_class.addOptions(argument_parser)
+
   try:
     import argcomplete
     argcomplete.autocomplete(argument_parser)

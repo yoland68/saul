@@ -9,20 +9,22 @@ from antlr.JavaParser import JavaParser
 from agents.JavaAgentBase import GetIsJavaMcFn, JavaAgentBase, JavaRefactorAgent
 
 def _AddDefaultArguments(parser, keyword):
-  parser.add_argument(
+  temp_group = parser.add_mutually_exclusive_group()
+  temp_group.add_argument(
       '--method-declaration',
       help='Specify the method declarition name, e.g. `--method-declaration '
            'func would %s inside the statments inside func declaration'
            % keyword)
-  parser.add_argument(
+  temp_group.add_argument(
       '--method-invocation',
       help='Specify the method invocation name, e.g. `--method-invocation'
            ' func would %s before each call'
            % keyword)
-  parser.add_argument(
+  group = parser.add_mutually_exclusive_group()
+  group.add_argument(
       '--%s-each-line' % keyword, action='store_true', default=False,
       help='Add %s in between each statement' % keyword)
-  parser.add_argument(
+  group.add_argument(
       '--%s-entry-exit' % keyword, action='store_true', default=False,
       help='Add %s only at block entry and exit' % keyword)
   return parser
@@ -43,17 +45,8 @@ class AndroidJavaLogAgent(JavaRefactorAgent):
                         'each line. e.g. `--log-variable=mFlag` would cause'
                         ' mFlag to be logged each time')
     parser.add_argument(
-        '--log-count', action='store_true', default=False,
+        '--log-format', choices=['counter', 'line', 'source'], default='line',
         help='Use number counting in log content')
-    parser.add_argument(
-        '--log-line', action='store_true', default=False,
-        help='Use file line number in log content')
-    parser.add_argument(
-        '--log-source', action='store_true', default=False,
-        help='Use source code itself as log content')
-    parser.add_argument(
-        '--bring-your-own-log', help='Specify your own log statement, e.g.'
-        ' --bring-your-own-log=Log.d("#SAUL", Integer.toString(mInt))')
     parser.add_argument(
         '--tag', default='#SAUL', help='Specify the tag used for logging')
     parser.add_argument(
@@ -62,6 +55,10 @@ class AndroidJavaLogAgent(JavaRefactorAgent):
     parser.add_argument(
         '--package', default='android.util.Log',
         help='Specify which logging package to use')
+    parser.add_argument(
+        '--byol', '--bring-your-own-log', dest='bring_your_own_log',
+        help='Specify your own log statement, e.g. '
+             '--bring-your-own-log=Log.d("#SAUL", Integer.toString(mInt))')
     return parser
 
   def __init__(self, args):
@@ -82,8 +79,6 @@ class AndroidJavaLogAgent(JavaRefactorAgent):
 
   #Override
   def actions(self):
-    if self.args.clean:
-      return
     log_template = self.getLogTemplate()
     self.addImport(self.args.package)
     if self.args.method_declaration:
@@ -146,7 +141,7 @@ class AndroidJavaLogAgent(JavaRefactorAgent):
       self.log_content = "{class_name}:{line_num}"
       self.log_formatter = self._lineNumLogFormatter
     elif self.args.log_source:
-      self.log_content = "{class_name}:\\t{code}"
+      self.log_content = "{class_name}:{line_num} {code}"
       self.log_formatter = self._sourceLogFormatter
     # default choice
     else:
@@ -190,8 +185,6 @@ class AndroidJavaTraceAgent(JavaRefactorAgent):
 
   #Override
   def actions(self):
-    if self.args.clean:
-      return
     trace_template = self.getTraceTemplate()
     self.addImport(self.args.package)
     self.refactor.actionOnX(
