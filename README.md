@@ -1,4 +1,10 @@
-# Lex Refactor
+# Better Call Saul.py 👍📞👨⚖️⚫🐍
+
+Are you frustrated with writing logs?
+Are you frustrated with time consuming code refactor that a 5-year can do?
+Do you know you have rights as a software develper? 
+
+Well, you **better call saul.py**
 
 This project aim to create scripts with Antlr4 and predefined Antlr4 grammars to tokenize source code and refactor them
 
