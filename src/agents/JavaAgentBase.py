@@ -1,11 +1,26 @@
 import logging
 import collections
+import functools
 
 from antlr.JavaParserListener import JavaParserListener
 from antlr.JavaLexer import JavaLexer
 from antlr.JavaParser import JavaParser
 
 from agents.Refactor import Refactor
+
+def IsJavaMethodInvocationOrConst(token):
+  if (type(token) == JavaParser.StatementContext
+      and token.getText().endswith(');')):
+    return True
+  return False
+
+def IsJavaMethodInvocationOrConstWithName(token, name):
+  return IsJavaMethodInvocationOrConst(token) and name+'(' in token.getText()
+
+def GetIsJavaMcFn(name):
+  def _inner_fn(token):
+    return IsJavaMethodInvocationOrConstWithName(token, name)
+  return _inner_fn
 
 class JavaAgentBase(JavaParserListener):
   @staticmethod
@@ -24,6 +39,9 @@ class JavaAgentBase(JavaParserListener):
   def addOptions(parser):
     return parser
 
+  def __init__(self):
+    self._filepath = None
+
   @property
   def args(self):
     return self._args
@@ -31,6 +49,10 @@ class JavaAgentBase(JavaParserListener):
   @property
   def filepath(self):
     return self._filepath
+
+  #Override
+  def preWalkActions(self):
+    pass
 
   def skip(self, filename):
     if not filename.endswith('.java'):
@@ -68,17 +90,64 @@ class JavaRefactorAgent(JavaAgentBase):
 
   def __init__(self, args):
     self._element_list = []
+    super(JavaRefactorAgent, self).__init__(args)
     self._element_table = collections.defaultdict(list)
-    super(JavaRefactorAgent, self).__init__()
+    self._imported_packages = []
+    self._class_name = None
 
   #Override
   def set_file(self, filepath):
     self._filepath = filepath
-    self._refactor = Refactor(filepath, self.args.save_as_new)
+    self._refactor = Refactor(filepath, self.args.save_as_new,
+        start_mask=self.start_mask, end_mask=self.end_mask)
+
+  @property
+  def start_mask(self):
+    return '/*SAUL:*/ '
+
+  @property
+  def escaped_start_mask(self):
+    return '\/\*SAUL:\*\/ '
+
+  @property
+  def end_mask(self):
+    return ' /*:SAUL*/'
+
+  @property
+  def escaped_end_mask(self):
+    return ' \/\*:SAUL\*\/'
+
+  @property
+  def class_name(self):
+    return self._class_name
+
+  def addImport(self, package_name):
+    if package_name.endswith(';'):
+      package_name = package_name[:-1]
+    if package_name not in self._imported_packages:
+      insertion = 'import %s;' % package_name
+      imports = self.refactor.actionOnX(
+          self.tb, JavaParser.ImportDeclarationContext)
+      self.refactor.insertAfterToken(imports[-1], insertion, use_mask=True)
+      self._imported_packages.append(package_name)
 
   def reset(self):
     self._element_list = []
     self._element_table = collections.defaultdict(list)
+
+  #Override
+  def preWalkActions(self):
+    pass
+
+  #Override
+  def setup(self):
+    self._element_list = sorted(self.ls, key=lambda x: x.start.start)
+    for i in self.ls:
+      self._element_table[type(i)].append(i)
+    main_class_context = functools.reduce(
+        (lambda x,y: x if x.depth() < y.depth() else y),
+        self._element_table[JavaParser.ClassDeclarationContext])
+    self._class_name = main_class_context.IDENTIFIER().getText()
 
   #Override
   def actions(self):
@@ -87,413 +156,310 @@ class JavaRefactorAgent(JavaAgentBase):
 
   ##### Overriding exit token methods for parser listener #####
   def exitCompilationUnit(self, ctx):
-    self.tb[type(ctx)].append(ctx)
     self.ls.append(ctx)
 
   def exitPackageDeclaration(self, ctx):
-    self.tb[type(ctx)].append(ctx)
     self.ls.append(ctx)
 
   def exitImportDeclaration(self, ctx):
-    self.tb[type(ctx)].append(ctx)
     self.ls.append(ctx)
 
   def exitTypeDeclaration(self, ctx):
-    self.tb[type(ctx)].append(ctx)
     self.ls.append(ctx)
 
   def exitModifier(self, ctx):
-    self.tb[type(ctx)].append(ctx)
     self.ls.append(ctx)
 
   def exitClassOrInterfaceModifier(self, ctx):
-    self.tb[type(ctx)].append(ctx)
     self.ls.append(ctx)
 
   def exitVariableModifier(self, ctx):
-    self.tb[type(ctx)].append(ctx)
     self.ls.append(ctx)
 
   def exitClassDeclaration(self, ctx):
-    self.tb[type(ctx)].append(ctx)
     self.ls.append(ctx)
 
   def exitTypeParameters(self, ctx):
-    self.tb[type(ctx)].append(ctx)
     self.ls.append(ctx)
 
   def exitTypeParameter(self, ctx):
-    self.tb[type(ctx)].append(ctx)
     self.ls.append(ctx)
 
   def exitTypeBound(self, ctx):
-    self.tb[type(ctx)].append(ctx)
     self.ls.append(ctx)
 
   def exitEnumDeclaration(self, ctx):
-    self.tb[type(ctx)].append(ctx)
     self.ls.append(ctx)
 
   def exitEnumConstants(self, ctx):
-    self.tb[type(ctx)].append(ctx)
     self.ls.append(ctx)
 
   def exitEnumConstant(self, ctx):
-    self.tb[type(ctx)].append(ctx)
     self.ls.append(ctx)
 
   def exitEnumBodyDeclarations(self, ctx):
-    self.tb[type(ctx)].append(ctx)
     self.ls.append(ctx)
 
   def exitInterfaceDeclaration(self, ctx):
-    self.tb[type(ctx)].append(ctx)
     self.ls.append(ctx)
 
   def exitClassBody(self, ctx):
-    self.tb[type(ctx)].append(ctx)
     self.ls.append(ctx)
 
   def exitInterfaceBody(self, ctx):
-    self.tb[type(ctx)].append(ctx)
     self.ls.append(ctx)
 
   def exitClassBodyDeclaration(self, ctx):
-    self.tb[type(ctx)].append(ctx)
     self.ls.append(ctx)
 
   def exitMemberDeclaration(self, ctx):
-    self.tb[type(ctx)].append(ctx)
     self.ls.append(ctx)
 
   def exitMethodDeclaration(self, ctx):
-    self.tb[type(ctx)].append(ctx)
     self.ls.append(ctx)
 
   def exitMethodBody(self, ctx):
-    self.tb[type(ctx)].append(ctx)
     self.ls.append(ctx)
 
   def exitTypeTypeOrVoid(self, ctx):
-    self.tb[type(ctx)].append(ctx)
     self.ls.append(ctx)
 
   def exitGenericMethodDeclaration(self, ctx):
-    self.tb[type(ctx)].append(ctx)
     self.ls.append(ctx)
 
   def exitGenericConstructorDeclaration(self, ctx):
-    self.tb[type(ctx)].append(ctx)
     self.ls.append(ctx)
 
   def exitConstructorDeclaration(self, ctx):
-    self.tb[type(ctx)].append(ctx)
     self.ls.append(ctx)
 
   def exitFieldDeclaration(self, ctx):
-    self.tb[type(ctx)].append(ctx)
     self.ls.append(ctx)
 
   def exitInterfaceBodyDeclaration(self, ctx):
-    self.tb[type(ctx)].append(ctx)
     self.ls.append(ctx)
 
   def exitInterfaceMemberDeclaration(self, ctx):
-    self.tb[type(ctx)].append(ctx)
     self.ls.append(ctx)
 
   def exitConstDeclaration(self, ctx):
-    self.tb[type(ctx)].append(ctx)
     self.ls.append(ctx)
 
   def exitConstantDeclarator(self, ctx):
-    self.tb[type(ctx)].append(ctx)
     self.ls.append(ctx)
 
   def exitInterfaceMethodDeclaration(self, ctx):
-    self.tb[type(ctx)].append(ctx)
     self.ls.append(ctx)
 
   def exitInterfaceMethodModifier(self, ctx):
-    self.tb[type(ctx)].append(ctx)
     self.ls.append(ctx)
 
   def exitGenericInterfaceMethodDeclaration(self, ctx):
-    self.tb[type(ctx)].append(ctx)
     self.ls.append(ctx)
 
   def exitVariableDeclarators(self, ctx):
-    self.tb[type(ctx)].append(ctx)
     self.ls.append(ctx)
 
   def exitVariableDeclarator(self, ctx):
-    self.tb[type(ctx)].append(ctx)
     self.ls.append(ctx)
 
   def exitVariableDeclaratorId(self, ctx):
-    self.tb[type(ctx)].append(ctx)
     self.ls.append(ctx)
 
   def exitVariableInitializer(self, ctx):
-    self.tb[type(ctx)].append(ctx)
     self.ls.append(ctx)
 
   def exitArrayInitializer(self, ctx):
-    self.tb[type(ctx)].append(ctx)
     self.ls.append(ctx)
 
   def exitClassOrInterfaceType(self, ctx):
-    self.tb[type(ctx)].append(ctx)
     self.ls.append(ctx)
 
   def exitTypeArgument(self, ctx):
-    self.tb[type(ctx)].append(ctx)
     self.ls.append(ctx)
 
   def exitQualifiedNameList(self, ctx):
-    self.tb[type(ctx)].append(ctx)
     self.ls.append(ctx)
 
   def exitFormalParameters(self, ctx):
-    self.tb[type(ctx)].append(ctx)
     self.ls.append(ctx)
 
   def exitFormalParameterList(self, ctx):
-    self.tb[type(ctx)].append(ctx)
     self.ls.append(ctx)
 
   def exitFormalParameter(self, ctx):
-    self.tb[type(ctx)].append(ctx)
     self.ls.append(ctx)
 
   def exitLastFormalParameter(self, ctx):
-    self.tb[type(ctx)].append(ctx)
     self.ls.append(ctx)
 
   def exitQualifiedName(self, ctx):
-    self.tb[type(ctx)].append(ctx)
     self.ls.append(ctx)
 
   def exitLiteral(self, ctx):
-    self.tb[type(ctx)].append(ctx)
     self.ls.append(ctx)
 
   def exitIntegerLiteral(self, ctx):
-    self.tb[type(ctx)].append(ctx)
     self.ls.append(ctx)
 
   def exitFloatLiteral(self, ctx):
-    self.tb[type(ctx)].append(ctx)
     self.ls.append(ctx)
 
   def exitAnnotation(self, ctx):
-    self.tb[type(ctx)].append(ctx)
     self.ls.append(ctx)
 
   def exitElementValuePairs(self, ctx):
-    self.tb[type(ctx)].append(ctx)
     self.ls.append(ctx)
 
   def exitElementValuePair(self, ctx):
-    self.tb[type(ctx)].append(ctx)
     self.ls.append(ctx)
 
   def exitElementValue(self, ctx):
-    self.tb[type(ctx)].append(ctx)
     self.ls.append(ctx)
 
   def exitElementValueArrayInitializer(self, ctx):
-    self.tb[type(ctx)].append(ctx)
     self.ls.append(ctx)
 
   def exitAnnotationTypeDeclaration(self, ctx):
-    self.tb[type(ctx)].append(ctx)
     self.ls.append(ctx)
 
   def exitAnnotationTypeBody(self, ctx):
-    self.tb[type(ctx)].append(ctx)
     self.ls.append(ctx)
 
   def exitAnnotationTypeElementDeclaration(self, ctx):
-    self.tb[type(ctx)].append(ctx)
     self.ls.append(ctx)
 
   def exitAnnotationTypeElementRest(self, ctx):
-    self.tb[type(ctx)].append(ctx)
     self.ls.append(ctx)
 
   def exitAnnotationMethodOrConstantRest(self, ctx):
-    self.tb[type(ctx)].append(ctx)
     self.ls.append(ctx)
 
   def exitAnnotationMethodRest(self, ctx):
-    self.tb[type(ctx)].append(ctx)
     self.ls.append(ctx)
 
   def exitAnnotationConstantRest(self, ctx):
-    self.tb[type(ctx)].append(ctx)
     self.ls.append(ctx)
 
   def exitDefaultValue(self, ctx):
-    self.tb[type(ctx)].append(ctx)
     self.ls.append(ctx)
 
   def exitBlock(self, ctx):
-    self.tb[type(ctx)].append(ctx)
     self.ls.append(ctx)
 
   def exitBlockStatement(self, ctx):
-    self.tb[type(ctx)].append(ctx)
     self.ls.append(ctx)
 
   def exitLocalVariableDeclaration(self, ctx):
-    self.tb[type(ctx)].append(ctx)
     self.ls.append(ctx)
 
   def exitLocalTypeDeclaration(self, ctx):
-    self.tb[type(ctx)].append(ctx)
     self.ls.append(ctx)
 
   def exitStatement(self, ctx):
-    self.tb[type(ctx)].append(ctx)
     self.ls.append(ctx)
 
   def exitCatchClause(self, ctx):
-    self.tb[type(ctx)].append(ctx)
     self.ls.append(ctx)
 
   def exitCatchType(self, ctx):
-    self.tb[type(ctx)].append(ctx)
     self.ls.append(ctx)
 
   def exitFinallyBlock(self, ctx):
-    self.tb[type(ctx)].append(ctx)
     self.ls.append(ctx)
 
   def exitResourceSpecification(self, ctx):
-    self.tb[type(ctx)].append(ctx)
     self.ls.append(ctx)
 
   def exitResources(self, ctx):
-    self.tb[type(ctx)].append(ctx)
     self.ls.append(ctx)
 
   def exitResource(self, ctx):
-    self.tb[type(ctx)].append(ctx)
     self.ls.append(ctx)
 
   def exitSwitchBlockStatementGroup(self, ctx):
-    self.tb[type(ctx)].append(ctx)
     self.ls.append(ctx)
 
   def exitSwitchLabel(self, ctx):
-    self.tb[type(ctx)].append(ctx)
     self.ls.append(ctx)
 
   def exitForControl(self, ctx):
-    self.tb[type(ctx)].append(ctx)
     self.ls.append(ctx)
 
   def exitForInit(self, ctx):
-    self.tb[type(ctx)].append(ctx)
     self.ls.append(ctx)
 
   def exitEnhancedForControl(self, ctx):
-    self.tb[type(ctx)].append(ctx)
     self.ls.append(ctx)
 
   def exitParExpression(self, ctx):
-    self.tb[type(ctx)].append(ctx)
     self.ls.append(ctx)
 
   def exitExpressionList(self, ctx):
-    self.tb[type(ctx)].append(ctx)
     self.ls.append(ctx)
 
   def exitExpression(self, ctx):
-    self.tb[type(ctx)].append(ctx)
     self.ls.append(ctx)
 
   def exitLambdaExpression(self, ctx):
-    self.tb[type(ctx)].append(ctx)
     self.ls.append(ctx)
 
   def exitLambdaParameters(self, ctx):
-    self.tb[type(ctx)].append(ctx)
     self.ls.append(ctx)
 
   def exitLambdaBody(self, ctx):
-    self.tb[type(ctx)].append(ctx)
     self.ls.append(ctx)
 
   def exitPrimary(self, ctx):
-    self.tb[type(ctx)].append(ctx)
     self.ls.append(ctx)
 
   def exitClassType(self, ctx):
-    self.tb[type(ctx)].append(ctx)
     self.ls.append(ctx)
 
   def exitCreator(self, ctx):
-    self.tb[type(ctx)].append(ctx)
     self.ls.append(ctx)
 
   def exitCreatedName(self, ctx):
-    self.tb[type(ctx)].append(ctx)
     self.ls.append(ctx)
 
   def exitInnerCreator(self, ctx):
-    self.tb[type(ctx)].append(ctx)
     self.ls.append(ctx)
 
   def exitArrayCreatorRest(self, ctx):
-    self.tb[type(ctx)].append(ctx)
     self.ls.append(ctx)
 
   def exitClassCreatorRest(self, ctx):
-    self.tb[type(ctx)].append(ctx)
     self.ls.append(ctx)
 
   def exitExplicitGenericInvocation(self, ctx):
-    self.tb[type(ctx)].append(ctx)
     self.ls.append(ctx)
 
   def exitTypeArgumentsOrDiamond(self, ctx):
-    self.tb[type(ctx)].append(ctx)
     self.ls.append(ctx)
 
   def exitNonWildcardTypeArgumentsOrDiamond(self, ctx):
-    self.tb[type(ctx)].append(ctx)
     self.ls.append(ctx)
 
   def exitNonWildcardTypeArguments(self, ctx):
-    self.tb[type(ctx)].append(ctx)
     self.ls.append(ctx)
 
   def exitTypeList(self, ctx):
-    self.tb[type(ctx)].append(ctx)
     self.ls.append(ctx)
 
   def exitTypeType(self, ctx):
-    self.tb[type(ctx)].append(ctx)
     self.ls.append(ctx)
 
   def exitPrimitiveType(self, ctx):
-    self.tb[type(ctx)].append(ctx)
     self.ls.append(ctx)
 
   def exitTypeArguments(self, ctx):
-    self.tb[type(ctx)].append(ctx)
     self.ls.append(ctx)
 
   def exitSuperSuffix(self, ctx):
-    self.tb[type(ctx)].append(ctx)
     self.ls.append(ctx)
 
   def exitExplicitGenericInvocationSuffix(self, ctx):
-    self.tb[type(ctx)].append(ctx)
     self.ls.append(ctx)
 
   def exitArguments(self, ctx):
-    self.tb[type(ctx)].append(ctx)
     self.ls.append(ctx)

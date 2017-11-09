@@ -1,0 +1,2 @@
+class JavaScriptStats:
+  pass

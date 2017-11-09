@@ -1,11 +1,23 @@
+import logging
+import inspect
 import collections
 
+def _CompareToken(t1, t2):
+  if t1.start.start == t2.start.start:
+    return 0
+  elif t1.start.start > t2.start.start:
+    return 1
+  else:
+    return -1
+
 class Refactor(object):
-  def __init__(self, filename, save_as_new):
+  def __init__(self, filename, save_as_new, start_mask='', end_mask=''):
     self._offset_table = collections.defaultdict(int)
     self._filename = filename
+    self._start_mask = start_mask
+    self._end_mask = end_mask
     with open(filename, 'r') as f:
-      self._content = f.read()
+      self.content = f.read()
     self._save_as_new = save_as_new
 
   @property
@@ -13,13 +25,17 @@ class Refactor(object):
     return self._offset_table
 
   @property
-  def content(self):
-    return self._content
+  def start_mask(self):
+    return self._start_mask
 
-  def GetStartLocation(self, token):
+  @property
+  def end_mask(self):
+    return self._end_mask
+
+  def getStartLocation(self, token):
     return self._GetLexPosRealLocation(token.start.start)
 
-  def GetStopLocation(self, token):
+  def getStopLocation(self, token):
     return self._GetLexPosRealLocation(token.stop.stop)
 
   def _GetLexPosRealLocation(self, lexpos):
@@ -29,42 +45,69 @@ class Refactor(object):
         offset += j
     return lexpos + offset
 
-  def GetStartStop(self, token):
+  def getStartStop(self, token):
     return self.GetStartLocation(token), self.GetStopLocation(token)
 
-  def RemoveToken(self, token):
+  def removeToken(self, token):
+    original_start = token.start.start
     start, stop = self.GetStartStop(token)
     self.content = self.content[:start] + self.content[stop:]
-    self.offset_table[start] = stop-start
+    self.offset_table[original_start] = start-stop
 
-  def ReplaceToken(self, token, replacement):
+  def replaceToken(self, token, replacement):
+    original_start = token.start.start
     start, stop = self.GetStartStop(token)
     self.content = self.content[:start] + replacement + self.content[stop:]
+    self.offset_table[original_start] = len(replacement) - (stop-start)
 
-  def InsertAboveToken(self, token):
-    pass
+  def insertBeforeToken(self, token, insertion, use_mask=True):
+    #STUB: find an effective way to insert that handles new lines
+    if use_mask:
+      insertion = self.start_mask + insertion + self.end_mask
+    original_start = token.start.start
+    start = self.getStartLocation(token)
+    self.content = self.content[:start] + insertion + self.content[start:]
+    self.offset_table[original_start] = len(insertion)
 
-  def InsertBelowToken(self, token):
-    pass
+  def insertAfterToken(self, token, insertion, use_mask=True):
+    #STUB: find an effective way to insert that handles new lines
+    if use_mask:
+      insertion = self.start_mask + insertion + self.end_mask
+    original_stop = token.stop.stop
+    stop = self.getStopLocation(token)
+    self.content = self.content[:stop+1] + insertion + self.content[1+stop:]
+    self.offset_table[original_stop] = len(insertion)
 
-  def InsertInFrontOfToken(self, token):
-    pass
+  #TODO: refactor this to be a outer function
+  def getInsertBeforeTokenFn(self, insertion, use_mask=True):
+    def _inner_function(token):
+      self.insertBeforeToken(token, insertion, use_mask)
+    return _inner_function
 
-  def InsertRightAfterToken(self, token):
-    pass
-
-  def ActionOnX(self, tb, ctx_class, condition_fn=None, action_fn=None,
-                optional=False):
+  #TODO refactor tb to be a inner object
+  #TODO remove debugger
+  def actionOnX(self, tb, ctx_class, condition_fn=None, action_fn=None,
+                optional=False, warn=True, debug=False):
+    if debug == True:
+      import ipdb
+      ipdb.set_trace()
     if not condition_fn:
       condition_fn = lambda _ : True
     x_list = tb.get(ctx_class)
     if x_list:
       limited_list = [i for i in x_list if condition_fn(i)]
+      if warn and not limited_list:
+        logging.warn(
+            '%s is not found under the required condition, condition fn:\n%s'
+            % (str(ctx_class), ''.join(
+                inspect.getsourcelines(condition_fn)[0])))
       if action_fn:
         for i in limited_list:
           action_fn(i)
       return limited_list
     else:
+      if warn:
+        logging.warn('%s is not found in this file' % str(ctx_class))
       if optional:
         return []
       else:
@@ -72,7 +115,7 @@ class Refactor(object):
                         % str(ctx_class))
 
 
-  def Save(self):
+  def save(self):
     filename = self._filename
     if self._save_as_new:
       filename += '.new'
