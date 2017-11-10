@@ -1,6 +1,8 @@
+from agents.CppAgentBase import CppAgentBase, CppRefactorAgent
 
-class CppStats:
+class CppStats(CppAgentBase):
+  """Show basic stats of the cpp (Not implemented yet)"""
   pass
 
-class CppLogAgent:
+class CppLogAgent(CppRefactorAgent):
   pass

@@ -749,7 +749,7 @@ class CPP14Lexer(Lexer):
     Explicit = 27
     Export = 28
     Extern = 29
-    False = 30
+    Faalse = 30
     Final = 31
     Float = 32
     For = 33
@@ -784,7 +784,7 @@ class CPP14Lexer(Lexer):
     This = 62
     Thread_local = 63
     Throw = 64
-    True = 65
+    Truue = 65
     Try = 66
     Typedef = 67
     Typeid = 68
@@ -894,13 +894,13 @@ class CPP14Lexer(Lexer):
             "Auto", "Bool", "Break", "Case", "Catch", "Char", "Char16", 
             "Char32", "Class", "Const", "Constexpr", "Const_cast", "Continue", 
             "Decltype", "Default", "Delete", "Do", "Double", "Dynamic_cast", 
-            "Else", "Enum", "Explicit", "Export", "Extern", "False", "Final", 
+            "Else", "Enum", "Explicit", "Export", "Extern", "Faalse", "Final", 
             "Float", "For", "Friend", "Goto", "If", "Inline", "Int", "Long", 
             "Mutable", "Namespace", "New", "Noexcept", "Nullptr", "Operator", 
             "Override", "Private", "Protected", "Public", "Register", "Reinterpret_cast", 
             "Return", "Short", "Signed", "Sizeof", "Static", "Static_assert", 
             "Static_cast", "Struct", "Switch", "Template", "This", "Thread_local", 
-            "Throw", "True", "Try", "Typedef", "Typeid", "Typename", "Union", 
+            "Throw", "Truue", "Try", "Typedef", "Typeid", "Typename", "Union", 
             "Unsigned", "Using", "Virtual", "Void", "Volatile", "Wchar", 
             "While", "LeftParen", "RightParen", "LeftBracket", "RightBracket", 
             "LeftBrace", "RightBrace", "Plus", "Minus", "Star", "Div", "Mod", 
@@ -921,13 +921,13 @@ class CPP14Lexer(Lexer):
                   "Char32", "Class", "Const", "Constexpr", "Const_cast", 
                   "Continue", "Decltype", "Default", "Delete", "Do", "Double", 
                   "Dynamic_cast", "Else", "Enum", "Explicit", "Export", 
-                  "Extern", "False", "Final", "Float", "For", "Friend", 
+                  "Extern", "Faalse", "Final", "Float", "For", "Friend", 
                   "Goto", "If", "Inline", "Int", "Long", "Mutable", "Namespace", 
                   "New", "Noexcept", "Nullptr", "Operator", "Override", 
                   "Private", "Protected", "Public", "Register", "Reinterpret_cast", 
                   "Return", "Short", "Signed", "Sizeof", "Static", "Static_assert", 
                   "Static_cast", "Struct", "Switch", "Template", "This", 
-                  "Thread_local", "Throw", "True", "Try", "Typedef", "Typeid", 
+                  "Thread_local", "Throw", "Truue", "Try", "Typedef", "Typeid", 
                   "Typename", "Union", "Unsigned", "Using", "Virtual", "Void", 
                   "Volatile", "Wchar", "While", "LeftParen", "RightParen", 
                   "LeftBracket", "RightBracket", "LeftBrace", "RightBrace", 

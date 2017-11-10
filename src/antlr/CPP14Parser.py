@@ -1380,61 +1380,61 @@ class CPP14Parser ( Parser ):
 
     sharedContextCache = PredictionContextCache()
 
-    literalNames = [ "<INVALID>", "<INVALID>", "<INVALID>", "'alignas'", 
-                     "'alignof'", "'asm'", "'auto'", "'bool'", "'break'", 
-                     "'case'", "'catch'", "'char'", "'char16_t'", "'char32_t'", 
-                     "'class'", "'const'", "'constexpr'", "'const_cast'", 
-                     "'continue'", "'decltype'", "'default'", "'delete'", 
-                     "'do'", "'double'", "'dynamic_cast'", "'else'", "'enum'", 
-                     "'explicit'", "'export'", "'extern'", "'false'", "'final'", 
-                     "'float'", "'for'", "'friend'", "'goto'", "'if'", "'inline'", 
-                     "'int'", "'long'", "'mutable'", "'namespace'", "'new'", 
-                     "'noexcept'", "'nullptr'", "'operator'", "'override'", 
-                     "'private'", "'protected'", "'public'", "'register'", 
-                     "'reinterpret_cast'", "'return'", "'short'", "'signed'", 
-                     "'sizeof'", "'static'", "'static_assert'", "'static_cast'", 
-                     "'struct'", "'switch'", "'template'", "'this'", "'thread_local'", 
-                     "'throw'", "'true'", "'try'", "'typedef'", "'typeid'", 
-                     "'typename'", "'union'", "'unsigned'", "'using'", "'virtual'", 
-                     "'void'", "'volatile'", "'wchar_t'", "'while'", "'('", 
-                     "')'", "'['", "']'", "'{'", "'}'", "'+'", "'-'", "'*'", 
-                     "'/'", "'%'", "'^'", "'&'", "'|'", "'~'", "'!'", "'='", 
-                     "'<'", "'>'", "'+='", "'-='", "'*='", "'/='", "'%='", 
-                     "'^='", "'&='", "'|='", "'<<'", "'<<='", "'=='", "'!='", 
-                     "'<='", "'>='", "'&&'", "'||'", "'++'", "'--'", "','", 
-                     "'->*'", "'->'", "'?'", "':'", "'::'", "';'", "'.'", 
+    literalNames = [ "<INVALID>", "<INVALID>", "<INVALID>", "'alignas'",
+                     "'alignof'", "'asm'", "'auto'", "'bool'", "'break'",
+                     "'case'", "'catch'", "'char'", "'char16_t'", "'char32_t'",
+                     "'class'", "'const'", "'constexpr'", "'const_cast'",
+                     "'continue'", "'decltype'", "'default'", "'delete'",
+                     "'do'", "'double'", "'dynamic_cast'", "'else'", "'enum'",
+                     "'explicit'", "'export'", "'extern'", "'false'", "'final'",
+                     "'float'", "'for'", "'friend'", "'goto'", "'if'", "'inline'",
+                     "'int'", "'long'", "'mutable'", "'namespace'", "'new'",
+                     "'noexcept'", "'nullptr'", "'operator'", "'override'",
+                     "'private'", "'protected'", "'public'", "'register'",
+                     "'reinterpret_cast'", "'return'", "'short'", "'signed'",
+                     "'sizeof'", "'static'", "'static_assert'", "'static_cast'",
+                     "'struct'", "'switch'", "'template'", "'this'", "'thread_local'",
+                     "'throw'", "'true'", "'try'", "'typedef'", "'typeid'",
+                     "'typename'", "'union'", "'unsigned'", "'using'", "'virtual'",
+                     "'void'", "'volatile'", "'wchar_t'", "'while'", "'('",
+                     "')'", "'['", "']'", "'{'", "'}'", "'+'", "'-'", "'*'",
+                     "'/'", "'%'", "'^'", "'&'", "'|'", "'~'", "'!'", "'='",
+                     "'<'", "'>'", "'+='", "'-='", "'*='", "'/='", "'%='",
+                     "'^='", "'&='", "'|='", "'<<'", "'<<='", "'=='", "'!='",
+                     "'<='", "'>='", "'&&'", "'||'", "'++'", "'--'", "','",
+                     "'->*'", "'->'", "'?'", "':'", "'::'", "';'", "'.'",
                      "'.*'", "'...'" ]
 
-    symbolicNames = [ "<INVALID>", "MultiLineMacro", "Directive", "Alignas", 
-                      "Alignof", "Asm", "Auto", "Bool", "Break", "Case", 
-                      "Catch", "Char", "Char16", "Char32", "Class", "Const", 
-                      "Constexpr", "Const_cast", "Continue", "Decltype", 
-                      "Default", "Delete", "Do", "Double", "Dynamic_cast", 
-                      "Else", "Enum", "Explicit", "Export", "Extern", "False", 
-                      "Final", "Float", "For", "Friend", "Goto", "If", "Inline", 
-                      "Int", "Long", "Mutable", "Namespace", "New", "Noexcept", 
-                      "Nullptr", "Operator", "Override", "Private", "Protected", 
-                      "Public", "Register", "Reinterpret_cast", "Return", 
-                      "Short", "Signed", "Sizeof", "Static", "Static_assert", 
-                      "Static_cast", "Struct", "Switch", "Template", "This", 
-                      "Thread_local", "Throw", "True", "Try", "Typedef", 
-                      "Typeid", "Typename", "Union", "Unsigned", "Using", 
-                      "Virtual", "Void", "Volatile", "Wchar", "While", "LeftParen", 
-                      "RightParen", "LeftBracket", "RightBracket", "LeftBrace", 
-                      "RightBrace", "Plus", "Minus", "Star", "Div", "Mod", 
-                      "Caret", "And", "Or", "Tilde", "Not", "Assign", "Less", 
-                      "Greater", "PlusAssign", "MinusAssign", "StarAssign", 
-                      "DivAssign", "ModAssign", "XorAssign", "AndAssign", 
-                      "OrAssign", "LeftShift", "LeftShiftAssign", "Equal", 
-                      "NotEqual", "LessEqual", "GreaterEqual", "AndAnd", 
-                      "OrOr", "PlusPlus", "MinusMinus", "Comma", "ArrowStar", 
-                      "Arrow", "Question", "Colon", "Doublecolon", "Semi", 
-                      "Dot", "DotStar", "Ellipsis", "Identifier", "Integerliteral", 
-                      "Decimalliteral", "Octalliteral", "Hexadecimalliteral", 
-                      "Binaryliteral", "Integersuffix", "Characterliteral", 
-                      "Floatingliteral", "Stringliteral", "Userdefinedintegerliteral", 
-                      "Userdefinedfloatingliteral", "Userdefinedstringliteral", 
-                      "Userdefinedcharacterliteral", "Whitespace", "Newline", 
+    symbolicNames = [ "<INVALID>", "MultiLineMacro", "Directive", "Alignas",
+                      "Alignof", "Asm", "Auto", "Bool", "Break", "Case",
+                      "Catch", "Char", "Char16", "Char32", "Class", "Const",
+                      "Constexpr", "Const_cast", "Continue", "Decltype",
+                      "Default", "Delete", "Do", "Double", "Dynamic_cast",
+                      "Else", "Enum", "Explicit", "Export", "Extern", "Faalse",
+                      "Final", "Float", "For", "Friend", "Goto", "If", "Inline",
+                      "Int", "Long", "Mutable", "Namespace", "New", "Noexcept",
+                      "Nullptr", "Operator", "Override", "Private", "Protected",
+                      "Public", "Register", "Reinterpret_cast", "Return",
+                      "Short", "Signed", "Sizeof", "Static", "Static_assert",
+                      "Static_cast", "Struct", "Switch", "Template", "This",
+                      "Thread_local", "Throw", "Truue", "Try", "Typedef",
+                      "Typeid", "Typename", "Union", "Unsigned", "Using",
+                      "Virtual", "Void", "Volatile", "Wchar", "While", "LeftParen",
+                      "RightParen", "LeftBracket", "RightBracket", "LeftBrace",
+                      "RightBrace", "Plus", "Minus", "Star", "Div", "Mod",
+                      "Caret", "And", "Or", "Tilde", "Not", "Assign", "Less",
+                      "Greater", "PlusAssign", "MinusAssign", "StarAssign",
+                      "DivAssign", "ModAssign", "XorAssign", "AndAssign",
+                      "OrAssign", "LeftShift", "LeftShiftAssign", "Equal",
+                      "NotEqual", "LessEqual", "GreaterEqual", "AndAnd",
+                      "OrOr", "PlusPlus", "MinusMinus", "Comma", "ArrowStar",
+                      "Arrow", "Question", "Colon", "Doublecolon", "Semi",
+                      "Dot", "DotStar", "Ellipsis", "Identifier", "Integerliteral",
+                      "Decimalliteral", "Octalliteral", "Hexadecimalliteral",
+                      "Binaryliteral", "Integersuffix", "Characterliteral",
+                      "Floatingliteral", "Stringliteral", "Userdefinedintegerliteral",
+                      "Userdefinedfloatingliteral", "Userdefinedstringliteral",
+                      "Userdefinedcharacterliteral", "Whitespace", "Newline",
                       "BlockComment", "LineComment" ]
 
     RULE_translationunit = 0
@@ -1637,69 +1637,69 @@ class CPP14Parser ( Parser ):
     RULE_pointerliteral = 197
     RULE_userdefinedliteral = 198
 
-    ruleNames =  [ "translationunit", "primaryexpression", "idexpression", 
-                   "unqualifiedid", "qualifiedid", "nestednamespecifier", 
-                   "lambdaexpression", "lambdaintroducer", "lambdacapture", 
-                   "capturedefault", "capturelist", "capture", "simplecapture", 
-                   "initcapture", "lambdadeclarator", "postfixexpression", 
-                   "expressionlist", "pseudodestructorname", "unaryexpression", 
-                   "unaryoperator", "newexpression", "newplacement", "newtypeid", 
-                   "newdeclarator", "noptrnewdeclarator", "newinitializer", 
-                   "deleteexpression", "noexceptexpression", "castexpression", 
-                   "pmexpression", "multiplicativeexpression", "additiveexpression", 
-                   "shiftexpression", "relationalexpression", "equalityexpression", 
-                   "andexpression", "exclusiveorexpression", "inclusiveorexpression", 
-                   "logicalandexpression", "logicalorexpression", "conditionalexpression", 
-                   "assignmentexpression", "assignmentoperator", "expression", 
-                   "constantexpression", "statement", "labeledstatement", 
-                   "expressionstatement", "compoundstatement", "statementseq", 
-                   "selectionstatement", "condition", "iterationstatement", 
-                   "forinitstatement", "forrangedeclaration", "forrangeinitializer", 
-                   "jumpstatement", "declarationstatement", "declarationseq", 
-                   "declaration", "blockdeclaration", "aliasdeclaration", 
-                   "simpledeclaration", "static_assertdeclaration", "emptydeclaration", 
-                   "attributedeclaration", "declspecifier", "declspecifierseq", 
-                   "storageclassspecifier", "functionspecifier", "typedefname", 
-                   "typespecifier", "trailingtypespecifier", "typespecifierseq", 
-                   "trailingtypespecifierseq", "simpletypespecifier", "thetypename", 
-                   "decltypespecifier", "elaboratedtypespecifier", "enumname", 
-                   "enumspecifier", "enumhead", "opaqueenumdeclaration", 
-                   "enumkey", "enumbase", "enumeratorlist", "enumeratordefinition", 
-                   "enumerator", "namespacename", "originalnamespacename", 
-                   "namespacedefinition", "namednamespacedefinition", "originalnamespacedefinition", 
-                   "extensionnamespacedefinition", "unnamednamespacedefinition", 
-                   "namespacebody", "namespacealias", "namespacealiasdefinition", 
-                   "qualifiednamespacespecifier", "usingdeclaration", "usingdirective", 
-                   "asmdefinition", "linkagespecification", "attributespecifierseq", 
-                   "attributespecifier", "alignmentspecifier", "attributelist", 
-                   "attribute", "attributetoken", "attributescopedtoken", 
-                   "attributenamespace", "attributeargumentclause", "balancedtokenseq", 
-                   "balancedtoken", "initdeclaratorlist", "initdeclarator", 
-                   "declarator", "ptrdeclarator", "noptrdeclarator", "parametersandqualifiers", 
-                   "trailingreturntype", "ptroperator", "cvqualifierseq", 
-                   "cvqualifier", "refqualifier", "declaratorid", "thetypeid", 
-                   "abstractdeclarator", "ptrabstractdeclarator", "noptrabstractdeclarator", 
-                   "abstractpackdeclarator", "noptrabstractpackdeclarator", 
-                   "parameterdeclarationclause", "parameterdeclarationlist", 
-                   "parameterdeclaration", "functiondefinition", "functionbody", 
-                   "initializer", "braceorequalinitializer", "initializerclause", 
-                   "initializerlist", "bracedinitlist", "classname", "classspecifier", 
-                   "classhead", "classheadname", "classvirtspecifier", "classkey", 
-                   "memberspecification", "memberdeclaration", "memberdeclaratorlist", 
-                   "memberdeclarator", "virtspecifierseq", "virtspecifier", 
-                   "purespecifier", "baseclause", "basespecifierlist", "basespecifier", 
-                   "classordecltype", "basetypespecifier", "accessspecifier", 
-                   "conversionfunctionid", "conversiontypeid", "conversiondeclarator", 
-                   "ctorinitializer", "meminitializerlist", "meminitializer", 
-                   "meminitializerid", "operatorfunctionid", "literaloperatorid", 
-                   "templatedeclaration", "templateparameterlist", "templateparameter", 
-                   "typeparameter", "simpletemplateid", "templateid", "templatename", 
-                   "templateargumentlist", "templateargument", "typenamespecifier", 
-                   "explicitinstantiation", "explicitspecialization", "tryblock", 
-                   "functiontryblock", "handlerseq", "handler", "exceptiondeclaration", 
-                   "throwexpression", "exceptionspecification", "dynamicexceptionspecification", 
-                   "typeidlist", "noexceptspecification", "rightShift", 
-                   "rightShiftAssign", "theoperator", "literal", "booleanliteral", 
+    ruleNames =  [ "translationunit", "primaryexpression", "idexpression",
+                   "unqualifiedid", "qualifiedid", "nestednamespecifier",
+                   "lambdaexpression", "lambdaintroducer", "lambdacapture",
+                   "capturedefault", "capturelist", "capture", "simplecapture",
+                   "initcapture", "lambdadeclarator", "postfixexpression",
+                   "expressionlist", "pseudodestructorname", "unaryexpression",
+                   "unaryoperator", "newexpression", "newplacement", "newtypeid",
+                   "newdeclarator", "noptrnewdeclarator", "newinitializer",
+                   "deleteexpression", "noexceptexpression", "castexpression",
+                   "pmexpression", "multiplicativeexpression", "additiveexpression",
+                   "shiftexpression", "relationalexpression", "equalityexpression",
+                   "andexpression", "exclusiveorexpression", "inclusiveorexpression",
+                   "logicalandexpression", "logicalorexpression", "conditionalexpression",
+                   "assignmentexpression", "assignmentoperator", "expression",
+                   "constantexpression", "statement", "labeledstatement",
+                   "expressionstatement", "compoundstatement", "statementseq",
+                   "selectionstatement", "condition", "iterationstatement",
+                   "forinitstatement", "forrangedeclaration", "forrangeinitializer",
+                   "jumpstatement", "declarationstatement", "declarationseq",
+                   "declaration", "blockdeclaration", "aliasdeclaration",
+                   "simpledeclaration", "static_assertdeclaration", "emptydeclaration",
+                   "attributedeclaration", "declspecifier", "declspecifierseq",
+                   "storageclassspecifier", "functionspecifier", "typedefname",
+                   "typespecifier", "trailingtypespecifier", "typespecifierseq",
+                   "trailingtypespecifierseq", "simpletypespecifier", "thetypename",
+                   "decltypespecifier", "elaboratedtypespecifier", "enumname",
+                   "enumspecifier", "enumhead", "opaqueenumdeclaration",
+                   "enumkey", "enumbase", "enumeratorlist", "enumeratordefinition",
+                   "enumerator", "namespacename", "originalnamespacename",
+                   "namespacedefinition", "namednamespacedefinition", "originalnamespacedefinition",
+                   "extensionnamespacedefinition", "unnamednamespacedefinition",
+                   "namespacebody", "namespacealias", "namespacealiasdefinition",
+                   "qualifiednamespacespecifier", "usingdeclaration", "usingdirective",
+                   "asmdefinition", "linkagespecification", "attributespecifierseq",
+                   "attributespecifier", "alignmentspecifier", "attributelist",
+                   "attribute", "attributetoken", "attributescopedtoken",
+                   "attributenamespace", "attributeargumentclause", "balancedtokenseq",
+                   "balancedtoken", "initdeclaratorlist", "initdeclarator",
+                   "declarator", "ptrdeclarator", "noptrdeclarator", "parametersandqualifiers",
+                   "trailingreturntype", "ptroperator", "cvqualifierseq",
+                   "cvqualifier", "refqualifier", "declaratorid", "thetypeid",
+                   "abstractdeclarator", "ptrabstractdeclarator", "noptrabstractdeclarator",
+                   "abstractpackdeclarator", "noptrabstractpackdeclarator",
+                   "parameterdeclarationclause", "parameterdeclarationlist",
+                   "parameterdeclaration", "functiondefinition", "functionbody",
+                   "initializer", "braceorequalinitializer", "initializerclause",
+                   "initializerlist", "bracedinitlist", "classname", "classspecifier",
+                   "classhead", "classheadname", "classvirtspecifier", "classkey",
+                   "memberspecification", "memberdeclaration", "memberdeclaratorlist",
+                   "memberdeclarator", "virtspecifierseq", "virtspecifier",
+                   "purespecifier", "baseclause", "basespecifierlist", "basespecifier",
+                   "classordecltype", "basetypespecifier", "accessspecifier",
+                   "conversionfunctionid", "conversiontypeid", "conversiondeclarator",
+                   "ctorinitializer", "meminitializerlist", "meminitializer",
+                   "meminitializerid", "operatorfunctionid", "literaloperatorid",
+                   "templatedeclaration", "templateparameterlist", "templateparameter",
+                   "typeparameter", "simpletemplateid", "templateid", "templatename",
+                   "templateargumentlist", "templateargument", "typenamespecifier",
+                   "explicitinstantiation", "explicitspecialization", "tryblock",
+                   "functiontryblock", "handlerseq", "handler", "exceptiondeclaration",
+                   "throwexpression", "exceptionspecification", "dynamicexceptionspecification",
+                   "typeidlist", "noexceptspecification", "rightShift",
+                   "rightShiftAssign", "theoperator", "literal", "booleanliteral",
                    "pointerliteral", "userdefinedliteral" ]
 
     EOF = Token.EOF
@@ -1732,7 +1732,7 @@ class CPP14Parser ( Parser ):
     Explicit=27
     Export=28
     Extern=29
-    False=30
+    Faalse=30
     Final=31
     Float=32
     For=33
@@ -1767,7 +1767,7 @@ class CPP14Parser ( Parser ):
     This=62
     Thread_local=63
     Throw=64
-    True=65
+    Truue=65
     Try=66
     Typedef=67
     Typeid=68
@@ -1953,7 +1953,7 @@ class CPP14Parser ( Parser ):
             self.state = 411
             self._errHandler.sync(self)
             token = self._input.LA(1)
-            if token in [CPP14Parser.False, CPP14Parser.Nullptr, CPP14Parser.True, CPP14Parser.Integerliteral, CPP14Parser.Characterliteral, CPP14Parser.Floatingliteral, CPP14Parser.Stringliteral, CPP14Parser.Userdefinedintegerliteral, CPP14Parser.Userdefinedfloatingliteral, CPP14Parser.Userdefinedstringliteral, CPP14Parser.Userdefinedcharacterliteral]:
+            if token in [CPP14Parser.Faalse, CPP14Parser.Nullptr, CPP14Parser.Truue, CPP14Parser.Integerliteral, CPP14Parser.Characterliteral, CPP14Parser.Floatingliteral, CPP14Parser.Stringliteral, CPP14Parser.Userdefinedintegerliteral, CPP14Parser.Userdefinedfloatingliteral, CPP14Parser.Userdefinedstringliteral, CPP14Parser.Userdefinedcharacterliteral]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 403
                 self.literal()
@@ -2349,7 +2349,7 @@ class CPP14Parser ( Parser ):
                         self.match(CPP14Parser.Doublecolon)
                         pass
 
-             
+
                 self.state = 461
                 self._errHandler.sync(self)
                 _alt = self._interp.adaptivePredict(self._input,8,self._ctx)
@@ -2654,7 +2654,7 @@ class CPP14Parser ( Parser ):
                         self.state = 492
                         self.match(CPP14Parser.Ellipsis)
 
-             
+
                 self.state = 499
                 self._errHandler.sync(self)
                 _alt = self._interp.adaptivePredict(self._input,14,self._ctx)
@@ -3043,7 +3043,7 @@ class CPP14Parser ( Parser ):
                 self.state = 537
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
-                if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << CPP14Parser.Alignof) | (1 << CPP14Parser.Auto) | (1 << CPP14Parser.Bool) | (1 << CPP14Parser.Char) | (1 << CPP14Parser.Char16) | (1 << CPP14Parser.Char32) | (1 << CPP14Parser.Const_cast) | (1 << CPP14Parser.Decltype) | (1 << CPP14Parser.Delete) | (1 << CPP14Parser.Double) | (1 << CPP14Parser.Dynamic_cast) | (1 << CPP14Parser.False) | (1 << CPP14Parser.Float) | (1 << CPP14Parser.Int) | (1 << CPP14Parser.Long) | (1 << CPP14Parser.New) | (1 << CPP14Parser.Noexcept) | (1 << CPP14Parser.Nullptr) | (1 << CPP14Parser.Operator) | (1 << CPP14Parser.Reinterpret_cast) | (1 << CPP14Parser.Short) | (1 << CPP14Parser.Signed) | (1 << CPP14Parser.Sizeof) | (1 << CPP14Parser.Static_cast) | (1 << CPP14Parser.This))) != 0) or ((((_la - 64)) & ~0x3f) == 0 and ((1 << (_la - 64)) & ((1 << (CPP14Parser.Throw - 64)) | (1 << (CPP14Parser.True - 64)) | (1 << (CPP14Parser.Typeid - 64)) | (1 << (CPP14Parser.Typename - 64)) | (1 << (CPP14Parser.Unsigned - 64)) | (1 << (CPP14Parser.Void - 64)) | (1 << (CPP14Parser.Wchar - 64)) | (1 << (CPP14Parser.LeftParen - 64)) | (1 << (CPP14Parser.LeftBracket - 64)) | (1 << (CPP14Parser.LeftBrace - 64)) | (1 << (CPP14Parser.Plus - 64)) | (1 << (CPP14Parser.Minus - 64)) | (1 << (CPP14Parser.Star - 64)) | (1 << (CPP14Parser.And - 64)) | (1 << (CPP14Parser.Or - 64)) | (1 << (CPP14Parser.Tilde - 64)) | (1 << (CPP14Parser.Not - 64)) | (1 << (CPP14Parser.PlusPlus - 64)) | (1 << (CPP14Parser.MinusMinus - 64)) | (1 << (CPP14Parser.Doublecolon - 64)) | (1 << (CPP14Parser.Identifier - 64)) | (1 << (CPP14Parser.Integerliteral - 64)))) != 0) or ((((_la - 132)) & ~0x3f) == 0 and ((1 << (_la - 132)) & ((1 << (CPP14Parser.Characterliteral - 132)) | (1 << (CPP14Parser.Floatingliteral - 132)) | (1 << (CPP14Parser.Stringliteral - 132)) | (1 << (CPP14Parser.Userdefinedintegerliteral - 132)) | (1 << (CPP14Parser.Userdefinedfloatingliteral - 132)) | (1 << (CPP14Parser.Userdefinedstringliteral - 132)) | (1 << (CPP14Parser.Userdefinedcharacterliteral - 132)))) != 0):
+                if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << CPP14Parser.Alignof) | (1 << CPP14Parser.Auto) | (1 << CPP14Parser.Bool) | (1 << CPP14Parser.Char) | (1 << CPP14Parser.Char16) | (1 << CPP14Parser.Char32) | (1 << CPP14Parser.Const_cast) | (1 << CPP14Parser.Decltype) | (1 << CPP14Parser.Delete) | (1 << CPP14Parser.Double) | (1 << CPP14Parser.Dynamic_cast) | (1 << CPP14Parser.Faalse) | (1 << CPP14Parser.Float) | (1 << CPP14Parser.Int) | (1 << CPP14Parser.Long) | (1 << CPP14Parser.New) | (1 << CPP14Parser.Noexcept) | (1 << CPP14Parser.Nullptr) | (1 << CPP14Parser.Operator) | (1 << CPP14Parser.Reinterpret_cast) | (1 << CPP14Parser.Short) | (1 << CPP14Parser.Signed) | (1 << CPP14Parser.Sizeof) | (1 << CPP14Parser.Static_cast) | (1 << CPP14Parser.This))) != 0) or ((((_la - 64)) & ~0x3f) == 0 and ((1 << (_la - 64)) & ((1 << (CPP14Parser.Throw - 64)) | (1 << (CPP14Parser.Truue - 64)) | (1 << (CPP14Parser.Typeid - 64)) | (1 << (CPP14Parser.Typename - 64)) | (1 << (CPP14Parser.Unsigned - 64)) | (1 << (CPP14Parser.Void - 64)) | (1 << (CPP14Parser.Wchar - 64)) | (1 << (CPP14Parser.LeftParen - 64)) | (1 << (CPP14Parser.LeftBracket - 64)) | (1 << (CPP14Parser.LeftBrace - 64)) | (1 << (CPP14Parser.Plus - 64)) | (1 << (CPP14Parser.Minus - 64)) | (1 << (CPP14Parser.Star - 64)) | (1 << (CPP14Parser.And - 64)) | (1 << (CPP14Parser.Or - 64)) | (1 << (CPP14Parser.Tilde - 64)) | (1 << (CPP14Parser.Not - 64)) | (1 << (CPP14Parser.PlusPlus - 64)) | (1 << (CPP14Parser.MinusMinus - 64)) | (1 << (CPP14Parser.Doublecolon - 64)) | (1 << (CPP14Parser.Identifier - 64)) | (1 << (CPP14Parser.Integerliteral - 64)))) != 0) or ((((_la - 132)) & ~0x3f) == 0 and ((1 << (_la - 132)) & ((1 << (CPP14Parser.Characterliteral - 132)) | (1 << (CPP14Parser.Floatingliteral - 132)) | (1 << (CPP14Parser.Stringliteral - 132)) | (1 << (CPP14Parser.Userdefinedintegerliteral - 132)) | (1 << (CPP14Parser.Userdefinedfloatingliteral - 132)) | (1 << (CPP14Parser.Userdefinedstringliteral - 132)) | (1 << (CPP14Parser.Userdefinedcharacterliteral - 132)))) != 0):
                     self.state = 536
                     self.expressionlist()
 
@@ -3060,7 +3060,7 @@ class CPP14Parser ( Parser ):
                 self.state = 544
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
-                if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << CPP14Parser.Alignof) | (1 << CPP14Parser.Auto) | (1 << CPP14Parser.Bool) | (1 << CPP14Parser.Char) | (1 << CPP14Parser.Char16) | (1 << CPP14Parser.Char32) | (1 << CPP14Parser.Const_cast) | (1 << CPP14Parser.Decltype) | (1 << CPP14Parser.Delete) | (1 << CPP14Parser.Double) | (1 << CPP14Parser.Dynamic_cast) | (1 << CPP14Parser.False) | (1 << CPP14Parser.Float) | (1 << CPP14Parser.Int) | (1 << CPP14Parser.Long) | (1 << CPP14Parser.New) | (1 << CPP14Parser.Noexcept) | (1 << CPP14Parser.Nullptr) | (1 << CPP14Parser.Operator) | (1 << CPP14Parser.Reinterpret_cast) | (1 << CPP14Parser.Short) | (1 << CPP14Parser.Signed) | (1 << CPP14Parser.Sizeof) | (1 << CPP14Parser.Static_cast) | (1 << CPP14Parser.This))) != 0) or ((((_la - 64)) & ~0x3f) == 0 and ((1 << (_la - 64)) & ((1 << (CPP14Parser.Throw - 64)) | (1 << (CPP14Parser.True - 64)) | (1 << (CPP14Parser.Typeid - 64)) | (1 << (CPP14Parser.Typename - 64)) | (1 << (CPP14Parser.Unsigned - 64)) | (1 << (CPP14Parser.Void - 64)) | (1 << (CPP14Parser.Wchar - 64)) | (1 << (CPP14Parser.LeftParen - 64)) | (1 << (CPP14Parser.LeftBracket - 64)) | (1 << (CPP14Parser.LeftBrace - 64)) | (1 << (CPP14Parser.Plus - 64)) | (1 << (CPP14Parser.Minus - 64)) | (1 << (CPP14Parser.Star - 64)) | (1 << (CPP14Parser.And - 64)) | (1 << (CPP14Parser.Or - 64)) | (1 << (CPP14Parser.Tilde - 64)) | (1 << (CPP14Parser.Not - 64)) | (1 << (CPP14Parser.PlusPlus - 64)) | (1 << (CPP14Parser.MinusMinus - 64)) | (1 << (CPP14Parser.Doublecolon - 64)) | (1 << (CPP14Parser.Identifier - 64)) | (1 << (CPP14Parser.Integerliteral - 64)))) != 0) or ((((_la - 132)) & ~0x3f) == 0 and ((1 << (_la - 132)) & ((1 << (CPP14Parser.Characterliteral - 132)) | (1 << (CPP14Parser.Floatingliteral - 132)) | (1 << (CPP14Parser.Stringliteral - 132)) | (1 << (CPP14Parser.Userdefinedintegerliteral - 132)) | (1 << (CPP14Parser.Userdefinedfloatingliteral - 132)) | (1 << (CPP14Parser.Userdefinedstringliteral - 132)) | (1 << (CPP14Parser.Userdefinedcharacterliteral - 132)))) != 0):
+                if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << CPP14Parser.Alignof) | (1 << CPP14Parser.Auto) | (1 << CPP14Parser.Bool) | (1 << CPP14Parser.Char) | (1 << CPP14Parser.Char16) | (1 << CPP14Parser.Char32) | (1 << CPP14Parser.Const_cast) | (1 << CPP14Parser.Decltype) | (1 << CPP14Parser.Delete) | (1 << CPP14Parser.Double) | (1 << CPP14Parser.Dynamic_cast) | (1 << CPP14Parser.Faalse) | (1 << CPP14Parser.Float) | (1 << CPP14Parser.Int) | (1 << CPP14Parser.Long) | (1 << CPP14Parser.New) | (1 << CPP14Parser.Noexcept) | (1 << CPP14Parser.Nullptr) | (1 << CPP14Parser.Operator) | (1 << CPP14Parser.Reinterpret_cast) | (1 << CPP14Parser.Short) | (1 << CPP14Parser.Signed) | (1 << CPP14Parser.Sizeof) | (1 << CPP14Parser.Static_cast) | (1 << CPP14Parser.This))) != 0) or ((((_la - 64)) & ~0x3f) == 0 and ((1 << (_la - 64)) & ((1 << (CPP14Parser.Throw - 64)) | (1 << (CPP14Parser.Truue - 64)) | (1 << (CPP14Parser.Typeid - 64)) | (1 << (CPP14Parser.Typename - 64)) | (1 << (CPP14Parser.Unsigned - 64)) | (1 << (CPP14Parser.Void - 64)) | (1 << (CPP14Parser.Wchar - 64)) | (1 << (CPP14Parser.LeftParen - 64)) | (1 << (CPP14Parser.LeftBracket - 64)) | (1 << (CPP14Parser.LeftBrace - 64)) | (1 << (CPP14Parser.Plus - 64)) | (1 << (CPP14Parser.Minus - 64)) | (1 << (CPP14Parser.Star - 64)) | (1 << (CPP14Parser.And - 64)) | (1 << (CPP14Parser.Or - 64)) | (1 << (CPP14Parser.Tilde - 64)) | (1 << (CPP14Parser.Not - 64)) | (1 << (CPP14Parser.PlusPlus - 64)) | (1 << (CPP14Parser.MinusMinus - 64)) | (1 << (CPP14Parser.Doublecolon - 64)) | (1 << (CPP14Parser.Identifier - 64)) | (1 << (CPP14Parser.Integerliteral - 64)))) != 0) or ((((_la - 132)) & ~0x3f) == 0 and ((1 << (_la - 132)) & ((1 << (CPP14Parser.Characterliteral - 132)) | (1 << (CPP14Parser.Floatingliteral - 132)) | (1 << (CPP14Parser.Stringliteral - 132)) | (1 << (CPP14Parser.Userdefinedintegerliteral - 132)) | (1 << (CPP14Parser.Userdefinedfloatingliteral - 132)) | (1 << (CPP14Parser.Userdefinedstringliteral - 132)) | (1 << (CPP14Parser.Userdefinedcharacterliteral - 132)))) != 0):
                     self.state = 543
                     self.expressionlist()
 
@@ -3228,7 +3228,7 @@ class CPP14Parser ( Parser ):
                         self.state = 611
                         self._errHandler.sync(self)
                         _la = self._input.LA(1)
-                        if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << CPP14Parser.Alignof) | (1 << CPP14Parser.Auto) | (1 << CPP14Parser.Bool) | (1 << CPP14Parser.Char) | (1 << CPP14Parser.Char16) | (1 << CPP14Parser.Char32) | (1 << CPP14Parser.Const_cast) | (1 << CPP14Parser.Decltype) | (1 << CPP14Parser.Delete) | (1 << CPP14Parser.Double) | (1 << CPP14Parser.Dynamic_cast) | (1 << CPP14Parser.False) | (1 << CPP14Parser.Float) | (1 << CPP14Parser.Int) | (1 << CPP14Parser.Long) | (1 << CPP14Parser.New) | (1 << CPP14Parser.Noexcept) | (1 << CPP14Parser.Nullptr) | (1 << CPP14Parser.Operator) | (1 << CPP14Parser.Reinterpret_cast) | (1 << CPP14Parser.Short) | (1 << CPP14Parser.Signed) | (1 << CPP14Parser.Sizeof) | (1 << CPP14Parser.Static_cast) | (1 << CPP14Parser.This))) != 0) or ((((_la - 64)) & ~0x3f) == 0 and ((1 << (_la - 64)) & ((1 << (CPP14Parser.Throw - 64)) | (1 << (CPP14Parser.True - 64)) | (1 << (CPP14Parser.Typeid - 64)) | (1 << (CPP14Parser.Typename - 64)) | (1 << (CPP14Parser.Unsigned - 64)) | (1 << (CPP14Parser.Void - 64)) | (1 << (CPP14Parser.Wchar - 64)) | (1 << (CPP14Parser.LeftParen - 64)) | (1 << (CPP14Parser.LeftBracket - 64)) | (1 << (CPP14Parser.LeftBrace - 64)) | (1 << (CPP14Parser.Plus - 64)) | (1 << (CPP14Parser.Minus - 64)) | (1 << (CPP14Parser.Star - 64)) | (1 << (CPP14Parser.And - 64)) | (1 << (CPP14Parser.Or - 64)) | (1 << (CPP14Parser.Tilde - 64)) | (1 << (CPP14Parser.Not - 64)) | (1 << (CPP14Parser.PlusPlus - 64)) | (1 << (CPP14Parser.MinusMinus - 64)) | (1 << (CPP14Parser.Doublecolon - 64)) | (1 << (CPP14Parser.Identifier - 64)) | (1 << (CPP14Parser.Integerliteral - 64)))) != 0) or ((((_la - 132)) & ~0x3f) == 0 and ((1 << (_la - 132)) & ((1 << (CPP14Parser.Characterliteral - 132)) | (1 << (CPP14Parser.Floatingliteral - 132)) | (1 << (CPP14Parser.Stringliteral - 132)) | (1 << (CPP14Parser.Userdefinedintegerliteral - 132)) | (1 << (CPP14Parser.Userdefinedfloatingliteral - 132)) | (1 << (CPP14Parser.Userdefinedstringliteral - 132)) | (1 << (CPP14Parser.Userdefinedcharacterliteral - 132)))) != 0):
+                        if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << CPP14Parser.Alignof) | (1 << CPP14Parser.Auto) | (1 << CPP14Parser.Bool) | (1 << CPP14Parser.Char) | (1 << CPP14Parser.Char16) | (1 << CPP14Parser.Char32) | (1 << CPP14Parser.Const_cast) | (1 << CPP14Parser.Decltype) | (1 << CPP14Parser.Delete) | (1 << CPP14Parser.Double) | (1 << CPP14Parser.Dynamic_cast) | (1 << CPP14Parser.Faalse) | (1 << CPP14Parser.Float) | (1 << CPP14Parser.Int) | (1 << CPP14Parser.Long) | (1 << CPP14Parser.New) | (1 << CPP14Parser.Noexcept) | (1 << CPP14Parser.Nullptr) | (1 << CPP14Parser.Operator) | (1 << CPP14Parser.Reinterpret_cast) | (1 << CPP14Parser.Short) | (1 << CPP14Parser.Signed) | (1 << CPP14Parser.Sizeof) | (1 << CPP14Parser.Static_cast) | (1 << CPP14Parser.This))) != 0) or ((((_la - 64)) & ~0x3f) == 0 and ((1 << (_la - 64)) & ((1 << (CPP14Parser.Throw - 64)) | (1 << (CPP14Parser.Truue - 64)) | (1 << (CPP14Parser.Typeid - 64)) | (1 << (CPP14Parser.Typename - 64)) | (1 << (CPP14Parser.Unsigned - 64)) | (1 << (CPP14Parser.Void - 64)) | (1 << (CPP14Parser.Wchar - 64)) | (1 << (CPP14Parser.LeftParen - 64)) | (1 << (CPP14Parser.LeftBracket - 64)) | (1 << (CPP14Parser.LeftBrace - 64)) | (1 << (CPP14Parser.Plus - 64)) | (1 << (CPP14Parser.Minus - 64)) | (1 << (CPP14Parser.Star - 64)) | (1 << (CPP14Parser.And - 64)) | (1 << (CPP14Parser.Or - 64)) | (1 << (CPP14Parser.Tilde - 64)) | (1 << (CPP14Parser.Not - 64)) | (1 << (CPP14Parser.PlusPlus - 64)) | (1 << (CPP14Parser.MinusMinus - 64)) | (1 << (CPP14Parser.Doublecolon - 64)) | (1 << (CPP14Parser.Identifier - 64)) | (1 << (CPP14Parser.Integerliteral - 64)))) != 0) or ((((_la - 132)) & ~0x3f) == 0 and ((1 << (_la - 132)) & ((1 << (CPP14Parser.Characterliteral - 132)) | (1 << (CPP14Parser.Floatingliteral - 132)) | (1 << (CPP14Parser.Stringliteral - 132)) | (1 << (CPP14Parser.Userdefinedintegerliteral - 132)) | (1 << (CPP14Parser.Userdefinedfloatingliteral - 132)) | (1 << (CPP14Parser.Userdefinedstringliteral - 132)) | (1 << (CPP14Parser.Userdefinedcharacterliteral - 132)))) != 0):
                             self.state = 610
                             self.expressionlist()
 
@@ -3327,7 +3327,7 @@ class CPP14Parser ( Parser ):
                         self.match(CPP14Parser.MinusMinus)
                         pass
 
-             
+
                 self.state = 640
                 self._errHandler.sync(self)
                 _alt = self._interp.adaptivePredict(self._input,29,self._ctx)
@@ -4091,7 +4091,7 @@ class CPP14Parser ( Parser ):
                         self.state = 751
                         self.attributespecifierseq(0)
 
-             
+
                 self.state = 758
                 self._errHandler.sync(self)
                 _alt = self._interp.adaptivePredict(self._input,46,self._ctx)
@@ -4148,7 +4148,7 @@ class CPP14Parser ( Parser ):
                 self.state = 761
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
-                if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << CPP14Parser.Alignof) | (1 << CPP14Parser.Auto) | (1 << CPP14Parser.Bool) | (1 << CPP14Parser.Char) | (1 << CPP14Parser.Char16) | (1 << CPP14Parser.Char32) | (1 << CPP14Parser.Const_cast) | (1 << CPP14Parser.Decltype) | (1 << CPP14Parser.Delete) | (1 << CPP14Parser.Double) | (1 << CPP14Parser.Dynamic_cast) | (1 << CPP14Parser.False) | (1 << CPP14Parser.Float) | (1 << CPP14Parser.Int) | (1 << CPP14Parser.Long) | (1 << CPP14Parser.New) | (1 << CPP14Parser.Noexcept) | (1 << CPP14Parser.Nullptr) | (1 << CPP14Parser.Operator) | (1 << CPP14Parser.Reinterpret_cast) | (1 << CPP14Parser.Short) | (1 << CPP14Parser.Signed) | (1 << CPP14Parser.Sizeof) | (1 << CPP14Parser.Static_cast) | (1 << CPP14Parser.This))) != 0) or ((((_la - 64)) & ~0x3f) == 0 and ((1 << (_la - 64)) & ((1 << (CPP14Parser.Throw - 64)) | (1 << (CPP14Parser.True - 64)) | (1 << (CPP14Parser.Typeid - 64)) | (1 << (CPP14Parser.Typename - 64)) | (1 << (CPP14Parser.Unsigned - 64)) | (1 << (CPP14Parser.Void - 64)) | (1 << (CPP14Parser.Wchar - 64)) | (1 << (CPP14Parser.LeftParen - 64)) | (1 << (CPP14Parser.LeftBracket - 64)) | (1 << (CPP14Parser.LeftBrace - 64)) | (1 << (CPP14Parser.Plus - 64)) | (1 << (CPP14Parser.Minus - 64)) | (1 << (CPP14Parser.Star - 64)) | (1 << (CPP14Parser.And - 64)) | (1 << (CPP14Parser.Or - 64)) | (1 << (CPP14Parser.Tilde - 64)) | (1 << (CPP14Parser.Not - 64)) | (1 << (CPP14Parser.PlusPlus - 64)) | (1 << (CPP14Parser.MinusMinus - 64)) | (1 << (CPP14Parser.Doublecolon - 64)) | (1 << (CPP14Parser.Identifier - 64)) | (1 << (CPP14Parser.Integerliteral - 64)))) != 0) or ((((_la - 132)) & ~0x3f) == 0 and ((1 << (_la - 132)) & ((1 << (CPP14Parser.Characterliteral - 132)) | (1 << (CPP14Parser.Floatingliteral - 132)) | (1 << (CPP14Parser.Stringliteral - 132)) | (1 << (CPP14Parser.Userdefinedintegerliteral - 132)) | (1 << (CPP14Parser.Userdefinedfloatingliteral - 132)) | (1 << (CPP14Parser.Userdefinedstringliteral - 132)) | (1 << (CPP14Parser.Userdefinedcharacterliteral - 132)))) != 0):
+                if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << CPP14Parser.Alignof) | (1 << CPP14Parser.Auto) | (1 << CPP14Parser.Bool) | (1 << CPP14Parser.Char) | (1 << CPP14Parser.Char16) | (1 << CPP14Parser.Char32) | (1 << CPP14Parser.Const_cast) | (1 << CPP14Parser.Decltype) | (1 << CPP14Parser.Delete) | (1 << CPP14Parser.Double) | (1 << CPP14Parser.Dynamic_cast) | (1 << CPP14Parser.Faalse) | (1 << CPP14Parser.Float) | (1 << CPP14Parser.Int) | (1 << CPP14Parser.Long) | (1 << CPP14Parser.New) | (1 << CPP14Parser.Noexcept) | (1 << CPP14Parser.Nullptr) | (1 << CPP14Parser.Operator) | (1 << CPP14Parser.Reinterpret_cast) | (1 << CPP14Parser.Short) | (1 << CPP14Parser.Signed) | (1 << CPP14Parser.Sizeof) | (1 << CPP14Parser.Static_cast) | (1 << CPP14Parser.This))) != 0) or ((((_la - 64)) & ~0x3f) == 0 and ((1 << (_la - 64)) & ((1 << (CPP14Parser.Throw - 64)) | (1 << (CPP14Parser.Truue - 64)) | (1 << (CPP14Parser.Typeid - 64)) | (1 << (CPP14Parser.Typename - 64)) | (1 << (CPP14Parser.Unsigned - 64)) | (1 << (CPP14Parser.Void - 64)) | (1 << (CPP14Parser.Wchar - 64)) | (1 << (CPP14Parser.LeftParen - 64)) | (1 << (CPP14Parser.LeftBracket - 64)) | (1 << (CPP14Parser.LeftBrace - 64)) | (1 << (CPP14Parser.Plus - 64)) | (1 << (CPP14Parser.Minus - 64)) | (1 << (CPP14Parser.Star - 64)) | (1 << (CPP14Parser.And - 64)) | (1 << (CPP14Parser.Or - 64)) | (1 << (CPP14Parser.Tilde - 64)) | (1 << (CPP14Parser.Not - 64)) | (1 << (CPP14Parser.PlusPlus - 64)) | (1 << (CPP14Parser.MinusMinus - 64)) | (1 << (CPP14Parser.Doublecolon - 64)) | (1 << (CPP14Parser.Identifier - 64)) | (1 << (CPP14Parser.Integerliteral - 64)))) != 0) or ((((_la - 132)) & ~0x3f) == 0 and ((1 << (_la - 132)) & ((1 << (CPP14Parser.Characterliteral - 132)) | (1 << (CPP14Parser.Floatingliteral - 132)) | (1 << (CPP14Parser.Stringliteral - 132)) | (1 << (CPP14Parser.Userdefinedintegerliteral - 132)) | (1 << (CPP14Parser.Userdefinedfloatingliteral - 132)) | (1 << (CPP14Parser.Userdefinedstringliteral - 132)) | (1 << (CPP14Parser.Userdefinedcharacterliteral - 132)))) != 0):
                     self.state = 760
                     self.expressionlist()
 
@@ -4445,7 +4445,7 @@ class CPP14Parser ( Parser ):
                         self.castexpression()
                         pass
 
-             
+
                 self.state = 807
                 self._errHandler.sync(self)
                 _alt = self._interp.adaptivePredict(self._input,54,self._ctx)
@@ -4547,7 +4547,7 @@ class CPP14Parser ( Parser ):
                         self.pmexpression(0)
                         pass
 
-             
+
                 self.state = 824
                 self._errHandler.sync(self)
                 _alt = self._interp.adaptivePredict(self._input,56,self._ctx)
@@ -4636,7 +4636,7 @@ class CPP14Parser ( Parser ):
                         self.multiplicativeexpression(0)
                         pass
 
-             
+
                 self.state = 838
                 self._errHandler.sync(self)
                 _alt = self._interp.adaptivePredict(self._input,58,self._ctx)
@@ -4729,7 +4729,7 @@ class CPP14Parser ( Parser ):
                         self.additiveexpression(0)
                         pass
 
-             
+
                 self.state = 853
                 self._errHandler.sync(self)
                 _alt = self._interp.adaptivePredict(self._input,60,self._ctx)
@@ -4844,7 +4844,7 @@ class CPP14Parser ( Parser ):
                         self.shiftexpression(0)
                         pass
 
-             
+
                 self.state = 873
                 self._errHandler.sync(self)
                 _alt = self._interp.adaptivePredict(self._input,62,self._ctx)
@@ -4933,7 +4933,7 @@ class CPP14Parser ( Parser ):
                         self.relationalexpression(0)
                         pass
 
-             
+
                 self.state = 887
                 self._errHandler.sync(self)
                 _alt = self._interp.adaptivePredict(self._input,64,self._ctx)
@@ -5002,7 +5002,7 @@ class CPP14Parser ( Parser ):
                     self.state = 892
                     self.match(CPP14Parser.And)
                     self.state = 893
-                    self.equalityexpression(0) 
+                    self.equalityexpression(0)
                 self.state = 898
                 self._errHandler.sync(self)
                 _alt = self._interp.adaptivePredict(self._input,65,self._ctx)
@@ -5071,7 +5071,7 @@ class CPP14Parser ( Parser ):
                     self.state = 903
                     self.match(CPP14Parser.Caret)
                     self.state = 904
-                    self.andexpression(0) 
+                    self.andexpression(0)
                 self.state = 909
                 self._errHandler.sync(self)
                 _alt = self._interp.adaptivePredict(self._input,66,self._ctx)
@@ -5140,7 +5140,7 @@ class CPP14Parser ( Parser ):
                     self.state = 914
                     self.match(CPP14Parser.Or)
                     self.state = 915
-                    self.exclusiveorexpression(0) 
+                    self.exclusiveorexpression(0)
                 self.state = 920
                 self._errHandler.sync(self)
                 _alt = self._interp.adaptivePredict(self._input,67,self._ctx)
@@ -5209,7 +5209,7 @@ class CPP14Parser ( Parser ):
                     self.state = 925
                     self.match(CPP14Parser.AndAnd)
                     self.state = 926
-                    self.inclusiveorexpression(0) 
+                    self.inclusiveorexpression(0)
                 self.state = 931
                 self._errHandler.sync(self)
                 _alt = self._interp.adaptivePredict(self._input,68,self._ctx)
@@ -5278,7 +5278,7 @@ class CPP14Parser ( Parser ):
                     self.state = 936
                     self.match(CPP14Parser.OrOr)
                     self.state = 937
-                    self.logicalandexpression(0) 
+                    self.logicalandexpression(0)
                 self.state = 942
                 self._errHandler.sync(self)
                 _alt = self._interp.adaptivePredict(self._input,69,self._ctx)
@@ -5593,7 +5593,7 @@ class CPP14Parser ( Parser ):
                     self.state = 977
                     self.match(CPP14Parser.Comma)
                     self.state = 978
-                    self.assignmentexpression() 
+                    self.assignmentexpression()
                 self.state = 983
                 self._errHandler.sync(self)
                 _alt = self._interp.adaptivePredict(self._input,73,self._ctx)
@@ -5965,7 +5965,7 @@ class CPP14Parser ( Parser ):
             self.state = 1037
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << CPP14Parser.Alignof) | (1 << CPP14Parser.Auto) | (1 << CPP14Parser.Bool) | (1 << CPP14Parser.Char) | (1 << CPP14Parser.Char16) | (1 << CPP14Parser.Char32) | (1 << CPP14Parser.Const_cast) | (1 << CPP14Parser.Decltype) | (1 << CPP14Parser.Delete) | (1 << CPP14Parser.Double) | (1 << CPP14Parser.Dynamic_cast) | (1 << CPP14Parser.False) | (1 << CPP14Parser.Float) | (1 << CPP14Parser.Int) | (1 << CPP14Parser.Long) | (1 << CPP14Parser.New) | (1 << CPP14Parser.Noexcept) | (1 << CPP14Parser.Nullptr) | (1 << CPP14Parser.Operator) | (1 << CPP14Parser.Reinterpret_cast) | (1 << CPP14Parser.Short) | (1 << CPP14Parser.Signed) | (1 << CPP14Parser.Sizeof) | (1 << CPP14Parser.Static_cast) | (1 << CPP14Parser.This))) != 0) or ((((_la - 64)) & ~0x3f) == 0 and ((1 << (_la - 64)) & ((1 << (CPP14Parser.Throw - 64)) | (1 << (CPP14Parser.True - 64)) | (1 << (CPP14Parser.Typeid - 64)) | (1 << (CPP14Parser.Typename - 64)) | (1 << (CPP14Parser.Unsigned - 64)) | (1 << (CPP14Parser.Void - 64)) | (1 << (CPP14Parser.Wchar - 64)) | (1 << (CPP14Parser.LeftParen - 64)) | (1 << (CPP14Parser.LeftBracket - 64)) | (1 << (CPP14Parser.Plus - 64)) | (1 << (CPP14Parser.Minus - 64)) | (1 << (CPP14Parser.Star - 64)) | (1 << (CPP14Parser.And - 64)) | (1 << (CPP14Parser.Or - 64)) | (1 << (CPP14Parser.Tilde - 64)) | (1 << (CPP14Parser.Not - 64)) | (1 << (CPP14Parser.PlusPlus - 64)) | (1 << (CPP14Parser.MinusMinus - 64)) | (1 << (CPP14Parser.Doublecolon - 64)) | (1 << (CPP14Parser.Identifier - 64)) | (1 << (CPP14Parser.Integerliteral - 64)))) != 0) or ((((_la - 132)) & ~0x3f) == 0 and ((1 << (_la - 132)) & ((1 << (CPP14Parser.Characterliteral - 132)) | (1 << (CPP14Parser.Floatingliteral - 132)) | (1 << (CPP14Parser.Stringliteral - 132)) | (1 << (CPP14Parser.Userdefinedintegerliteral - 132)) | (1 << (CPP14Parser.Userdefinedfloatingliteral - 132)) | (1 << (CPP14Parser.Userdefinedstringliteral - 132)) | (1 << (CPP14Parser.Userdefinedcharacterliteral - 132)))) != 0):
+            if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << CPP14Parser.Alignof) | (1 << CPP14Parser.Auto) | (1 << CPP14Parser.Bool) | (1 << CPP14Parser.Char) | (1 << CPP14Parser.Char16) | (1 << CPP14Parser.Char32) | (1 << CPP14Parser.Const_cast) | (1 << CPP14Parser.Decltype) | (1 << CPP14Parser.Delete) | (1 << CPP14Parser.Double) | (1 << CPP14Parser.Dynamic_cast) | (1 << CPP14Parser.Faalse) | (1 << CPP14Parser.Float) | (1 << CPP14Parser.Int) | (1 << CPP14Parser.Long) | (1 << CPP14Parser.New) | (1 << CPP14Parser.Noexcept) | (1 << CPP14Parser.Nullptr) | (1 << CPP14Parser.Operator) | (1 << CPP14Parser.Reinterpret_cast) | (1 << CPP14Parser.Short) | (1 << CPP14Parser.Signed) | (1 << CPP14Parser.Sizeof) | (1 << CPP14Parser.Static_cast) | (1 << CPP14Parser.This))) != 0) or ((((_la - 64)) & ~0x3f) == 0 and ((1 << (_la - 64)) & ((1 << (CPP14Parser.Throw - 64)) | (1 << (CPP14Parser.Truue - 64)) | (1 << (CPP14Parser.Typeid - 64)) | (1 << (CPP14Parser.Typename - 64)) | (1 << (CPP14Parser.Unsigned - 64)) | (1 << (CPP14Parser.Void - 64)) | (1 << (CPP14Parser.Wchar - 64)) | (1 << (CPP14Parser.LeftParen - 64)) | (1 << (CPP14Parser.LeftBracket - 64)) | (1 << (CPP14Parser.Plus - 64)) | (1 << (CPP14Parser.Minus - 64)) | (1 << (CPP14Parser.Star - 64)) | (1 << (CPP14Parser.And - 64)) | (1 << (CPP14Parser.Or - 64)) | (1 << (CPP14Parser.Tilde - 64)) | (1 << (CPP14Parser.Not - 64)) | (1 << (CPP14Parser.PlusPlus - 64)) | (1 << (CPP14Parser.MinusMinus - 64)) | (1 << (CPP14Parser.Doublecolon - 64)) | (1 << (CPP14Parser.Identifier - 64)) | (1 << (CPP14Parser.Integerliteral - 64)))) != 0) or ((((_la - 132)) & ~0x3f) == 0 and ((1 << (_la - 132)) & ((1 << (CPP14Parser.Characterliteral - 132)) | (1 << (CPP14Parser.Floatingliteral - 132)) | (1 << (CPP14Parser.Stringliteral - 132)) | (1 << (CPP14Parser.Userdefinedintegerliteral - 132)) | (1 << (CPP14Parser.Userdefinedfloatingliteral - 132)) | (1 << (CPP14Parser.Userdefinedstringliteral - 132)) | (1 << (CPP14Parser.Userdefinedcharacterliteral - 132)))) != 0):
                 self.state = 1036
                 self.expression(0)
 
@@ -6016,7 +6016,7 @@ class CPP14Parser ( Parser ):
             self.state = 1043
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << CPP14Parser.Alignas) | (1 << CPP14Parser.Alignof) | (1 << CPP14Parser.Asm) | (1 << CPP14Parser.Auto) | (1 << CPP14Parser.Bool) | (1 << CPP14Parser.Break) | (1 << CPP14Parser.Case) | (1 << CPP14Parser.Char) | (1 << CPP14Parser.Char16) | (1 << CPP14Parser.Char32) | (1 << CPP14Parser.Class) | (1 << CPP14Parser.Const) | (1 << CPP14Parser.Constexpr) | (1 << CPP14Parser.Const_cast) | (1 << CPP14Parser.Continue) | (1 << CPP14Parser.Decltype) | (1 << CPP14Parser.Default) | (1 << CPP14Parser.Delete) | (1 << CPP14Parser.Do) | (1 << CPP14Parser.Double) | (1 << CPP14Parser.Dynamic_cast) | (1 << CPP14Parser.Enum) | (1 << CPP14Parser.Explicit) | (1 << CPP14Parser.Extern) | (1 << CPP14Parser.False) | (1 << CPP14Parser.Float) | (1 << CPP14Parser.For) | (1 << CPP14Parser.Friend) | (1 << CPP14Parser.Goto) | (1 << CPP14Parser.If) | (1 << CPP14Parser.Inline) | (1 << CPP14Parser.Int) | (1 << CPP14Parser.Long) | (1 << CPP14Parser.Mutable) | (1 << CPP14Parser.Namespace) | (1 << CPP14Parser.New) | (1 << CPP14Parser.Noexcept) | (1 << CPP14Parser.Nullptr) | (1 << CPP14Parser.Operator) | (1 << CPP14Parser.Register) | (1 << CPP14Parser.Reinterpret_cast) | (1 << CPP14Parser.Return) | (1 << CPP14Parser.Short) | (1 << CPP14Parser.Signed) | (1 << CPP14Parser.Sizeof) | (1 << CPP14Parser.Static) | (1 << CPP14Parser.Static_assert) | (1 << CPP14Parser.Static_cast) | (1 << CPP14Parser.Struct) | (1 << CPP14Parser.Switch) | (1 << CPP14Parser.This) | (1 << CPP14Parser.Thread_local))) != 0) or ((((_la - 64)) & ~0x3f) == 0 and ((1 << (_la - 64)) & ((1 << (CPP14Parser.Throw - 64)) | (1 << (CPP14Parser.True - 64)) | (1 << (CPP14Parser.Try - 64)) | (1 << (CPP14Parser.Typedef - 64)) | (1 << (CPP14Parser.Typeid - 64)) | (1 << (CPP14Parser.Typename - 64)) | (1 << (CPP14Parser.Union - 64)) | (1 << (CPP14Parser.Unsigned - 64)) | (1 << (CPP14Parser.Using - 64)) | (1 << (CPP14Parser.Virtual - 64)) | (1 << (CPP14Parser.Void - 64)) | (1 << (CPP14Parser.Volatile - 64)) | (1 << (CPP14Parser.Wchar - 64)) | (1 << (CPP14Parser.While - 64)) | (1 << (CPP14Parser.LeftParen - 64)) | (1 << (CPP14Parser.LeftBracket - 64)) | (1 << (CPP14Parser.LeftBrace - 64)) | (1 << (CPP14Parser.Plus - 64)) | (1 << (CPP14Parser.Minus - 64)) | (1 << (CPP14Parser.Star - 64)) | (1 << (CPP14Parser.And - 64)) | (1 << (CPP14Parser.Or - 64)) | (1 << (CPP14Parser.Tilde - 64)) | (1 << (CPP14Parser.Not - 64)) | (1 << (CPP14Parser.AndAnd - 64)) | (1 << (CPP14Parser.PlusPlus - 64)) | (1 << (CPP14Parser.MinusMinus - 64)) | (1 << (CPP14Parser.Doublecolon - 64)) | (1 << (CPP14Parser.Semi - 64)) | (1 << (CPP14Parser.Ellipsis - 64)) | (1 << (CPP14Parser.Identifier - 64)) | (1 << (CPP14Parser.Integerliteral - 64)))) != 0) or ((((_la - 132)) & ~0x3f) == 0 and ((1 << (_la - 132)) & ((1 << (CPP14Parser.Characterliteral - 132)) | (1 << (CPP14Parser.Floatingliteral - 132)) | (1 << (CPP14Parser.Stringliteral - 132)) | (1 << (CPP14Parser.Userdefinedintegerliteral - 132)) | (1 << (CPP14Parser.Userdefinedfloatingliteral - 132)) | (1 << (CPP14Parser.Userdefinedstringliteral - 132)) | (1 << (CPP14Parser.Userdefinedcharacterliteral - 132)))) != 0):
+            if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << CPP14Parser.Alignas) | (1 << CPP14Parser.Alignof) | (1 << CPP14Parser.Asm) | (1 << CPP14Parser.Auto) | (1 << CPP14Parser.Bool) | (1 << CPP14Parser.Break) | (1 << CPP14Parser.Case) | (1 << CPP14Parser.Char) | (1 << CPP14Parser.Char16) | (1 << CPP14Parser.Char32) | (1 << CPP14Parser.Class) | (1 << CPP14Parser.Const) | (1 << CPP14Parser.Constexpr) | (1 << CPP14Parser.Const_cast) | (1 << CPP14Parser.Continue) | (1 << CPP14Parser.Decltype) | (1 << CPP14Parser.Default) | (1 << CPP14Parser.Delete) | (1 << CPP14Parser.Do) | (1 << CPP14Parser.Double) | (1 << CPP14Parser.Dynamic_cast) | (1 << CPP14Parser.Enum) | (1 << CPP14Parser.Explicit) | (1 << CPP14Parser.Extern) | (1 << CPP14Parser.Faalse) | (1 << CPP14Parser.Float) | (1 << CPP14Parser.For) | (1 << CPP14Parser.Friend) | (1 << CPP14Parser.Goto) | (1 << CPP14Parser.If) | (1 << CPP14Parser.Inline) | (1 << CPP14Parser.Int) | (1 << CPP14Parser.Long) | (1 << CPP14Parser.Mutable) | (1 << CPP14Parser.Namespace) | (1 << CPP14Parser.New) | (1 << CPP14Parser.Noexcept) | (1 << CPP14Parser.Nullptr) | (1 << CPP14Parser.Operator) | (1 << CPP14Parser.Register) | (1 << CPP14Parser.Reinterpret_cast) | (1 << CPP14Parser.Return) | (1 << CPP14Parser.Short) | (1 << CPP14Parser.Signed) | (1 << CPP14Parser.Sizeof) | (1 << CPP14Parser.Static) | (1 << CPP14Parser.Static_assert) | (1 << CPP14Parser.Static_cast) | (1 << CPP14Parser.Struct) | (1 << CPP14Parser.Switch) | (1 << CPP14Parser.This) | (1 << CPP14Parser.Thread_local))) != 0) or ((((_la - 64)) & ~0x3f) == 0 and ((1 << (_la - 64)) & ((1 << (CPP14Parser.Throw - 64)) | (1 << (CPP14Parser.Truue - 64)) | (1 << (CPP14Parser.Try - 64)) | (1 << (CPP14Parser.Typedef - 64)) | (1 << (CPP14Parser.Typeid - 64)) | (1 << (CPP14Parser.Typename - 64)) | (1 << (CPP14Parser.Union - 64)) | (1 << (CPP14Parser.Unsigned - 64)) | (1 << (CPP14Parser.Using - 64)) | (1 << (CPP14Parser.Virtual - 64)) | (1 << (CPP14Parser.Void - 64)) | (1 << (CPP14Parser.Volatile - 64)) | (1 << (CPP14Parser.Wchar - 64)) | (1 << (CPP14Parser.While - 64)) | (1 << (CPP14Parser.LeftParen - 64)) | (1 << (CPP14Parser.LeftBracket - 64)) | (1 << (CPP14Parser.LeftBrace - 64)) | (1 << (CPP14Parser.Plus - 64)) | (1 << (CPP14Parser.Minus - 64)) | (1 << (CPP14Parser.Star - 64)) | (1 << (CPP14Parser.And - 64)) | (1 << (CPP14Parser.Or - 64)) | (1 << (CPP14Parser.Tilde - 64)) | (1 << (CPP14Parser.Not - 64)) | (1 << (CPP14Parser.AndAnd - 64)) | (1 << (CPP14Parser.PlusPlus - 64)) | (1 << (CPP14Parser.MinusMinus - 64)) | (1 << (CPP14Parser.Doublecolon - 64)) | (1 << (CPP14Parser.Semi - 64)) | (1 << (CPP14Parser.Ellipsis - 64)) | (1 << (CPP14Parser.Identifier - 64)) | (1 << (CPP14Parser.Integerliteral - 64)))) != 0) or ((((_la - 132)) & ~0x3f) == 0 and ((1 << (_la - 132)) & ((1 << (CPP14Parser.Characterliteral - 132)) | (1 << (CPP14Parser.Floatingliteral - 132)) | (1 << (CPP14Parser.Stringliteral - 132)) | (1 << (CPP14Parser.Userdefinedintegerliteral - 132)) | (1 << (CPP14Parser.Userdefinedfloatingliteral - 132)) | (1 << (CPP14Parser.Userdefinedstringliteral - 132)) | (1 << (CPP14Parser.Userdefinedcharacterliteral - 132)))) != 0):
                 self.state = 1042
                 self.statementseq(0)
 
@@ -6085,7 +6085,7 @@ class CPP14Parser ( Parser ):
                         from antlr4.error.Errors import FailedPredicateException
                         raise FailedPredicateException(self, "self.precpred(self._ctx, 1)")
                     self.state = 1051
-                    self.statement() 
+                    self.statement()
                 self.state = 1056
                 self._errHandler.sync(self)
                 _alt = self._interp.adaptivePredict(self._input,87,self._ctx)
@@ -6412,7 +6412,7 @@ class CPP14Parser ( Parser ):
                 self.state = 1115
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
-                if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << CPP14Parser.Alignas) | (1 << CPP14Parser.Alignof) | (1 << CPP14Parser.Auto) | (1 << CPP14Parser.Bool) | (1 << CPP14Parser.Char) | (1 << CPP14Parser.Char16) | (1 << CPP14Parser.Char32) | (1 << CPP14Parser.Class) | (1 << CPP14Parser.Const) | (1 << CPP14Parser.Constexpr) | (1 << CPP14Parser.Const_cast) | (1 << CPP14Parser.Decltype) | (1 << CPP14Parser.Delete) | (1 << CPP14Parser.Double) | (1 << CPP14Parser.Dynamic_cast) | (1 << CPP14Parser.Enum) | (1 << CPP14Parser.Explicit) | (1 << CPP14Parser.Extern) | (1 << CPP14Parser.False) | (1 << CPP14Parser.Float) | (1 << CPP14Parser.Friend) | (1 << CPP14Parser.Inline) | (1 << CPP14Parser.Int) | (1 << CPP14Parser.Long) | (1 << CPP14Parser.Mutable) | (1 << CPP14Parser.New) | (1 << CPP14Parser.Noexcept) | (1 << CPP14Parser.Nullptr) | (1 << CPP14Parser.Operator) | (1 << CPP14Parser.Register) | (1 << CPP14Parser.Reinterpret_cast) | (1 << CPP14Parser.Short) | (1 << CPP14Parser.Signed) | (1 << CPP14Parser.Sizeof) | (1 << CPP14Parser.Static) | (1 << CPP14Parser.Static_cast) | (1 << CPP14Parser.Struct) | (1 << CPP14Parser.This) | (1 << CPP14Parser.Thread_local))) != 0) or ((((_la - 64)) & ~0x3f) == 0 and ((1 << (_la - 64)) & ((1 << (CPP14Parser.Throw - 64)) | (1 << (CPP14Parser.True - 64)) | (1 << (CPP14Parser.Typedef - 64)) | (1 << (CPP14Parser.Typeid - 64)) | (1 << (CPP14Parser.Typename - 64)) | (1 << (CPP14Parser.Union - 64)) | (1 << (CPP14Parser.Unsigned - 64)) | (1 << (CPP14Parser.Virtual - 64)) | (1 << (CPP14Parser.Void - 64)) | (1 << (CPP14Parser.Volatile - 64)) | (1 << (CPP14Parser.Wchar - 64)) | (1 << (CPP14Parser.LeftParen - 64)) | (1 << (CPP14Parser.LeftBracket - 64)) | (1 << (CPP14Parser.Plus - 64)) | (1 << (CPP14Parser.Minus - 64)) | (1 << (CPP14Parser.Star - 64)) | (1 << (CPP14Parser.And - 64)) | (1 << (CPP14Parser.Or - 64)) | (1 << (CPP14Parser.Tilde - 64)) | (1 << (CPP14Parser.Not - 64)) | (1 << (CPP14Parser.PlusPlus - 64)) | (1 << (CPP14Parser.MinusMinus - 64)) | (1 << (CPP14Parser.Doublecolon - 64)) | (1 << (CPP14Parser.Identifier - 64)) | (1 << (CPP14Parser.Integerliteral - 64)))) != 0) or ((((_la - 132)) & ~0x3f) == 0 and ((1 << (_la - 132)) & ((1 << (CPP14Parser.Characterliteral - 132)) | (1 << (CPP14Parser.Floatingliteral - 132)) | (1 << (CPP14Parser.Stringliteral - 132)) | (1 << (CPP14Parser.Userdefinedintegerliteral - 132)) | (1 << (CPP14Parser.Userdefinedfloatingliteral - 132)) | (1 << (CPP14Parser.Userdefinedstringliteral - 132)) | (1 << (CPP14Parser.Userdefinedcharacterliteral - 132)))) != 0):
+                if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << CPP14Parser.Alignas) | (1 << CPP14Parser.Alignof) | (1 << CPP14Parser.Auto) | (1 << CPP14Parser.Bool) | (1 << CPP14Parser.Char) | (1 << CPP14Parser.Char16) | (1 << CPP14Parser.Char32) | (1 << CPP14Parser.Class) | (1 << CPP14Parser.Const) | (1 << CPP14Parser.Constexpr) | (1 << CPP14Parser.Const_cast) | (1 << CPP14Parser.Decltype) | (1 << CPP14Parser.Delete) | (1 << CPP14Parser.Double) | (1 << CPP14Parser.Dynamic_cast) | (1 << CPP14Parser.Enum) | (1 << CPP14Parser.Explicit) | (1 << CPP14Parser.Extern) | (1 << CPP14Parser.Faalse) | (1 << CPP14Parser.Float) | (1 << CPP14Parser.Friend) | (1 << CPP14Parser.Inline) | (1 << CPP14Parser.Int) | (1 << CPP14Parser.Long) | (1 << CPP14Parser.Mutable) | (1 << CPP14Parser.New) | (1 << CPP14Parser.Noexcept) | (1 << CPP14Parser.Nullptr) | (1 << CPP14Parser.Operator) | (1 << CPP14Parser.Register) | (1 << CPP14Parser.Reinterpret_cast) | (1 << CPP14Parser.Short) | (1 << CPP14Parser.Signed) | (1 << CPP14Parser.Sizeof) | (1 << CPP14Parser.Static) | (1 << CPP14Parser.Static_cast) | (1 << CPP14Parser.Struct) | (1 << CPP14Parser.This) | (1 << CPP14Parser.Thread_local))) != 0) or ((((_la - 64)) & ~0x3f) == 0 and ((1 << (_la - 64)) & ((1 << (CPP14Parser.Throw - 64)) | (1 << (CPP14Parser.Truue - 64)) | (1 << (CPP14Parser.Typedef - 64)) | (1 << (CPP14Parser.Typeid - 64)) | (1 << (CPP14Parser.Typename - 64)) | (1 << (CPP14Parser.Union - 64)) | (1 << (CPP14Parser.Unsigned - 64)) | (1 << (CPP14Parser.Virtual - 64)) | (1 << (CPP14Parser.Void - 64)) | (1 << (CPP14Parser.Volatile - 64)) | (1 << (CPP14Parser.Wchar - 64)) | (1 << (CPP14Parser.LeftParen - 64)) | (1 << (CPP14Parser.LeftBracket - 64)) | (1 << (CPP14Parser.Plus - 64)) | (1 << (CPP14Parser.Minus - 64)) | (1 << (CPP14Parser.Star - 64)) | (1 << (CPP14Parser.And - 64)) | (1 << (CPP14Parser.Or - 64)) | (1 << (CPP14Parser.Tilde - 64)) | (1 << (CPP14Parser.Not - 64)) | (1 << (CPP14Parser.PlusPlus - 64)) | (1 << (CPP14Parser.MinusMinus - 64)) | (1 << (CPP14Parser.Doublecolon - 64)) | (1 << (CPP14Parser.Identifier - 64)) | (1 << (CPP14Parser.Integerliteral - 64)))) != 0) or ((((_la - 132)) & ~0x3f) == 0 and ((1 << (_la - 132)) & ((1 << (CPP14Parser.Characterliteral - 132)) | (1 << (CPP14Parser.Floatingliteral - 132)) | (1 << (CPP14Parser.Stringliteral - 132)) | (1 << (CPP14Parser.Userdefinedintegerliteral - 132)) | (1 << (CPP14Parser.Userdefinedfloatingliteral - 132)) | (1 << (CPP14Parser.Userdefinedstringliteral - 132)) | (1 << (CPP14Parser.Userdefinedcharacterliteral - 132)))) != 0):
                     self.state = 1114
                     self.condition()
 
@@ -6422,7 +6422,7 @@ class CPP14Parser ( Parser ):
                 self.state = 1119
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
-                if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << CPP14Parser.Alignof) | (1 << CPP14Parser.Auto) | (1 << CPP14Parser.Bool) | (1 << CPP14Parser.Char) | (1 << CPP14Parser.Char16) | (1 << CPP14Parser.Char32) | (1 << CPP14Parser.Const_cast) | (1 << CPP14Parser.Decltype) | (1 << CPP14Parser.Delete) | (1 << CPP14Parser.Double) | (1 << CPP14Parser.Dynamic_cast) | (1 << CPP14Parser.False) | (1 << CPP14Parser.Float) | (1 << CPP14Parser.Int) | (1 << CPP14Parser.Long) | (1 << CPP14Parser.New) | (1 << CPP14Parser.Noexcept) | (1 << CPP14Parser.Nullptr) | (1 << CPP14Parser.Operator) | (1 << CPP14Parser.Reinterpret_cast) | (1 << CPP14Parser.Short) | (1 << CPP14Parser.Signed) | (1 << CPP14Parser.Sizeof) | (1 << CPP14Parser.Static_cast) | (1 << CPP14Parser.This))) != 0) or ((((_la - 64)) & ~0x3f) == 0 and ((1 << (_la - 64)) & ((1 << (CPP14Parser.Throw - 64)) | (1 << (CPP14Parser.True - 64)) | (1 << (CPP14Parser.Typeid - 64)) | (1 << (CPP14Parser.Typename - 64)) | (1 << (CPP14Parser.Unsigned - 64)) | (1 << (CPP14Parser.Void - 64)) | (1 << (CPP14Parser.Wchar - 64)) | (1 << (CPP14Parser.LeftParen - 64)) | (1 << (CPP14Parser.LeftBracket - 64)) | (1 << (CPP14Parser.Plus - 64)) | (1 << (CPP14Parser.Minus - 64)) | (1 << (CPP14Parser.Star - 64)) | (1 << (CPP14Parser.And - 64)) | (1 << (CPP14Parser.Or - 64)) | (1 << (CPP14Parser.Tilde - 64)) | (1 << (CPP14Parser.Not - 64)) | (1 << (CPP14Parser.PlusPlus - 64)) | (1 << (CPP14Parser.MinusMinus - 64)) | (1 << (CPP14Parser.Doublecolon - 64)) | (1 << (CPP14Parser.Identifier - 64)) | (1 << (CPP14Parser.Integerliteral - 64)))) != 0) or ((((_la - 132)) & ~0x3f) == 0 and ((1 << (_la - 132)) & ((1 << (CPP14Parser.Characterliteral - 132)) | (1 << (CPP14Parser.Floatingliteral - 132)) | (1 << (CPP14Parser.Stringliteral - 132)) | (1 << (CPP14Parser.Userdefinedintegerliteral - 132)) | (1 << (CPP14Parser.Userdefinedfloatingliteral - 132)) | (1 << (CPP14Parser.Userdefinedstringliteral - 132)) | (1 << (CPP14Parser.Userdefinedcharacterliteral - 132)))) != 0):
+                if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << CPP14Parser.Alignof) | (1 << CPP14Parser.Auto) | (1 << CPP14Parser.Bool) | (1 << CPP14Parser.Char) | (1 << CPP14Parser.Char16) | (1 << CPP14Parser.Char32) | (1 << CPP14Parser.Const_cast) | (1 << CPP14Parser.Decltype) | (1 << CPP14Parser.Delete) | (1 << CPP14Parser.Double) | (1 << CPP14Parser.Dynamic_cast) | (1 << CPP14Parser.Faalse) | (1 << CPP14Parser.Float) | (1 << CPP14Parser.Int) | (1 << CPP14Parser.Long) | (1 << CPP14Parser.New) | (1 << CPP14Parser.Noexcept) | (1 << CPP14Parser.Nullptr) | (1 << CPP14Parser.Operator) | (1 << CPP14Parser.Reinterpret_cast) | (1 << CPP14Parser.Short) | (1 << CPP14Parser.Signed) | (1 << CPP14Parser.Sizeof) | (1 << CPP14Parser.Static_cast) | (1 << CPP14Parser.This))) != 0) or ((((_la - 64)) & ~0x3f) == 0 and ((1 << (_la - 64)) & ((1 << (CPP14Parser.Throw - 64)) | (1 << (CPP14Parser.Truue - 64)) | (1 << (CPP14Parser.Typeid - 64)) | (1 << (CPP14Parser.Typename - 64)) | (1 << (CPP14Parser.Unsigned - 64)) | (1 << (CPP14Parser.Void - 64)) | (1 << (CPP14Parser.Wchar - 64)) | (1 << (CPP14Parser.LeftParen - 64)) | (1 << (CPP14Parser.LeftBracket - 64)) | (1 << (CPP14Parser.Plus - 64)) | (1 << (CPP14Parser.Minus - 64)) | (1 << (CPP14Parser.Star - 64)) | (1 << (CPP14Parser.And - 64)) | (1 << (CPP14Parser.Or - 64)) | (1 << (CPP14Parser.Tilde - 64)) | (1 << (CPP14Parser.Not - 64)) | (1 << (CPP14Parser.PlusPlus - 64)) | (1 << (CPP14Parser.MinusMinus - 64)) | (1 << (CPP14Parser.Doublecolon - 64)) | (1 << (CPP14Parser.Identifier - 64)) | (1 << (CPP14Parser.Integerliteral - 64)))) != 0) or ((((_la - 132)) & ~0x3f) == 0 and ((1 << (_la - 132)) & ((1 << (CPP14Parser.Characterliteral - 132)) | (1 << (CPP14Parser.Floatingliteral - 132)) | (1 << (CPP14Parser.Stringliteral - 132)) | (1 << (CPP14Parser.Userdefinedintegerliteral - 132)) | (1 << (CPP14Parser.Userdefinedfloatingliteral - 132)) | (1 << (CPP14Parser.Userdefinedstringliteral - 132)) | (1 << (CPP14Parser.Userdefinedcharacterliteral - 132)))) != 0):
                     self.state = 1118
                     self.expression(0)
 
@@ -6612,7 +6612,7 @@ class CPP14Parser ( Parser ):
             self.state = 1146
             self._errHandler.sync(self)
             token = self._input.LA(1)
-            if token in [CPP14Parser.Alignof, CPP14Parser.Auto, CPP14Parser.Bool, CPP14Parser.Char, CPP14Parser.Char16, CPP14Parser.Char32, CPP14Parser.Const_cast, CPP14Parser.Decltype, CPP14Parser.Delete, CPP14Parser.Double, CPP14Parser.Dynamic_cast, CPP14Parser.False, CPP14Parser.Float, CPP14Parser.Int, CPP14Parser.Long, CPP14Parser.New, CPP14Parser.Noexcept, CPP14Parser.Nullptr, CPP14Parser.Operator, CPP14Parser.Reinterpret_cast, CPP14Parser.Short, CPP14Parser.Signed, CPP14Parser.Sizeof, CPP14Parser.Static_cast, CPP14Parser.This, CPP14Parser.Throw, CPP14Parser.True, CPP14Parser.Typeid, CPP14Parser.Typename, CPP14Parser.Unsigned, CPP14Parser.Void, CPP14Parser.Wchar, CPP14Parser.LeftParen, CPP14Parser.LeftBracket, CPP14Parser.Plus, CPP14Parser.Minus, CPP14Parser.Star, CPP14Parser.And, CPP14Parser.Or, CPP14Parser.Tilde, CPP14Parser.Not, CPP14Parser.PlusPlus, CPP14Parser.MinusMinus, CPP14Parser.Doublecolon, CPP14Parser.Identifier, CPP14Parser.Integerliteral, CPP14Parser.Characterliteral, CPP14Parser.Floatingliteral, CPP14Parser.Stringliteral, CPP14Parser.Userdefinedintegerliteral, CPP14Parser.Userdefinedfloatingliteral, CPP14Parser.Userdefinedstringliteral, CPP14Parser.Userdefinedcharacterliteral]:
+            if token in [CPP14Parser.Alignof, CPP14Parser.Auto, CPP14Parser.Bool, CPP14Parser.Char, CPP14Parser.Char16, CPP14Parser.Char32, CPP14Parser.Const_cast, CPP14Parser.Decltype, CPP14Parser.Delete, CPP14Parser.Double, CPP14Parser.Dynamic_cast, CPP14Parser.Faalse, CPP14Parser.Float, CPP14Parser.Int, CPP14Parser.Long, CPP14Parser.New, CPP14Parser.Noexcept, CPP14Parser.Nullptr, CPP14Parser.Operator, CPP14Parser.Reinterpret_cast, CPP14Parser.Short, CPP14Parser.Signed, CPP14Parser.Sizeof, CPP14Parser.Static_cast, CPP14Parser.This, CPP14Parser.Throw, CPP14Parser.Truue, CPP14Parser.Typeid, CPP14Parser.Typename, CPP14Parser.Unsigned, CPP14Parser.Void, CPP14Parser.Wchar, CPP14Parser.LeftParen, CPP14Parser.LeftBracket, CPP14Parser.Plus, CPP14Parser.Minus, CPP14Parser.Star, CPP14Parser.And, CPP14Parser.Or, CPP14Parser.Tilde, CPP14Parser.Not, CPP14Parser.PlusPlus, CPP14Parser.MinusMinus, CPP14Parser.Doublecolon, CPP14Parser.Identifier, CPP14Parser.Integerliteral, CPP14Parser.Characterliteral, CPP14Parser.Floatingliteral, CPP14Parser.Stringliteral, CPP14Parser.Userdefinedintegerliteral, CPP14Parser.Userdefinedfloatingliteral, CPP14Parser.Userdefinedstringliteral, CPP14Parser.Userdefinedcharacterliteral]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 1144
                 self.expression(0)
@@ -6708,7 +6708,7 @@ class CPP14Parser ( Parser ):
                 self.state = 1154
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
-                if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << CPP14Parser.Alignof) | (1 << CPP14Parser.Auto) | (1 << CPP14Parser.Bool) | (1 << CPP14Parser.Char) | (1 << CPP14Parser.Char16) | (1 << CPP14Parser.Char32) | (1 << CPP14Parser.Const_cast) | (1 << CPP14Parser.Decltype) | (1 << CPP14Parser.Delete) | (1 << CPP14Parser.Double) | (1 << CPP14Parser.Dynamic_cast) | (1 << CPP14Parser.False) | (1 << CPP14Parser.Float) | (1 << CPP14Parser.Int) | (1 << CPP14Parser.Long) | (1 << CPP14Parser.New) | (1 << CPP14Parser.Noexcept) | (1 << CPP14Parser.Nullptr) | (1 << CPP14Parser.Operator) | (1 << CPP14Parser.Reinterpret_cast) | (1 << CPP14Parser.Short) | (1 << CPP14Parser.Signed) | (1 << CPP14Parser.Sizeof) | (1 << CPP14Parser.Static_cast) | (1 << CPP14Parser.This))) != 0) or ((((_la - 64)) & ~0x3f) == 0 and ((1 << (_la - 64)) & ((1 << (CPP14Parser.Throw - 64)) | (1 << (CPP14Parser.True - 64)) | (1 << (CPP14Parser.Typeid - 64)) | (1 << (CPP14Parser.Typename - 64)) | (1 << (CPP14Parser.Unsigned - 64)) | (1 << (CPP14Parser.Void - 64)) | (1 << (CPP14Parser.Wchar - 64)) | (1 << (CPP14Parser.LeftParen - 64)) | (1 << (CPP14Parser.LeftBracket - 64)) | (1 << (CPP14Parser.Plus - 64)) | (1 << (CPP14Parser.Minus - 64)) | (1 << (CPP14Parser.Star - 64)) | (1 << (CPP14Parser.And - 64)) | (1 << (CPP14Parser.Or - 64)) | (1 << (CPP14Parser.Tilde - 64)) | (1 << (CPP14Parser.Not - 64)) | (1 << (CPP14Parser.PlusPlus - 64)) | (1 << (CPP14Parser.MinusMinus - 64)) | (1 << (CPP14Parser.Doublecolon - 64)) | (1 << (CPP14Parser.Identifier - 64)) | (1 << (CPP14Parser.Integerliteral - 64)))) != 0) or ((((_la - 132)) & ~0x3f) == 0 and ((1 << (_la - 132)) & ((1 << (CPP14Parser.Characterliteral - 132)) | (1 << (CPP14Parser.Floatingliteral - 132)) | (1 << (CPP14Parser.Stringliteral - 132)) | (1 << (CPP14Parser.Userdefinedintegerliteral - 132)) | (1 << (CPP14Parser.Userdefinedfloatingliteral - 132)) | (1 << (CPP14Parser.Userdefinedstringliteral - 132)) | (1 << (CPP14Parser.Userdefinedcharacterliteral - 132)))) != 0):
+                if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << CPP14Parser.Alignof) | (1 << CPP14Parser.Auto) | (1 << CPP14Parser.Bool) | (1 << CPP14Parser.Char) | (1 << CPP14Parser.Char16) | (1 << CPP14Parser.Char32) | (1 << CPP14Parser.Const_cast) | (1 << CPP14Parser.Decltype) | (1 << CPP14Parser.Delete) | (1 << CPP14Parser.Double) | (1 << CPP14Parser.Dynamic_cast) | (1 << CPP14Parser.Faalse) | (1 << CPP14Parser.Float) | (1 << CPP14Parser.Int) | (1 << CPP14Parser.Long) | (1 << CPP14Parser.New) | (1 << CPP14Parser.Noexcept) | (1 << CPP14Parser.Nullptr) | (1 << CPP14Parser.Operator) | (1 << CPP14Parser.Reinterpret_cast) | (1 << CPP14Parser.Short) | (1 << CPP14Parser.Signed) | (1 << CPP14Parser.Sizeof) | (1 << CPP14Parser.Static_cast) | (1 << CPP14Parser.This))) != 0) or ((((_la - 64)) & ~0x3f) == 0 and ((1 << (_la - 64)) & ((1 << (CPP14Parser.Throw - 64)) | (1 << (CPP14Parser.Truue - 64)) | (1 << (CPP14Parser.Typeid - 64)) | (1 << (CPP14Parser.Typename - 64)) | (1 << (CPP14Parser.Unsigned - 64)) | (1 << (CPP14Parser.Void - 64)) | (1 << (CPP14Parser.Wchar - 64)) | (1 << (CPP14Parser.LeftParen - 64)) | (1 << (CPP14Parser.LeftBracket - 64)) | (1 << (CPP14Parser.Plus - 64)) | (1 << (CPP14Parser.Minus - 64)) | (1 << (CPP14Parser.Star - 64)) | (1 << (CPP14Parser.And - 64)) | (1 << (CPP14Parser.Or - 64)) | (1 << (CPP14Parser.Tilde - 64)) | (1 << (CPP14Parser.Not - 64)) | (1 << (CPP14Parser.PlusPlus - 64)) | (1 << (CPP14Parser.MinusMinus - 64)) | (1 << (CPP14Parser.Doublecolon - 64)) | (1 << (CPP14Parser.Identifier - 64)) | (1 << (CPP14Parser.Integerliteral - 64)))) != 0) or ((((_la - 132)) & ~0x3f) == 0 and ((1 << (_la - 132)) & ((1 << (CPP14Parser.Characterliteral - 132)) | (1 << (CPP14Parser.Floatingliteral - 132)) | (1 << (CPP14Parser.Stringliteral - 132)) | (1 << (CPP14Parser.Userdefinedintegerliteral - 132)) | (1 << (CPP14Parser.Userdefinedfloatingliteral - 132)) | (1 << (CPP14Parser.Userdefinedstringliteral - 132)) | (1 << (CPP14Parser.Userdefinedcharacterliteral - 132)))) != 0):
                     self.state = 1153
                     self.expression(0)
 
@@ -6840,7 +6840,7 @@ class CPP14Parser ( Parser ):
                         from antlr4.error.Errors import FailedPredicateException
                         raise FailedPredicateException(self, "self.precpred(self._ctx, 1)")
                     self.state = 1172
-                    self.declaration() 
+                    self.declaration()
                 self.state = 1177
                 self._errHandler.sync(self)
                 _alt = self._interp.adaptivePredict(self._input,100,self._ctx)
@@ -8940,7 +8940,7 @@ class CPP14Parser ( Parser ):
                     self.state = 1419
                     self.match(CPP14Parser.Comma)
                     self.state = 1420
-                    self.enumeratordefinition() 
+                    self.enumeratordefinition()
                 self.state = 1425
                 self._errHandler.sync(self)
                 _alt = self._interp.adaptivePredict(self._input,137,self._ctx)
@@ -9996,7 +9996,7 @@ class CPP14Parser ( Parser ):
                         from antlr4.error.Errors import FailedPredicateException
                         raise FailedPredicateException(self, "self.precpred(self._ctx, 1)")
                     self.state = 1539
-                    self.attributespecifier() 
+                    self.attributespecifier()
                 self.state = 1544
                 self._errHandler.sync(self)
                 _alt = self._interp.adaptivePredict(self._input,153,self._ctx)
@@ -10267,7 +10267,7 @@ class CPP14Parser ( Parser ):
                         self.match(CPP14Parser.Ellipsis)
                         pass
 
-             
+
                 self.state = 1595
                 self._errHandler.sync(self)
                 _alt = self._interp.adaptivePredict(self._input,162,self._ctx)
@@ -10578,7 +10578,7 @@ class CPP14Parser ( Parser ):
                         from antlr4.error.Errors import FailedPredicateException
                         raise FailedPredicateException(self, "self.precpred(self._ctx, 1)")
                     self.state = 1619
-                    self.balancedtoken() 
+                    self.balancedtoken()
                 self.state = 1624
                 self._errHandler.sync(self)
                 _alt = self._interp.adaptivePredict(self._input,166,self._ctx)
@@ -10717,7 +10717,7 @@ class CPP14Parser ( Parser ):
                     self.state = 1643
                     self.match(CPP14Parser.Comma)
                     self.state = 1644
-                    self.initdeclarator() 
+                    self.initdeclarator()
                 self.state = 1649
                 self._errHandler.sync(self)
                 _alt = self._interp.adaptivePredict(self._input,168,self._ctx)
@@ -11028,7 +11028,7 @@ class CPP14Parser ( Parser ):
                         self.state = 1683
                         self._errHandler.sync(self)
                         _la = self._input.LA(1)
-                        if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << CPP14Parser.Alignof) | (1 << CPP14Parser.Auto) | (1 << CPP14Parser.Bool) | (1 << CPP14Parser.Char) | (1 << CPP14Parser.Char16) | (1 << CPP14Parser.Char32) | (1 << CPP14Parser.Const_cast) | (1 << CPP14Parser.Decltype) | (1 << CPP14Parser.Delete) | (1 << CPP14Parser.Double) | (1 << CPP14Parser.Dynamic_cast) | (1 << CPP14Parser.False) | (1 << CPP14Parser.Float) | (1 << CPP14Parser.Int) | (1 << CPP14Parser.Long) | (1 << CPP14Parser.New) | (1 << CPP14Parser.Noexcept) | (1 << CPP14Parser.Nullptr) | (1 << CPP14Parser.Operator) | (1 << CPP14Parser.Reinterpret_cast) | (1 << CPP14Parser.Short) | (1 << CPP14Parser.Signed) | (1 << CPP14Parser.Sizeof) | (1 << CPP14Parser.Static_cast) | (1 << CPP14Parser.This))) != 0) or ((((_la - 65)) & ~0x3f) == 0 and ((1 << (_la - 65)) & ((1 << (CPP14Parser.True - 65)) | (1 << (CPP14Parser.Typeid - 65)) | (1 << (CPP14Parser.Typename - 65)) | (1 << (CPP14Parser.Unsigned - 65)) | (1 << (CPP14Parser.Void - 65)) | (1 << (CPP14Parser.Wchar - 65)) | (1 << (CPP14Parser.LeftParen - 65)) | (1 << (CPP14Parser.LeftBracket - 65)) | (1 << (CPP14Parser.Plus - 65)) | (1 << (CPP14Parser.Minus - 65)) | (1 << (CPP14Parser.Star - 65)) | (1 << (CPP14Parser.And - 65)) | (1 << (CPP14Parser.Or - 65)) | (1 << (CPP14Parser.Tilde - 65)) | (1 << (CPP14Parser.Not - 65)) | (1 << (CPP14Parser.PlusPlus - 65)) | (1 << (CPP14Parser.MinusMinus - 65)) | (1 << (CPP14Parser.Doublecolon - 65)) | (1 << (CPP14Parser.Identifier - 65)) | (1 << (CPP14Parser.Integerliteral - 65)))) != 0) or ((((_la - 132)) & ~0x3f) == 0 and ((1 << (_la - 132)) & ((1 << (CPP14Parser.Characterliteral - 132)) | (1 << (CPP14Parser.Floatingliteral - 132)) | (1 << (CPP14Parser.Stringliteral - 132)) | (1 << (CPP14Parser.Userdefinedintegerliteral - 132)) | (1 << (CPP14Parser.Userdefinedfloatingliteral - 132)) | (1 << (CPP14Parser.Userdefinedstringliteral - 132)) | (1 << (CPP14Parser.Userdefinedcharacterliteral - 132)))) != 0):
+                        if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << CPP14Parser.Alignof) | (1 << CPP14Parser.Auto) | (1 << CPP14Parser.Bool) | (1 << CPP14Parser.Char) | (1 << CPP14Parser.Char16) | (1 << CPP14Parser.Char32) | (1 << CPP14Parser.Const_cast) | (1 << CPP14Parser.Decltype) | (1 << CPP14Parser.Delete) | (1 << CPP14Parser.Double) | (1 << CPP14Parser.Dynamic_cast) | (1 << CPP14Parser.Faalse) | (1 << CPP14Parser.Float) | (1 << CPP14Parser.Int) | (1 << CPP14Parser.Long) | (1 << CPP14Parser.New) | (1 << CPP14Parser.Noexcept) | (1 << CPP14Parser.Nullptr) | (1 << CPP14Parser.Operator) | (1 << CPP14Parser.Reinterpret_cast) | (1 << CPP14Parser.Short) | (1 << CPP14Parser.Signed) | (1 << CPP14Parser.Sizeof) | (1 << CPP14Parser.Static_cast) | (1 << CPP14Parser.This))) != 0) or ((((_la - 65)) & ~0x3f) == 0 and ((1 << (_la - 65)) & ((1 << (CPP14Parser.Truue - 65)) | (1 << (CPP14Parser.Typeid - 65)) | (1 << (CPP14Parser.Typename - 65)) | (1 << (CPP14Parser.Unsigned - 65)) | (1 << (CPP14Parser.Void - 65)) | (1 << (CPP14Parser.Wchar - 65)) | (1 << (CPP14Parser.LeftParen - 65)) | (1 << (CPP14Parser.LeftBracket - 65)) | (1 << (CPP14Parser.Plus - 65)) | (1 << (CPP14Parser.Minus - 65)) | (1 << (CPP14Parser.Star - 65)) | (1 << (CPP14Parser.And - 65)) | (1 << (CPP14Parser.Or - 65)) | (1 << (CPP14Parser.Tilde - 65)) | (1 << (CPP14Parser.Not - 65)) | (1 << (CPP14Parser.PlusPlus - 65)) | (1 << (CPP14Parser.MinusMinus - 65)) | (1 << (CPP14Parser.Doublecolon - 65)) | (1 << (CPP14Parser.Identifier - 65)) | (1 << (CPP14Parser.Integerliteral - 65)))) != 0) or ((((_la - 132)) & ~0x3f) == 0 and ((1 << (_la - 132)) & ((1 << (CPP14Parser.Characterliteral - 132)) | (1 << (CPP14Parser.Floatingliteral - 132)) | (1 << (CPP14Parser.Stringliteral - 132)) | (1 << (CPP14Parser.Userdefinedintegerliteral - 132)) | (1 << (CPP14Parser.Userdefinedfloatingliteral - 132)) | (1 << (CPP14Parser.Userdefinedstringliteral - 132)) | (1 << (CPP14Parser.Userdefinedcharacterliteral - 132)))) != 0):
                             self.state = 1682
                             self.constantexpression()
 
@@ -11045,7 +11045,7 @@ class CPP14Parser ( Parser ):
 
                         pass
 
-             
+
                 self.state = 1693
                 self._errHandler.sync(self)
                 _alt = self._interp.adaptivePredict(self._input,177,self._ctx)
@@ -11786,7 +11786,7 @@ class CPP14Parser ( Parser ):
                 self.state = 1777
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
-                if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << CPP14Parser.Alignof) | (1 << CPP14Parser.Auto) | (1 << CPP14Parser.Bool) | (1 << CPP14Parser.Char) | (1 << CPP14Parser.Char16) | (1 << CPP14Parser.Char32) | (1 << CPP14Parser.Const_cast) | (1 << CPP14Parser.Decltype) | (1 << CPP14Parser.Delete) | (1 << CPP14Parser.Double) | (1 << CPP14Parser.Dynamic_cast) | (1 << CPP14Parser.False) | (1 << CPP14Parser.Float) | (1 << CPP14Parser.Int) | (1 << CPP14Parser.Long) | (1 << CPP14Parser.New) | (1 << CPP14Parser.Noexcept) | (1 << CPP14Parser.Nullptr) | (1 << CPP14Parser.Operator) | (1 << CPP14Parser.Reinterpret_cast) | (1 << CPP14Parser.Short) | (1 << CPP14Parser.Signed) | (1 << CPP14Parser.Sizeof) | (1 << CPP14Parser.Static_cast) | (1 << CPP14Parser.This))) != 0) or ((((_la - 65)) & ~0x3f) == 0 and ((1 << (_la - 65)) & ((1 << (CPP14Parser.True - 65)) | (1 << (CPP14Parser.Typeid - 65)) | (1 << (CPP14Parser.Typename - 65)) | (1 << (CPP14Parser.Unsigned - 65)) | (1 << (CPP14Parser.Void - 65)) | (1 << (CPP14Parser.Wchar - 65)) | (1 << (CPP14Parser.LeftParen - 65)) | (1 << (CPP14Parser.LeftBracket - 65)) | (1 << (CPP14Parser.Plus - 65)) | (1 << (CPP14Parser.Minus - 65)) | (1 << (CPP14Parser.Star - 65)) | (1 << (CPP14Parser.And - 65)) | (1 << (CPP14Parser.Or - 65)) | (1 << (CPP14Parser.Tilde - 65)) | (1 << (CPP14Parser.Not - 65)) | (1 << (CPP14Parser.PlusPlus - 65)) | (1 << (CPP14Parser.MinusMinus - 65)) | (1 << (CPP14Parser.Doublecolon - 65)) | (1 << (CPP14Parser.Identifier - 65)) | (1 << (CPP14Parser.Integerliteral - 65)))) != 0) or ((((_la - 132)) & ~0x3f) == 0 and ((1 << (_la - 132)) & ((1 << (CPP14Parser.Characterliteral - 132)) | (1 << (CPP14Parser.Floatingliteral - 132)) | (1 << (CPP14Parser.Stringliteral - 132)) | (1 << (CPP14Parser.Userdefinedintegerliteral - 132)) | (1 << (CPP14Parser.Userdefinedfloatingliteral - 132)) | (1 << (CPP14Parser.Userdefinedstringliteral - 132)) | (1 << (CPP14Parser.Userdefinedcharacterliteral - 132)))) != 0):
+                if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << CPP14Parser.Alignof) | (1 << CPP14Parser.Auto) | (1 << CPP14Parser.Bool) | (1 << CPP14Parser.Char) | (1 << CPP14Parser.Char16) | (1 << CPP14Parser.Char32) | (1 << CPP14Parser.Const_cast) | (1 << CPP14Parser.Decltype) | (1 << CPP14Parser.Delete) | (1 << CPP14Parser.Double) | (1 << CPP14Parser.Dynamic_cast) | (1 << CPP14Parser.Faalse) | (1 << CPP14Parser.Float) | (1 << CPP14Parser.Int) | (1 << CPP14Parser.Long) | (1 << CPP14Parser.New) | (1 << CPP14Parser.Noexcept) | (1 << CPP14Parser.Nullptr) | (1 << CPP14Parser.Operator) | (1 << CPP14Parser.Reinterpret_cast) | (1 << CPP14Parser.Short) | (1 << CPP14Parser.Signed) | (1 << CPP14Parser.Sizeof) | (1 << CPP14Parser.Static_cast) | (1 << CPP14Parser.This))) != 0) or ((((_la - 65)) & ~0x3f) == 0 and ((1 << (_la - 65)) & ((1 << (CPP14Parser.Truue - 65)) | (1 << (CPP14Parser.Typeid - 65)) | (1 << (CPP14Parser.Typename - 65)) | (1 << (CPP14Parser.Unsigned - 65)) | (1 << (CPP14Parser.Void - 65)) | (1 << (CPP14Parser.Wchar - 65)) | (1 << (CPP14Parser.LeftParen - 65)) | (1 << (CPP14Parser.LeftBracket - 65)) | (1 << (CPP14Parser.Plus - 65)) | (1 << (CPP14Parser.Minus - 65)) | (1 << (CPP14Parser.Star - 65)) | (1 << (CPP14Parser.And - 65)) | (1 << (CPP14Parser.Or - 65)) | (1 << (CPP14Parser.Tilde - 65)) | (1 << (CPP14Parser.Not - 65)) | (1 << (CPP14Parser.PlusPlus - 65)) | (1 << (CPP14Parser.MinusMinus - 65)) | (1 << (CPP14Parser.Doublecolon - 65)) | (1 << (CPP14Parser.Identifier - 65)) | (1 << (CPP14Parser.Integerliteral - 65)))) != 0) or ((((_la - 132)) & ~0x3f) == 0 and ((1 << (_la - 132)) & ((1 << (CPP14Parser.Characterliteral - 132)) | (1 << (CPP14Parser.Floatingliteral - 132)) | (1 << (CPP14Parser.Stringliteral - 132)) | (1 << (CPP14Parser.Userdefinedintegerliteral - 132)) | (1 << (CPP14Parser.Userdefinedfloatingliteral - 132)) | (1 << (CPP14Parser.Userdefinedstringliteral - 132)) | (1 << (CPP14Parser.Userdefinedcharacterliteral - 132)))) != 0):
                     self.state = 1776
                     self.constantexpression()
 
@@ -11848,7 +11848,7 @@ class CPP14Parser ( Parser ):
                         self.state = 1794
                         self._errHandler.sync(self)
                         _la = self._input.LA(1)
-                        if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << CPP14Parser.Alignof) | (1 << CPP14Parser.Auto) | (1 << CPP14Parser.Bool) | (1 << CPP14Parser.Char) | (1 << CPP14Parser.Char16) | (1 << CPP14Parser.Char32) | (1 << CPP14Parser.Const_cast) | (1 << CPP14Parser.Decltype) | (1 << CPP14Parser.Delete) | (1 << CPP14Parser.Double) | (1 << CPP14Parser.Dynamic_cast) | (1 << CPP14Parser.False) | (1 << CPP14Parser.Float) | (1 << CPP14Parser.Int) | (1 << CPP14Parser.Long) | (1 << CPP14Parser.New) | (1 << CPP14Parser.Noexcept) | (1 << CPP14Parser.Nullptr) | (1 << CPP14Parser.Operator) | (1 << CPP14Parser.Reinterpret_cast) | (1 << CPP14Parser.Short) | (1 << CPP14Parser.Signed) | (1 << CPP14Parser.Sizeof) | (1 << CPP14Parser.Static_cast) | (1 << CPP14Parser.This))) != 0) or ((((_la - 65)) & ~0x3f) == 0 and ((1 << (_la - 65)) & ((1 << (CPP14Parser.True - 65)) | (1 << (CPP14Parser.Typeid - 65)) | (1 << (CPP14Parser.Typename - 65)) | (1 << (CPP14Parser.Unsigned - 65)) | (1 << (CPP14Parser.Void - 65)) | (1 << (CPP14Parser.Wchar - 65)) | (1 << (CPP14Parser.LeftParen - 65)) | (1 << (CPP14Parser.LeftBracket - 65)) | (1 << (CPP14Parser.Plus - 65)) | (1 << (CPP14Parser.Minus - 65)) | (1 << (CPP14Parser.Star - 65)) | (1 << (CPP14Parser.And - 65)) | (1 << (CPP14Parser.Or - 65)) | (1 << (CPP14Parser.Tilde - 65)) | (1 << (CPP14Parser.Not - 65)) | (1 << (CPP14Parser.PlusPlus - 65)) | (1 << (CPP14Parser.MinusMinus - 65)) | (1 << (CPP14Parser.Doublecolon - 65)) | (1 << (CPP14Parser.Identifier - 65)) | (1 << (CPP14Parser.Integerliteral - 65)))) != 0) or ((((_la - 132)) & ~0x3f) == 0 and ((1 << (_la - 132)) & ((1 << (CPP14Parser.Characterliteral - 132)) | (1 << (CPP14Parser.Floatingliteral - 132)) | (1 << (CPP14Parser.Stringliteral - 132)) | (1 << (CPP14Parser.Userdefinedintegerliteral - 132)) | (1 << (CPP14Parser.Userdefinedfloatingliteral - 132)) | (1 << (CPP14Parser.Userdefinedstringliteral - 132)) | (1 << (CPP14Parser.Userdefinedcharacterliteral - 132)))) != 0):
+                        if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << CPP14Parser.Alignof) | (1 << CPP14Parser.Auto) | (1 << CPP14Parser.Bool) | (1 << CPP14Parser.Char) | (1 << CPP14Parser.Char16) | (1 << CPP14Parser.Char32) | (1 << CPP14Parser.Const_cast) | (1 << CPP14Parser.Decltype) | (1 << CPP14Parser.Delete) | (1 << CPP14Parser.Double) | (1 << CPP14Parser.Dynamic_cast) | (1 << CPP14Parser.Faalse) | (1 << CPP14Parser.Float) | (1 << CPP14Parser.Int) | (1 << CPP14Parser.Long) | (1 << CPP14Parser.New) | (1 << CPP14Parser.Noexcept) | (1 << CPP14Parser.Nullptr) | (1 << CPP14Parser.Operator) | (1 << CPP14Parser.Reinterpret_cast) | (1 << CPP14Parser.Short) | (1 << CPP14Parser.Signed) | (1 << CPP14Parser.Sizeof) | (1 << CPP14Parser.Static_cast) | (1 << CPP14Parser.This))) != 0) or ((((_la - 65)) & ~0x3f) == 0 and ((1 << (_la - 65)) & ((1 << (CPP14Parser.Truue - 65)) | (1 << (CPP14Parser.Typeid - 65)) | (1 << (CPP14Parser.Typename - 65)) | (1 << (CPP14Parser.Unsigned - 65)) | (1 << (CPP14Parser.Void - 65)) | (1 << (CPP14Parser.Wchar - 65)) | (1 << (CPP14Parser.LeftParen - 65)) | (1 << (CPP14Parser.LeftBracket - 65)) | (1 << (CPP14Parser.Plus - 65)) | (1 << (CPP14Parser.Minus - 65)) | (1 << (CPP14Parser.Star - 65)) | (1 << (CPP14Parser.And - 65)) | (1 << (CPP14Parser.Or - 65)) | (1 << (CPP14Parser.Tilde - 65)) | (1 << (CPP14Parser.Not - 65)) | (1 << (CPP14Parser.PlusPlus - 65)) | (1 << (CPP14Parser.MinusMinus - 65)) | (1 << (CPP14Parser.Doublecolon - 65)) | (1 << (CPP14Parser.Identifier - 65)) | (1 << (CPP14Parser.Integerliteral - 65)))) != 0) or ((((_la - 132)) & ~0x3f) == 0 and ((1 << (_la - 132)) & ((1 << (CPP14Parser.Characterliteral - 132)) | (1 << (CPP14Parser.Floatingliteral - 132)) | (1 << (CPP14Parser.Stringliteral - 132)) | (1 << (CPP14Parser.Userdefinedintegerliteral - 132)) | (1 << (CPP14Parser.Userdefinedfloatingliteral - 132)) | (1 << (CPP14Parser.Userdefinedstringliteral - 132)) | (1 << (CPP14Parser.Userdefinedcharacterliteral - 132)))) != 0):
                             self.state = 1793
                             self.constantexpression()
 
@@ -11865,7 +11865,7 @@ class CPP14Parser ( Parser ):
 
                         pass
 
-             
+
                 self.state = 1804
                 self._errHandler.sync(self)
                 _alt = self._interp.adaptivePredict(self._input,203,self._ctx)
@@ -12023,7 +12023,7 @@ class CPP14Parser ( Parser ):
                         self.state = 1819
                         self._errHandler.sync(self)
                         _la = self._input.LA(1)
-                        if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << CPP14Parser.Alignof) | (1 << CPP14Parser.Auto) | (1 << CPP14Parser.Bool) | (1 << CPP14Parser.Char) | (1 << CPP14Parser.Char16) | (1 << CPP14Parser.Char32) | (1 << CPP14Parser.Const_cast) | (1 << CPP14Parser.Decltype) | (1 << CPP14Parser.Delete) | (1 << CPP14Parser.Double) | (1 << CPP14Parser.Dynamic_cast) | (1 << CPP14Parser.False) | (1 << CPP14Parser.Float) | (1 << CPP14Parser.Int) | (1 << CPP14Parser.Long) | (1 << CPP14Parser.New) | (1 << CPP14Parser.Noexcept) | (1 << CPP14Parser.Nullptr) | (1 << CPP14Parser.Operator) | (1 << CPP14Parser.Reinterpret_cast) | (1 << CPP14Parser.Short) | (1 << CPP14Parser.Signed) | (1 << CPP14Parser.Sizeof) | (1 << CPP14Parser.Static_cast) | (1 << CPP14Parser.This))) != 0) or ((((_la - 65)) & ~0x3f) == 0 and ((1 << (_la - 65)) & ((1 << (CPP14Parser.True - 65)) | (1 << (CPP14Parser.Typeid - 65)) | (1 << (CPP14Parser.Typename - 65)) | (1 << (CPP14Parser.Unsigned - 65)) | (1 << (CPP14Parser.Void - 65)) | (1 << (CPP14Parser.Wchar - 65)) | (1 << (CPP14Parser.LeftParen - 65)) | (1 << (CPP14Parser.LeftBracket - 65)) | (1 << (CPP14Parser.Plus - 65)) | (1 << (CPP14Parser.Minus - 65)) | (1 << (CPP14Parser.Star - 65)) | (1 << (CPP14Parser.And - 65)) | (1 << (CPP14Parser.Or - 65)) | (1 << (CPP14Parser.Tilde - 65)) | (1 << (CPP14Parser.Not - 65)) | (1 << (CPP14Parser.PlusPlus - 65)) | (1 << (CPP14Parser.MinusMinus - 65)) | (1 << (CPP14Parser.Doublecolon - 65)) | (1 << (CPP14Parser.Identifier - 65)) | (1 << (CPP14Parser.Integerliteral - 65)))) != 0) or ((((_la - 132)) & ~0x3f) == 0 and ((1 << (_la - 132)) & ((1 << (CPP14Parser.Characterliteral - 132)) | (1 << (CPP14Parser.Floatingliteral - 132)) | (1 << (CPP14Parser.Stringliteral - 132)) | (1 << (CPP14Parser.Userdefinedintegerliteral - 132)) | (1 << (CPP14Parser.Userdefinedfloatingliteral - 132)) | (1 << (CPP14Parser.Userdefinedstringliteral - 132)) | (1 << (CPP14Parser.Userdefinedcharacterliteral - 132)))) != 0):
+                        if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << CPP14Parser.Alignof) | (1 << CPP14Parser.Auto) | (1 << CPP14Parser.Bool) | (1 << CPP14Parser.Char) | (1 << CPP14Parser.Char16) | (1 << CPP14Parser.Char32) | (1 << CPP14Parser.Const_cast) | (1 << CPP14Parser.Decltype) | (1 << CPP14Parser.Delete) | (1 << CPP14Parser.Double) | (1 << CPP14Parser.Dynamic_cast) | (1 << CPP14Parser.Faalse) | (1 << CPP14Parser.Float) | (1 << CPP14Parser.Int) | (1 << CPP14Parser.Long) | (1 << CPP14Parser.New) | (1 << CPP14Parser.Noexcept) | (1 << CPP14Parser.Nullptr) | (1 << CPP14Parser.Operator) | (1 << CPP14Parser.Reinterpret_cast) | (1 << CPP14Parser.Short) | (1 << CPP14Parser.Signed) | (1 << CPP14Parser.Sizeof) | (1 << CPP14Parser.Static_cast) | (1 << CPP14Parser.This))) != 0) or ((((_la - 65)) & ~0x3f) == 0 and ((1 << (_la - 65)) & ((1 << (CPP14Parser.Truue - 65)) | (1 << (CPP14Parser.Typeid - 65)) | (1 << (CPP14Parser.Typename - 65)) | (1 << (CPP14Parser.Unsigned - 65)) | (1 << (CPP14Parser.Void - 65)) | (1 << (CPP14Parser.Wchar - 65)) | (1 << (CPP14Parser.LeftParen - 65)) | (1 << (CPP14Parser.LeftBracket - 65)) | (1 << (CPP14Parser.Plus - 65)) | (1 << (CPP14Parser.Minus - 65)) | (1 << (CPP14Parser.Star - 65)) | (1 << (CPP14Parser.And - 65)) | (1 << (CPP14Parser.Or - 65)) | (1 << (CPP14Parser.Tilde - 65)) | (1 << (CPP14Parser.Not - 65)) | (1 << (CPP14Parser.PlusPlus - 65)) | (1 << (CPP14Parser.MinusMinus - 65)) | (1 << (CPP14Parser.Doublecolon - 65)) | (1 << (CPP14Parser.Identifier - 65)) | (1 << (CPP14Parser.Integerliteral - 65)))) != 0) or ((((_la - 132)) & ~0x3f) == 0 and ((1 << (_la - 132)) & ((1 << (CPP14Parser.Characterliteral - 132)) | (1 << (CPP14Parser.Floatingliteral - 132)) | (1 << (CPP14Parser.Stringliteral - 132)) | (1 << (CPP14Parser.Userdefinedintegerliteral - 132)) | (1 << (CPP14Parser.Userdefinedfloatingliteral - 132)) | (1 << (CPP14Parser.Userdefinedstringliteral - 132)) | (1 << (CPP14Parser.Userdefinedcharacterliteral - 132)))) != 0):
                             self.state = 1818
                             self.constantexpression()
 
@@ -12040,7 +12040,7 @@ class CPP14Parser ( Parser ):
 
                         pass
 
-             
+
                 self.state = 1829
                 self._errHandler.sync(self)
                 _alt = self._interp.adaptivePredict(self._input,208,self._ctx)
@@ -12181,7 +12181,7 @@ class CPP14Parser ( Parser ):
                     self.state = 1846
                     self.match(CPP14Parser.Comma)
                     self.state = 1847
-                    self.parameterdeclaration() 
+                    self.parameterdeclaration()
                 self.state = 1852
                 self._errHandler.sync(self)
                 _alt = self._interp.adaptivePredict(self._input,212,self._ctx)
@@ -12671,7 +12671,7 @@ class CPP14Parser ( Parser ):
             self.state = 1925
             self._errHandler.sync(self)
             token = self._input.LA(1)
-            if token in [CPP14Parser.Alignof, CPP14Parser.Auto, CPP14Parser.Bool, CPP14Parser.Char, CPP14Parser.Char16, CPP14Parser.Char32, CPP14Parser.Const_cast, CPP14Parser.Decltype, CPP14Parser.Delete, CPP14Parser.Double, CPP14Parser.Dynamic_cast, CPP14Parser.False, CPP14Parser.Float, CPP14Parser.Int, CPP14Parser.Long, CPP14Parser.New, CPP14Parser.Noexcept, CPP14Parser.Nullptr, CPP14Parser.Operator, CPP14Parser.Reinterpret_cast, CPP14Parser.Short, CPP14Parser.Signed, CPP14Parser.Sizeof, CPP14Parser.Static_cast, CPP14Parser.This, CPP14Parser.Throw, CPP14Parser.True, CPP14Parser.Typeid, CPP14Parser.Typename, CPP14Parser.Unsigned, CPP14Parser.Void, CPP14Parser.Wchar, CPP14Parser.LeftParen, CPP14Parser.LeftBracket, CPP14Parser.Plus, CPP14Parser.Minus, CPP14Parser.Star, CPP14Parser.And, CPP14Parser.Or, CPP14Parser.Tilde, CPP14Parser.Not, CPP14Parser.PlusPlus, CPP14Parser.MinusMinus, CPP14Parser.Doublecolon, CPP14Parser.Identifier, CPP14Parser.Integerliteral, CPP14Parser.Characterliteral, CPP14Parser.Floatingliteral, CPP14Parser.Stringliteral, CPP14Parser.Userdefinedintegerliteral, CPP14Parser.Userdefinedfloatingliteral, CPP14Parser.Userdefinedstringliteral, CPP14Parser.Userdefinedcharacterliteral]:
+            if token in [CPP14Parser.Alignof, CPP14Parser.Auto, CPP14Parser.Bool, CPP14Parser.Char, CPP14Parser.Char16, CPP14Parser.Char32, CPP14Parser.Const_cast, CPP14Parser.Decltype, CPP14Parser.Delete, CPP14Parser.Double, CPP14Parser.Dynamic_cast, CPP14Parser.Faalse, CPP14Parser.Float, CPP14Parser.Int, CPP14Parser.Long, CPP14Parser.New, CPP14Parser.Noexcept, CPP14Parser.Nullptr, CPP14Parser.Operator, CPP14Parser.Reinterpret_cast, CPP14Parser.Short, CPP14Parser.Signed, CPP14Parser.Sizeof, CPP14Parser.Static_cast, CPP14Parser.This, CPP14Parser.Throw, CPP14Parser.Truue, CPP14Parser.Typeid, CPP14Parser.Typename, CPP14Parser.Unsigned, CPP14Parser.Void, CPP14Parser.Wchar, CPP14Parser.LeftParen, CPP14Parser.LeftBracket, CPP14Parser.Plus, CPP14Parser.Minus, CPP14Parser.Star, CPP14Parser.And, CPP14Parser.Or, CPP14Parser.Tilde, CPP14Parser.Not, CPP14Parser.PlusPlus, CPP14Parser.MinusMinus, CPP14Parser.Doublecolon, CPP14Parser.Identifier, CPP14Parser.Integerliteral, CPP14Parser.Characterliteral, CPP14Parser.Floatingliteral, CPP14Parser.Stringliteral, CPP14Parser.Userdefinedintegerliteral, CPP14Parser.Userdefinedfloatingliteral, CPP14Parser.Userdefinedstringliteral, CPP14Parser.Userdefinedcharacterliteral]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 1923
                 self.assignmentexpression()
@@ -12764,7 +12764,7 @@ class CPP14Parser ( Parser ):
                         self.state = 1935
                         self.match(CPP14Parser.Ellipsis)
 
-             
+
                 self.state = 1942
                 self._errHandler.sync(self)
                 _alt = self._interp.adaptivePredict(self._input,230,self._ctx)
@@ -13488,7 +13488,7 @@ class CPP14Parser ( Parser ):
                     self.state = 2027
                     self.match(CPP14Parser.Comma)
                     self.state = 2028
-                    self.memberdeclarator() 
+                    self.memberdeclarator()
                 self.state = 2033
                 self._errHandler.sync(self)
                 _alt = self._interp.adaptivePredict(self._input,249,self._ctx)
@@ -13680,7 +13680,7 @@ class CPP14Parser ( Parser ):
                         from antlr4.error.Errors import FailedPredicateException
                         raise FailedPredicateException(self, "self.precpred(self._ctx, 1)")
                     self.state = 2059
-                    self.virtspecifier() 
+                    self.virtspecifier()
                 self.state = 2064
                 self._errHandler.sync(self)
                 _alt = self._interp.adaptivePredict(self._input,256,self._ctx)
@@ -13778,7 +13778,8 @@ class CPP14Parser ( Parser ):
             self.match(CPP14Parser.Assign)
             self.state = 2068
             localctx.val = self.match(CPP14Parser.Octalliteral)
-            if((None if localctx.val is None else localctx.val.text).compareTo("0")!=0) throw new InputMismatchException(this);
+            if((None if localctx.val is None else localctx.val.text).compareTo("0")!=0):
+              raise Exception('wtf is going on');
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -13901,7 +13902,7 @@ class CPP14Parser ( Parser ):
                         self.state = 2082
                         self.match(CPP14Parser.Ellipsis)
 
-             
+
                 self.state = 2089
                 self._errHandler.sync(self)
                 _alt = self._interp.adaptivePredict(self._input,259,self._ctx)
@@ -14508,7 +14509,7 @@ class CPP14Parser ( Parser ):
                 self.state = 2154
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
-                if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << CPP14Parser.Alignof) | (1 << CPP14Parser.Auto) | (1 << CPP14Parser.Bool) | (1 << CPP14Parser.Char) | (1 << CPP14Parser.Char16) | (1 << CPP14Parser.Char32) | (1 << CPP14Parser.Const_cast) | (1 << CPP14Parser.Decltype) | (1 << CPP14Parser.Delete) | (1 << CPP14Parser.Double) | (1 << CPP14Parser.Dynamic_cast) | (1 << CPP14Parser.False) | (1 << CPP14Parser.Float) | (1 << CPP14Parser.Int) | (1 << CPP14Parser.Long) | (1 << CPP14Parser.New) | (1 << CPP14Parser.Noexcept) | (1 << CPP14Parser.Nullptr) | (1 << CPP14Parser.Operator) | (1 << CPP14Parser.Reinterpret_cast) | (1 << CPP14Parser.Short) | (1 << CPP14Parser.Signed) | (1 << CPP14Parser.Sizeof) | (1 << CPP14Parser.Static_cast) | (1 << CPP14Parser.This))) != 0) or ((((_la - 64)) & ~0x3f) == 0 and ((1 << (_la - 64)) & ((1 << (CPP14Parser.Throw - 64)) | (1 << (CPP14Parser.True - 64)) | (1 << (CPP14Parser.Typeid - 64)) | (1 << (CPP14Parser.Typename - 64)) | (1 << (CPP14Parser.Unsigned - 64)) | (1 << (CPP14Parser.Void - 64)) | (1 << (CPP14Parser.Wchar - 64)) | (1 << (CPP14Parser.LeftParen - 64)) | (1 << (CPP14Parser.LeftBracket - 64)) | (1 << (CPP14Parser.LeftBrace - 64)) | (1 << (CPP14Parser.Plus - 64)) | (1 << (CPP14Parser.Minus - 64)) | (1 << (CPP14Parser.Star - 64)) | (1 << (CPP14Parser.And - 64)) | (1 << (CPP14Parser.Or - 64)) | (1 << (CPP14Parser.Tilde - 64)) | (1 << (CPP14Parser.Not - 64)) | (1 << (CPP14Parser.PlusPlus - 64)) | (1 << (CPP14Parser.MinusMinus - 64)) | (1 << (CPP14Parser.Doublecolon - 64)) | (1 << (CPP14Parser.Identifier - 64)) | (1 << (CPP14Parser.Integerliteral - 64)))) != 0) or ((((_la - 132)) & ~0x3f) == 0 and ((1 << (_la - 132)) & ((1 << (CPP14Parser.Characterliteral - 132)) | (1 << (CPP14Parser.Floatingliteral - 132)) | (1 << (CPP14Parser.Stringliteral - 132)) | (1 << (CPP14Parser.Userdefinedintegerliteral - 132)) | (1 << (CPP14Parser.Userdefinedfloatingliteral - 132)) | (1 << (CPP14Parser.Userdefinedstringliteral - 132)) | (1 << (CPP14Parser.Userdefinedcharacterliteral - 132)))) != 0):
+                if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << CPP14Parser.Alignof) | (1 << CPP14Parser.Auto) | (1 << CPP14Parser.Bool) | (1 << CPP14Parser.Char) | (1 << CPP14Parser.Char16) | (1 << CPP14Parser.Char32) | (1 << CPP14Parser.Const_cast) | (1 << CPP14Parser.Decltype) | (1 << CPP14Parser.Delete) | (1 << CPP14Parser.Double) | (1 << CPP14Parser.Dynamic_cast) | (1 << CPP14Parser.Faalse) | (1 << CPP14Parser.Float) | (1 << CPP14Parser.Int) | (1 << CPP14Parser.Long) | (1 << CPP14Parser.New) | (1 << CPP14Parser.Noexcept) | (1 << CPP14Parser.Nullptr) | (1 << CPP14Parser.Operator) | (1 << CPP14Parser.Reinterpret_cast) | (1 << CPP14Parser.Short) | (1 << CPP14Parser.Signed) | (1 << CPP14Parser.Sizeof) | (1 << CPP14Parser.Static_cast) | (1 << CPP14Parser.This))) != 0) or ((((_la - 64)) & ~0x3f) == 0 and ((1 << (_la - 64)) & ((1 << (CPP14Parser.Throw - 64)) | (1 << (CPP14Parser.Truue - 64)) | (1 << (CPP14Parser.Typeid - 64)) | (1 << (CPP14Parser.Typename - 64)) | (1 << (CPP14Parser.Unsigned - 64)) | (1 << (CPP14Parser.Void - 64)) | (1 << (CPP14Parser.Wchar - 64)) | (1 << (CPP14Parser.LeftParen - 64)) | (1 << (CPP14Parser.LeftBracket - 64)) | (1 << (CPP14Parser.LeftBrace - 64)) | (1 << (CPP14Parser.Plus - 64)) | (1 << (CPP14Parser.Minus - 64)) | (1 << (CPP14Parser.Star - 64)) | (1 << (CPP14Parser.And - 64)) | (1 << (CPP14Parser.Or - 64)) | (1 << (CPP14Parser.Tilde - 64)) | (1 << (CPP14Parser.Not - 64)) | (1 << (CPP14Parser.PlusPlus - 64)) | (1 << (CPP14Parser.MinusMinus - 64)) | (1 << (CPP14Parser.Doublecolon - 64)) | (1 << (CPP14Parser.Identifier - 64)) | (1 << (CPP14Parser.Integerliteral - 64)))) != 0) or ((((_la - 132)) & ~0x3f) == 0 and ((1 << (_la - 132)) & ((1 << (CPP14Parser.Characterliteral - 132)) | (1 << (CPP14Parser.Floatingliteral - 132)) | (1 << (CPP14Parser.Stringliteral - 132)) | (1 << (CPP14Parser.Userdefinedintegerliteral - 132)) | (1 << (CPP14Parser.Userdefinedfloatingliteral - 132)) | (1 << (CPP14Parser.Userdefinedstringliteral - 132)) | (1 << (CPP14Parser.Userdefinedcharacterliteral - 132)))) != 0):
                     self.state = 2153
                     self.expressionlist()
 
@@ -14813,7 +14814,7 @@ class CPP14Parser ( Parser ):
                     self.state = 2187
                     self.match(CPP14Parser.Comma)
                     self.state = 2188
-                    self.templateparameter() 
+                    self.templateparameter()
                 self.state = 2193
                 self._errHandler.sync(self)
                 _alt = self._interp.adaptivePredict(self._input,277,self._ctx)
@@ -15123,7 +15124,7 @@ class CPP14Parser ( Parser ):
             self.state = 2251
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << CPP14Parser.Alignof) | (1 << CPP14Parser.Auto) | (1 << CPP14Parser.Bool) | (1 << CPP14Parser.Char) | (1 << CPP14Parser.Char16) | (1 << CPP14Parser.Char32) | (1 << CPP14Parser.Class) | (1 << CPP14Parser.Const) | (1 << CPP14Parser.Const_cast) | (1 << CPP14Parser.Decltype) | (1 << CPP14Parser.Delete) | (1 << CPP14Parser.Double) | (1 << CPP14Parser.Dynamic_cast) | (1 << CPP14Parser.Enum) | (1 << CPP14Parser.False) | (1 << CPP14Parser.Float) | (1 << CPP14Parser.Int) | (1 << CPP14Parser.Long) | (1 << CPP14Parser.New) | (1 << CPP14Parser.Noexcept) | (1 << CPP14Parser.Nullptr) | (1 << CPP14Parser.Operator) | (1 << CPP14Parser.Reinterpret_cast) | (1 << CPP14Parser.Short) | (1 << CPP14Parser.Signed) | (1 << CPP14Parser.Sizeof) | (1 << CPP14Parser.Static_cast) | (1 << CPP14Parser.Struct) | (1 << CPP14Parser.This))) != 0) or ((((_la - 65)) & ~0x3f) == 0 and ((1 << (_la - 65)) & ((1 << (CPP14Parser.True - 65)) | (1 << (CPP14Parser.Typeid - 65)) | (1 << (CPP14Parser.Typename - 65)) | (1 << (CPP14Parser.Union - 65)) | (1 << (CPP14Parser.Unsigned - 65)) | (1 << (CPP14Parser.Void - 65)) | (1 << (CPP14Parser.Volatile - 65)) | (1 << (CPP14Parser.Wchar - 65)) | (1 << (CPP14Parser.LeftParen - 65)) | (1 << (CPP14Parser.LeftBracket - 65)) | (1 << (CPP14Parser.Plus - 65)) | (1 << (CPP14Parser.Minus - 65)) | (1 << (CPP14Parser.Star - 65)) | (1 << (CPP14Parser.And - 65)) | (1 << (CPP14Parser.Or - 65)) | (1 << (CPP14Parser.Tilde - 65)) | (1 << (CPP14Parser.Not - 65)) | (1 << (CPP14Parser.PlusPlus - 65)) | (1 << (CPP14Parser.MinusMinus - 65)) | (1 << (CPP14Parser.Doublecolon - 65)) | (1 << (CPP14Parser.Identifier - 65)) | (1 << (CPP14Parser.Integerliteral - 65)))) != 0) or ((((_la - 132)) & ~0x3f) == 0 and ((1 << (_la - 132)) & ((1 << (CPP14Parser.Characterliteral - 132)) | (1 << (CPP14Parser.Floatingliteral - 132)) | (1 << (CPP14Parser.Stringliteral - 132)) | (1 << (CPP14Parser.Userdefinedintegerliteral - 132)) | (1 << (CPP14Parser.Userdefinedfloatingliteral - 132)) | (1 << (CPP14Parser.Userdefinedstringliteral - 132)) | (1 << (CPP14Parser.Userdefinedcharacterliteral - 132)))) != 0):
+            if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << CPP14Parser.Alignof) | (1 << CPP14Parser.Auto) | (1 << CPP14Parser.Bool) | (1 << CPP14Parser.Char) | (1 << CPP14Parser.Char16) | (1 << CPP14Parser.Char32) | (1 << CPP14Parser.Class) | (1 << CPP14Parser.Const) | (1 << CPP14Parser.Const_cast) | (1 << CPP14Parser.Decltype) | (1 << CPP14Parser.Delete) | (1 << CPP14Parser.Double) | (1 << CPP14Parser.Dynamic_cast) | (1 << CPP14Parser.Enum) | (1 << CPP14Parser.Faalse) | (1 << CPP14Parser.Float) | (1 << CPP14Parser.Int) | (1 << CPP14Parser.Long) | (1 << CPP14Parser.New) | (1 << CPP14Parser.Noexcept) | (1 << CPP14Parser.Nullptr) | (1 << CPP14Parser.Operator) | (1 << CPP14Parser.Reinterpret_cast) | (1 << CPP14Parser.Short) | (1 << CPP14Parser.Signed) | (1 << CPP14Parser.Sizeof) | (1 << CPP14Parser.Static_cast) | (1 << CPP14Parser.Struct) | (1 << CPP14Parser.This))) != 0) or ((((_la - 65)) & ~0x3f) == 0 and ((1 << (_la - 65)) & ((1 << (CPP14Parser.Truue - 65)) | (1 << (CPP14Parser.Typeid - 65)) | (1 << (CPP14Parser.Typename - 65)) | (1 << (CPP14Parser.Union - 65)) | (1 << (CPP14Parser.Unsigned - 65)) | (1 << (CPP14Parser.Void - 65)) | (1 << (CPP14Parser.Volatile - 65)) | (1 << (CPP14Parser.Wchar - 65)) | (1 << (CPP14Parser.LeftParen - 65)) | (1 << (CPP14Parser.LeftBracket - 65)) | (1 << (CPP14Parser.Plus - 65)) | (1 << (CPP14Parser.Minus - 65)) | (1 << (CPP14Parser.Star - 65)) | (1 << (CPP14Parser.And - 65)) | (1 << (CPP14Parser.Or - 65)) | (1 << (CPP14Parser.Tilde - 65)) | (1 << (CPP14Parser.Not - 65)) | (1 << (CPP14Parser.PlusPlus - 65)) | (1 << (CPP14Parser.MinusMinus - 65)) | (1 << (CPP14Parser.Doublecolon - 65)) | (1 << (CPP14Parser.Identifier - 65)) | (1 << (CPP14Parser.Integerliteral - 65)))) != 0) or ((((_la - 132)) & ~0x3f) == 0 and ((1 << (_la - 132)) & ((1 << (CPP14Parser.Characterliteral - 132)) | (1 << (CPP14Parser.Floatingliteral - 132)) | (1 << (CPP14Parser.Stringliteral - 132)) | (1 << (CPP14Parser.Userdefinedintegerliteral - 132)) | (1 << (CPP14Parser.Userdefinedfloatingliteral - 132)) | (1 << (CPP14Parser.Userdefinedstringliteral - 132)) | (1 << (CPP14Parser.Userdefinedcharacterliteral - 132)))) != 0):
                 self.state = 2250
                 self.templateargumentlist(0)
 
@@ -15198,7 +15199,7 @@ class CPP14Parser ( Parser ):
                 self.state = 2259
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
-                if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << CPP14Parser.Alignof) | (1 << CPP14Parser.Auto) | (1 << CPP14Parser.Bool) | (1 << CPP14Parser.Char) | (1 << CPP14Parser.Char16) | (1 << CPP14Parser.Char32) | (1 << CPP14Parser.Class) | (1 << CPP14Parser.Const) | (1 << CPP14Parser.Const_cast) | (1 << CPP14Parser.Decltype) | (1 << CPP14Parser.Delete) | (1 << CPP14Parser.Double) | (1 << CPP14Parser.Dynamic_cast) | (1 << CPP14Parser.Enum) | (1 << CPP14Parser.False) | (1 << CPP14Parser.Float) | (1 << CPP14Parser.Int) | (1 << CPP14Parser.Long) | (1 << CPP14Parser.New) | (1 << CPP14Parser.Noexcept) | (1 << CPP14Parser.Nullptr) | (1 << CPP14Parser.Operator) | (1 << CPP14Parser.Reinterpret_cast) | (1 << CPP14Parser.Short) | (1 << CPP14Parser.Signed) | (1 << CPP14Parser.Sizeof) | (1 << CPP14Parser.Static_cast) | (1 << CPP14Parser.Struct) | (1 << CPP14Parser.This))) != 0) or ((((_la - 65)) & ~0x3f) == 0 and ((1 << (_la - 65)) & ((1 << (CPP14Parser.True - 65)) | (1 << (CPP14Parser.Typeid - 65)) | (1 << (CPP14Parser.Typename - 65)) | (1 << (CPP14Parser.Union - 65)) | (1 << (CPP14Parser.Unsigned - 65)) | (1 << (CPP14Parser.Void - 65)) | (1 << (CPP14Parser.Volatile - 65)) | (1 << (CPP14Parser.Wchar - 65)) | (1 << (CPP14Parser.LeftParen - 65)) | (1 << (CPP14Parser.LeftBracket - 65)) | (1 << (CPP14Parser.Plus - 65)) | (1 << (CPP14Parser.Minus - 65)) | (1 << (CPP14Parser.Star - 65)) | (1 << (CPP14Parser.And - 65)) | (1 << (CPP14Parser.Or - 65)) | (1 << (CPP14Parser.Tilde - 65)) | (1 << (CPP14Parser.Not - 65)) | (1 << (CPP14Parser.PlusPlus - 65)) | (1 << (CPP14Parser.MinusMinus - 65)) | (1 << (CPP14Parser.Doublecolon - 65)) | (1 << (CPP14Parser.Identifier - 65)) | (1 << (CPP14Parser.Integerliteral - 65)))) != 0) or ((((_la - 132)) & ~0x3f) == 0 and ((1 << (_la - 132)) & ((1 << (CPP14Parser.Characterliteral - 132)) | (1 << (CPP14Parser.Floatingliteral - 132)) | (1 << (CPP14Parser.Stringliteral - 132)) | (1 << (CPP14Parser.Userdefinedintegerliteral - 132)) | (1 << (CPP14Parser.Userdefinedfloatingliteral - 132)) | (1 << (CPP14Parser.Userdefinedstringliteral - 132)) | (1 << (CPP14Parser.Userdefinedcharacterliteral - 132)))) != 0):
+                if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << CPP14Parser.Alignof) | (1 << CPP14Parser.Auto) | (1 << CPP14Parser.Bool) | (1 << CPP14Parser.Char) | (1 << CPP14Parser.Char16) | (1 << CPP14Parser.Char32) | (1 << CPP14Parser.Class) | (1 << CPP14Parser.Const) | (1 << CPP14Parser.Const_cast) | (1 << CPP14Parser.Decltype) | (1 << CPP14Parser.Delete) | (1 << CPP14Parser.Double) | (1 << CPP14Parser.Dynamic_cast) | (1 << CPP14Parser.Enum) | (1 << CPP14Parser.Faalse) | (1 << CPP14Parser.Float) | (1 << CPP14Parser.Int) | (1 << CPP14Parser.Long) | (1 << CPP14Parser.New) | (1 << CPP14Parser.Noexcept) | (1 << CPP14Parser.Nullptr) | (1 << CPP14Parser.Operator) | (1 << CPP14Parser.Reinterpret_cast) | (1 << CPP14Parser.Short) | (1 << CPP14Parser.Signed) | (1 << CPP14Parser.Sizeof) | (1 << CPP14Parser.Static_cast) | (1 << CPP14Parser.Struct) | (1 << CPP14Parser.This))) != 0) or ((((_la - 65)) & ~0x3f) == 0 and ((1 << (_la - 65)) & ((1 << (CPP14Parser.Truue - 65)) | (1 << (CPP14Parser.Typeid - 65)) | (1 << (CPP14Parser.Typename - 65)) | (1 << (CPP14Parser.Union - 65)) | (1 << (CPP14Parser.Unsigned - 65)) | (1 << (CPP14Parser.Void - 65)) | (1 << (CPP14Parser.Volatile - 65)) | (1 << (CPP14Parser.Wchar - 65)) | (1 << (CPP14Parser.LeftParen - 65)) | (1 << (CPP14Parser.LeftBracket - 65)) | (1 << (CPP14Parser.Plus - 65)) | (1 << (CPP14Parser.Minus - 65)) | (1 << (CPP14Parser.Star - 65)) | (1 << (CPP14Parser.And - 65)) | (1 << (CPP14Parser.Or - 65)) | (1 << (CPP14Parser.Tilde - 65)) | (1 << (CPP14Parser.Not - 65)) | (1 << (CPP14Parser.PlusPlus - 65)) | (1 << (CPP14Parser.MinusMinus - 65)) | (1 << (CPP14Parser.Doublecolon - 65)) | (1 << (CPP14Parser.Identifier - 65)) | (1 << (CPP14Parser.Integerliteral - 65)))) != 0) or ((((_la - 132)) & ~0x3f) == 0 and ((1 << (_la - 132)) & ((1 << (CPP14Parser.Characterliteral - 132)) | (1 << (CPP14Parser.Floatingliteral - 132)) | (1 << (CPP14Parser.Stringliteral - 132)) | (1 << (CPP14Parser.Userdefinedintegerliteral - 132)) | (1 << (CPP14Parser.Userdefinedfloatingliteral - 132)) | (1 << (CPP14Parser.Userdefinedstringliteral - 132)) | (1 << (CPP14Parser.Userdefinedcharacterliteral - 132)))) != 0):
                     self.state = 2258
                     self.templateargumentlist(0)
 
@@ -15216,7 +15217,7 @@ class CPP14Parser ( Parser ):
                 self.state = 2266
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
-                if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << CPP14Parser.Alignof) | (1 << CPP14Parser.Auto) | (1 << CPP14Parser.Bool) | (1 << CPP14Parser.Char) | (1 << CPP14Parser.Char16) | (1 << CPP14Parser.Char32) | (1 << CPP14Parser.Class) | (1 << CPP14Parser.Const) | (1 << CPP14Parser.Const_cast) | (1 << CPP14Parser.Decltype) | (1 << CPP14Parser.Delete) | (1 << CPP14Parser.Double) | (1 << CPP14Parser.Dynamic_cast) | (1 << CPP14Parser.Enum) | (1 << CPP14Parser.False) | (1 << CPP14Parser.Float) | (1 << CPP14Parser.Int) | (1 << CPP14Parser.Long) | (1 << CPP14Parser.New) | (1 << CPP14Parser.Noexcept) | (1 << CPP14Parser.Nullptr) | (1 << CPP14Parser.Operator) | (1 << CPP14Parser.Reinterpret_cast) | (1 << CPP14Parser.Short) | (1 << CPP14Parser.Signed) | (1 << CPP14Parser.Sizeof) | (1 << CPP14Parser.Static_cast) | (1 << CPP14Parser.Struct) | (1 << CPP14Parser.This))) != 0) or ((((_la - 65)) & ~0x3f) == 0 and ((1 << (_la - 65)) & ((1 << (CPP14Parser.True - 65)) | (1 << (CPP14Parser.Typeid - 65)) | (1 << (CPP14Parser.Typename - 65)) | (1 << (CPP14Parser.Union - 65)) | (1 << (CPP14Parser.Unsigned - 65)) | (1 << (CPP14Parser.Void - 65)) | (1 << (CPP14Parser.Volatile - 65)) | (1 << (CPP14Parser.Wchar - 65)) | (1 << (CPP14Parser.LeftParen - 65)) | (1 << (CPP14Parser.LeftBracket - 65)) | (1 << (CPP14Parser.Plus - 65)) | (1 << (CPP14Parser.Minus - 65)) | (1 << (CPP14Parser.Star - 65)) | (1 << (CPP14Parser.And - 65)) | (1 << (CPP14Parser.Or - 65)) | (1 << (CPP14Parser.Tilde - 65)) | (1 << (CPP14Parser.Not - 65)) | (1 << (CPP14Parser.PlusPlus - 65)) | (1 << (CPP14Parser.MinusMinus - 65)) | (1 << (CPP14Parser.Doublecolon - 65)) | (1 << (CPP14Parser.Identifier - 65)) | (1 << (CPP14Parser.Integerliteral - 65)))) != 0) or ((((_la - 132)) & ~0x3f) == 0 and ((1 << (_la - 132)) & ((1 << (CPP14Parser.Characterliteral - 132)) | (1 << (CPP14Parser.Floatingliteral - 132)) | (1 << (CPP14Parser.Stringliteral - 132)) | (1 << (CPP14Parser.Userdefinedintegerliteral - 132)) | (1 << (CPP14Parser.Userdefinedfloatingliteral - 132)) | (1 << (CPP14Parser.Userdefinedstringliteral - 132)) | (1 << (CPP14Parser.Userdefinedcharacterliteral - 132)))) != 0):
+                if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << CPP14Parser.Alignof) | (1 << CPP14Parser.Auto) | (1 << CPP14Parser.Bool) | (1 << CPP14Parser.Char) | (1 << CPP14Parser.Char16) | (1 << CPP14Parser.Char32) | (1 << CPP14Parser.Class) | (1 << CPP14Parser.Const) | (1 << CPP14Parser.Const_cast) | (1 << CPP14Parser.Decltype) | (1 << CPP14Parser.Delete) | (1 << CPP14Parser.Double) | (1 << CPP14Parser.Dynamic_cast) | (1 << CPP14Parser.Enum) | (1 << CPP14Parser.Faalse) | (1 << CPP14Parser.Float) | (1 << CPP14Parser.Int) | (1 << CPP14Parser.Long) | (1 << CPP14Parser.New) | (1 << CPP14Parser.Noexcept) | (1 << CPP14Parser.Nullptr) | (1 << CPP14Parser.Operator) | (1 << CPP14Parser.Reinterpret_cast) | (1 << CPP14Parser.Short) | (1 << CPP14Parser.Signed) | (1 << CPP14Parser.Sizeof) | (1 << CPP14Parser.Static_cast) | (1 << CPP14Parser.Struct) | (1 << CPP14Parser.This))) != 0) or ((((_la - 65)) & ~0x3f) == 0 and ((1 << (_la - 65)) & ((1 << (CPP14Parser.Truue - 65)) | (1 << (CPP14Parser.Typeid - 65)) | (1 << (CPP14Parser.Typename - 65)) | (1 << (CPP14Parser.Union - 65)) | (1 << (CPP14Parser.Unsigned - 65)) | (1 << (CPP14Parser.Void - 65)) | (1 << (CPP14Parser.Volatile - 65)) | (1 << (CPP14Parser.Wchar - 65)) | (1 << (CPP14Parser.LeftParen - 65)) | (1 << (CPP14Parser.LeftBracket - 65)) | (1 << (CPP14Parser.Plus - 65)) | (1 << (CPP14Parser.Minus - 65)) | (1 << (CPP14Parser.Star - 65)) | (1 << (CPP14Parser.And - 65)) | (1 << (CPP14Parser.Or - 65)) | (1 << (CPP14Parser.Tilde - 65)) | (1 << (CPP14Parser.Not - 65)) | (1 << (CPP14Parser.PlusPlus - 65)) | (1 << (CPP14Parser.MinusMinus - 65)) | (1 << (CPP14Parser.Doublecolon - 65)) | (1 << (CPP14Parser.Identifier - 65)) | (1 << (CPP14Parser.Integerliteral - 65)))) != 0) or ((((_la - 132)) & ~0x3f) == 0 and ((1 << (_la - 132)) & ((1 << (CPP14Parser.Characterliteral - 132)) | (1 << (CPP14Parser.Floatingliteral - 132)) | (1 << (CPP14Parser.Stringliteral - 132)) | (1 << (CPP14Parser.Userdefinedintegerliteral - 132)) | (1 << (CPP14Parser.Userdefinedfloatingliteral - 132)) | (1 << (CPP14Parser.Userdefinedstringliteral - 132)) | (1 << (CPP14Parser.Userdefinedcharacterliteral - 132)))) != 0):
                     self.state = 2265
                     self.templateargumentlist(0)
 
@@ -15345,7 +15346,7 @@ class CPP14Parser ( Parser ):
                         self.state = 2282
                         self.match(CPP14Parser.Ellipsis)
 
-             
+
                 self.state = 2289
                 self._errHandler.sync(self)
                 _alt = self._interp.adaptivePredict(self._input,295,self._ctx)
@@ -16170,7 +16171,7 @@ class CPP14Parser ( Parser ):
                         self.state = 2379
                         self.match(CPP14Parser.Ellipsis)
 
-             
+
                 self.state = 2386
                 self._errHandler.sync(self)
                 _alt = self._interp.adaptivePredict(self._input,311,self._ctx)
@@ -16725,7 +16726,7 @@ class CPP14Parser ( Parser ):
                 self.state = 2455
                 self.match(CPP14Parser.Stringliteral)
                 pass
-            elif token in [CPP14Parser.False, CPP14Parser.True]:
+            elif token in [CPP14Parser.Faalse, CPP14Parser.Truue]:
                 self.enterOuterAlt(localctx, 5)
                 self.state = 2456
                 self.booleanliteral()
@@ -16757,11 +16758,11 @@ class CPP14Parser ( Parser ):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def False(self):
-            return self.getToken(CPP14Parser.False, 0)
+        def Faalse(self):
+            return self.getToken(CPP14Parser.Faalse, 0)
 
-        def True(self):
-            return self.getToken(CPP14Parser.True, 0)
+        def Truue(self):
+            return self.getToken(CPP14Parser.Truue, 0)
 
         def getRuleIndex(self):
             return CPP14Parser.RULE_booleanliteral
@@ -16786,7 +16787,7 @@ class CPP14Parser ( Parser ):
             self.enterOuterAlt(localctx, 1)
             self.state = 2461
             _la = self._input.LA(1)
-            if not(_la==CPP14Parser.False or _la==CPP14Parser.True):
+            if not(_la==CPP14Parser.Faalse or _la==CPP14Parser.Truue):
                 self._errHandler.recoverInline(self)
             else:
                 self._errHandler.reportMatch(self)
@@ -16940,260 +16941,260 @@ class CPP14Parser ( Parser ):
     def nestednamespecifier_sempred(self, localctx:NestednamespecifierContext, predIndex:int):
             if predIndex == 0:
                 return self.precpred(self._ctx, 2)
-         
+
 
             if predIndex == 1:
                 return self.precpred(self._ctx, 1)
-         
+
 
     def capturelist_sempred(self, localctx:CapturelistContext, predIndex:int):
             if predIndex == 2:
                 return self.precpred(self._ctx, 1)
-         
+
 
     def postfixexpression_sempred(self, localctx:PostfixexpressionContext, predIndex:int):
             if predIndex == 3:
                 return self.precpred(self._ctx, 19)
-         
+
 
             if predIndex == 4:
                 return self.precpred(self._ctx, 18)
-         
+
 
             if predIndex == 5:
                 return self.precpred(self._ctx, 17)
-         
+
 
             if predIndex == 6:
                 return self.precpred(self._ctx, 12)
-         
+
 
             if predIndex == 7:
                 return self.precpred(self._ctx, 11)
-         
+
 
             if predIndex == 8:
                 return self.precpred(self._ctx, 10)
-         
+
 
             if predIndex == 9:
                 return self.precpred(self._ctx, 9)
-         
+
 
             if predIndex == 10:
                 return self.precpred(self._ctx, 8)
-         
+
 
             if predIndex == 11:
                 return self.precpred(self._ctx, 7)
-         
+
 
     def noptrnewdeclarator_sempred(self, localctx:NoptrnewdeclaratorContext, predIndex:int):
             if predIndex == 12:
                 return self.precpred(self._ctx, 1)
-         
+
 
     def pmexpression_sempred(self, localctx:PmexpressionContext, predIndex:int):
             if predIndex == 13:
                 return self.precpred(self._ctx, 2)
-         
+
 
             if predIndex == 14:
                 return self.precpred(self._ctx, 1)
-         
+
 
     def multiplicativeexpression_sempred(self, localctx:MultiplicativeexpressionContext, predIndex:int):
             if predIndex == 15:
                 return self.precpred(self._ctx, 3)
-         
+
 
             if predIndex == 16:
                 return self.precpred(self._ctx, 2)
-         
+
 
             if predIndex == 17:
                 return self.precpred(self._ctx, 1)
-         
+
 
     def additiveexpression_sempred(self, localctx:AdditiveexpressionContext, predIndex:int):
             if predIndex == 18:
                 return self.precpred(self._ctx, 2)
-         
+
 
             if predIndex == 19:
                 return self.precpred(self._ctx, 1)
-         
+
 
     def shiftexpression_sempred(self, localctx:ShiftexpressionContext, predIndex:int):
             if predIndex == 20:
                 return self.precpred(self._ctx, 2)
-         
+
 
             if predIndex == 21:
                 return self.precpred(self._ctx, 1)
-         
+
 
     def relationalexpression_sempred(self, localctx:RelationalexpressionContext, predIndex:int):
             if predIndex == 22:
                 return self.precpred(self._ctx, 4)
-         
+
 
             if predIndex == 23:
                 return self.precpred(self._ctx, 3)
-         
+
 
             if predIndex == 24:
                 return self.precpred(self._ctx, 2)
-         
+
 
             if predIndex == 25:
                 return self.precpred(self._ctx, 1)
-         
+
 
     def equalityexpression_sempred(self, localctx:EqualityexpressionContext, predIndex:int):
             if predIndex == 26:
                 return self.precpred(self._ctx, 2)
-         
+
 
             if predIndex == 27:
                 return self.precpred(self._ctx, 1)
-         
+
 
     def andexpression_sempred(self, localctx:AndexpressionContext, predIndex:int):
             if predIndex == 28:
                 return self.precpred(self._ctx, 1)
-         
+
 
     def exclusiveorexpression_sempred(self, localctx:ExclusiveorexpressionContext, predIndex:int):
             if predIndex == 29:
                 return self.precpred(self._ctx, 1)
-         
+
 
     def inclusiveorexpression_sempred(self, localctx:InclusiveorexpressionContext, predIndex:int):
             if predIndex == 30:
                 return self.precpred(self._ctx, 1)
-         
+
 
     def logicalandexpression_sempred(self, localctx:LogicalandexpressionContext, predIndex:int):
             if predIndex == 31:
                 return self.precpred(self._ctx, 1)
-         
+
 
     def logicalorexpression_sempred(self, localctx:LogicalorexpressionContext, predIndex:int):
             if predIndex == 32:
                 return self.precpred(self._ctx, 1)
-         
+
 
     def expression_sempred(self, localctx:ExpressionContext, predIndex:int):
             if predIndex == 33:
                 return self.precpred(self._ctx, 1)
-         
+
 
     def statementseq_sempred(self, localctx:StatementseqContext, predIndex:int):
             if predIndex == 34:
                 return self.precpred(self._ctx, 1)
-         
+
 
     def declarationseq_sempred(self, localctx:DeclarationseqContext, predIndex:int):
             if predIndex == 35:
                 return self.precpred(self._ctx, 1)
-         
+
 
     def enumeratorlist_sempred(self, localctx:EnumeratorlistContext, predIndex:int):
             if predIndex == 36:
                 return self.precpred(self._ctx, 1)
-         
+
 
     def attributespecifierseq_sempred(self, localctx:AttributespecifierseqContext, predIndex:int):
             if predIndex == 37:
                 return self.precpred(self._ctx, 1)
-         
+
 
     def attributelist_sempred(self, localctx:AttributelistContext, predIndex:int):
             if predIndex == 38:
                 return self.precpred(self._ctx, 3)
-         
+
 
             if predIndex == 39:
                 return self.precpred(self._ctx, 1)
-         
+
 
     def balancedtokenseq_sempred(self, localctx:BalancedtokenseqContext, predIndex:int):
             if predIndex == 40:
                 return self.precpred(self._ctx, 1)
-         
+
 
     def initdeclaratorlist_sempred(self, localctx:InitdeclaratorlistContext, predIndex:int):
             if predIndex == 41:
                 return self.precpred(self._ctx, 1)
-         
+
 
     def noptrdeclarator_sempred(self, localctx:NoptrdeclaratorContext, predIndex:int):
             if predIndex == 42:
                 return self.precpred(self._ctx, 3)
-         
+
 
             if predIndex == 43:
                 return self.precpred(self._ctx, 2)
-         
+
 
     def noptrabstractdeclarator_sempred(self, localctx:NoptrabstractdeclaratorContext, predIndex:int):
             if predIndex == 44:
                 return self.precpred(self._ctx, 5)
-         
+
 
             if predIndex == 45:
                 return self.precpred(self._ctx, 3)
-         
+
 
     def noptrabstractpackdeclarator_sempred(self, localctx:NoptrabstractpackdeclaratorContext, predIndex:int):
             if predIndex == 46:
                 return self.precpred(self._ctx, 3)
-         
+
 
             if predIndex == 47:
                 return self.precpred(self._ctx, 2)
-         
+
 
     def parameterdeclarationlist_sempred(self, localctx:ParameterdeclarationlistContext, predIndex:int):
             if predIndex == 48:
                 return self.precpred(self._ctx, 1)
-         
+
 
     def initializerlist_sempred(self, localctx:InitializerlistContext, predIndex:int):
             if predIndex == 49:
                 return self.precpred(self._ctx, 1)
-         
+
 
     def memberdeclaratorlist_sempred(self, localctx:MemberdeclaratorlistContext, predIndex:int):
             if predIndex == 50:
                 return self.precpred(self._ctx, 1)
-         
+
 
     def virtspecifierseq_sempred(self, localctx:VirtspecifierseqContext, predIndex:int):
             if predIndex == 51:
                 return self.precpred(self._ctx, 1)
-         
+
 
     def basespecifierlist_sempred(self, localctx:BasespecifierlistContext, predIndex:int):
             if predIndex == 52:
                 return self.precpred(self._ctx, 1)
-         
+
 
     def templateparameterlist_sempred(self, localctx:TemplateparameterlistContext, predIndex:int):
             if predIndex == 53:
                 return self.precpred(self._ctx, 1)
-         
+
 
     def templateargumentlist_sempred(self, localctx:TemplateargumentlistContext, predIndex:int):
             if predIndex == 54:
                 return self.precpred(self._ctx, 1)
-         
+
 
     def typeidlist_sempred(self, localctx:TypeidlistContext, predIndex:int):
             if predIndex == 55:
                 return self.precpred(self._ctx, 1)
-         
+
 
 
 

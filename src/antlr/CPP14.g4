@@ -44,7 +44,8 @@ if($val.text.compareTo("0")!=0) throw new InputMismatchException(this);
  *   Python2:
 
  *   Python3:
-
+if($val.text.compareTo("0")!=0):
+    raise Exception('wtf is going onnnnn?')
  *   C#:
 
  ******************************************************************************/
@@ -1466,7 +1467,7 @@ Extern
 	'extern'
 ;
 
-False
+Faalse
 :
 	'false'
 ;
@@ -1641,7 +1642,7 @@ Throw
 	'throw'
 ;
 
-True
+Truue
 :
 	'true'
 ;
@@ -2282,8 +2283,8 @@ Rawstring /* '"' dcharsequence? '(' rcharsequence? ')' dcharsequence? '"' */
 
 booleanliteral
 :
-	False
-	| True
+	Faalse
+	| Truue
 ;
 
 pointerliteral
