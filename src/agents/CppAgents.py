@@ -5,4 +5,12 @@ class CppStats(CppAgentBase):
   pass
 
 class CppLogAgent(CppRefactorAgent):
-  pass
+  """Not yet implemented"""
+
+  #Override
+  def validate(self):
+    pass
+
+  def actions(self):
+    import ipdb
+    ipdb.set_trace()

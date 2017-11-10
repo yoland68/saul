@@ -1,6 +1,6 @@
 # Better Call Saul.py 👍📞👨⚖️⚫🐍
 
-- Are you frustrated with writing logs?
+- Are you frustrated with writing log calls or other statement over and over?
 - Are you frustrated with time consuming code refactor that a 5-year can do?
 - Do you know you have rights as a software develper? 
 

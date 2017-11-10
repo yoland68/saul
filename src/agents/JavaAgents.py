@@ -69,13 +69,7 @@ class AndroidJavaLogAgent(JavaRefactorAgent):
 
   #Override
   def validate(self):
-    if self.args.log_each_line and self.args.log_entry_exit:
-      raise Exception('Can not specify --log-each-line and --log-entry-exit at '
-                      'the same time')
-
-    if self.args.log_count and self.args.log_line:
-      raise Exception(
-          'Can not specify --log-count and --log-line at the same time')
+    pass
 
   #Override
   def actions(self):
@@ -134,13 +128,13 @@ class AndroidJavaLogAgent(JavaRefactorAgent):
     if self.args.bring_your_own_log:
       self.log_content = self.args.bring_your_own_log
       self.log_formatter = lambda tem, _: tem
-    if self.args.log_count:
+    if self.args.log_format == 'counter':
       self.log_content = "{class_name}:{counter:d}"
       self.log_formatter = self._counterLogFormatter
-    elif self.args.log_line:
+    elif self.args.log_format == 'line':
       self.log_content = "{class_name}:{line_num}"
       self.log_formatter = self._lineNumLogFormatter
-    elif self.args.log_source:
+    elif self.args.log_format == 'source':
       self.log_content = "{class_name}:{line_num} {code}"
       self.log_formatter = self._sourceLogFormatter
     # default choice
