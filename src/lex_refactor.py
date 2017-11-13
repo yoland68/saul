@@ -8,8 +8,14 @@ import logging
 import argparse
 import os
 import re
+import inspect
+
+import cProfile
 
 from antlr4 import FileStream, CommonTokenStream, ParseTreeWalker
+from antlr4.error.ErrorStrategy import BailErrorStrategy
+from antlr4.atn.PredictionMode import PredictionMode
+
 from antlr.JavaLexer import JavaLexer
 from antlr.JavaParser import JavaParser
 from antlr.JavaParserListener import JavaParserListener
@@ -49,11 +55,13 @@ def ActionOnFile(agent, filename, logging_level=logging.WARNING):
   logger = SetLogger(logging_level, filename)
   if agent.skip(filename):
     logger.warning('%s does not match %s requirement' % (filename, agent))
+    return
   inp = FileStream(filename)
   agent.set_file(filename)
   lexer = agent.createLexer(inp)
   stream = CommonTokenStream(lexer)
   parser = agent.createParser(stream)
+
   tree = agent.defaultEntryPoint(parser)
   walker = ParseTreeWalker()
   walker.walk(agent, tree)
